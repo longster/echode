@@ -20,7 +20,7 @@
   main,footer{position:relative;z-index:1}
   main{padding-top:92px}
   section[id]{scroll-margin-top:104px}
-  body{position:relative;font-family:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,#eef6fc,#fff 36%);line-height:1.55;font-size:17px}
+  body{position:relative;overflow-x:hidden;overflow-x:clip;font-family:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,#eef6fc,#fff 36%);line-height:1.55;font-size:17px}
   a{color:var(--blue-dark)}
   :focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:4px}
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
@@ -176,7 +176,7 @@
   .city-lock .div{width:1px;height:26px;background:var(--line)}
   .city-name{font-weight:800;letter-spacing:.18em;font-size:17px;color:var(--char);text-decoration:none;transition:color .18s ease}
   .city-name:hover,.city-name:focus-visible{color:var(--blue)}
-  .xhero{padding:3.2rem 0 .5rem}
+  .xhero{padding:3.2rem 0 .5rem;overflow-x:clip}
   .xhero h1{font-size:clamp(36px,4.6vw,56px);line-height:1.1;letter-spacing:-.01em;margin:6px 0 1.3rem;color:var(--char);text-wrap:balance}
   .pchip{display:inline-block;background:#fdf3e3;color:var(--amber);border:1px solid #f0dcb2;font-weight:700;font-size:12.5px;letter-spacing:.08em;padding:6px 12px;border-radius:999px}
   .hero-meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-top:18px}
