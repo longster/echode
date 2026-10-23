@@ -220,8 +220,8 @@
   .goal-title{display:block;font-size:1.28rem;font-weight:700;color:var(--char);letter-spacing:-.01em;margin-bottom:.45rem}
   .goal-text{display:block;font-size:.96rem;color:var(--ink2);line-height:1.55}
   .goal-arrow{position:absolute;right:1.4rem;bottom:1.3rem;width:24px;height:24px;color:var(--blue-dark)}
-  .xsec{padding:4.5rem 0;position:relative}
-  .xsec::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:100vw;border-top:1px solid var(--hl)}
+  .xsec{padding:4.5rem 0;position:relative;isolation:isolate}
+  .xsec::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:100vw;border-top:1px solid var(--hl);z-index:-1}
   .xsec.first::before{display:none}
   .xsec.band::before{height:100%;background:rgba(247,249,251,.9)}
   .xsec.band.form::before{background:rgba(232,242,249,.9)}
