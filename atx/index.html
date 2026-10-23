@@ -220,11 +220,11 @@
   .goal-title{display:block;font-size:1.28rem;font-weight:700;color:var(--char);letter-spacing:-.01em;margin-bottom:.45rem}
   .goal-text{display:block;font-size:.96rem;color:var(--ink2);line-height:1.55}
   .goal-arrow{position:absolute;right:1.4rem;bottom:1.3rem;width:24px;height:24px;color:var(--blue-dark)}
-  .xsec{padding:4.5rem 0;position:relative;isolation:isolate}
-  .xsec::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:100vw;border-top:1px solid var(--hl);z-index:-1}
+  .xsec{padding:4.5rem 0;position:relative}
+  .xsec::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:100vw;border-top:1px solid var(--hl)}
   .xsec.first::before{display:none}
-  .xsec.band::before{height:100%;background:rgba(247,249,251,.9)}
-  .xsec.band.form::before{background:rgba(232,242,249,.9)}
+  .xsec.band{box-shadow:0 0 0 100vmax rgba(247,249,251,.9);clip-path:inset(0 -100vmax)}
+  .xsec.band.form{box-shadow:0 0 0 100vmax rgba(232,242,249,.9)}
   .xsec.first{border-top:none}
   .xsec h2{font-size:clamp(1.7rem,3.4vw,2.15rem);letter-spacing:-.015em;line-height:1.15;margin:0 0 .8rem;color:var(--char);text-wrap:balance}
   .xsec .sub{color:var(--ink2);max-width:62ch;margin:0 0 1.6rem}
@@ -430,8 +430,8 @@ gtag('config', 'G-Y56G4N26M4');
   :root[data-theme="dark"] .bg-aurora .b4{--bo:.22}
   :root[data-theme="dark"] .bg-aurora .b5{--bo:.34}
   :root[data-theme="dark"] .bg-aurora .b6{--bo:.30}
-    :root[data-theme="dark"] .xsec.band::before{background:rgba(13,22,30,.85)}
-  :root[data-theme="dark"] .xsec.band.form::before{background:rgba(10,32,54,.55)}
+    :root[data-theme="dark"] .xsec.band{box-shadow:0 0 0 100vmax rgba(13,22,30,.85)}
+  :root[data-theme="dark"] .xsec.band.form{box-shadow:0 0 0 100vmax rgba(10,32,54,.55)}
   @media (max-width:876px){:root[data-theme="dark"] header nav{background:#131e28}}
 </style>
 </head>
