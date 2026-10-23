@@ -283,6 +283,16 @@
   .gl-band h3{margin:0 0 .45rem;font-size:1.28rem;color:var(--char)}
   .gl-band p{color:var(--ink2);margin:0 0 1.1rem;max-width:58ch}
   .btn-x{display:inline-block;padding:.8rem 1.7rem;border-radius:999px;text-decoration:none;font-weight:600;font-size:1rem;background:var(--blue);color:#fff;border:1px solid transparent;cursor:pointer}
+  .gform{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:26px;text-align:left}
+  .gform label{font-weight:600;font-size:15px;display:block;margin-bottom:7px;color:var(--char)}
+  .gform input,.gform select,.gform textarea{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1.5px solid #c9d2d9;border-radius:10px;background:#fff;color:var(--ink)}
+  .gform textarea{min-height:120px;resize:vertical}
+  .gform .full{grid-column:1/-1}
+  .gform .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .form-status{font-size:14.5px;margin-top:12px;color:var(--gray)}
+  .form-status.ok{color:#146c2e}
+  .form-status.err{color:#b3261e}
+  @media (max-width:640px){.gform{grid-template-columns:1fr;padding:24px}}
   .btn-x:hover{background:var(--blue-dark)}
   .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:10px}
   .nav-toggle span{display:block;width:22px;height:2px;background:var(--char);margin:5px 0;border-radius:2px}
@@ -358,7 +368,7 @@ gtag('config', 'G-Y56G4N26M4');
       <a href="#jobs">Jobs</a>
       <a href="#guides">Guides</a>
       <a href="#faq">FAQ</a>
-      <a class="btn" href="../#suggest">Get Listed</a>
+      <a class="btn" href="#get-listed">Get Listed</a>
     </nav>
   </div>
 </header>
@@ -397,7 +407,7 @@ gtag('config', 'G-Y56G4N26M4');
               <div><dt>Next gathering</dt><dd><strong id="cardNextName">Deaf Night Out ATX</strong><br><span id="cardNextWhen">Saturday, November 21, 2026 · Austin, venue announced in Facebook group</span></dd></div>
               <div id="newsRow" hidden><dt>Latest</dt><dd><a id="newsLink" href="#" target="_blank" rel="noopener"><strong id="newsTitle"></strong><svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg></a><br><span id="newsDate"></span></dd></div>
             </dl>
-            <a class="btn" href="../#suggest">Share Latest With Us</a>
+            <a class="btn" href="#get-listed">Share Latest With Us</a>
           </div>
         </div>
       </div>
@@ -461,10 +471,39 @@ gtag('config', 'G-Y56G4N26M4');
     </section>
 
     <section class="xsec" id="get-listed">
-      <div class="cta-row">
-        <p class="cta-text">Austin submissions run through the Echode suggest form for now. Everything goes into a review queue first... nothing publishes without a human check, and community listings are free.</p>
-        <a class="btn-x" href="../#suggest">Get Listed</a>
-      </div>
+      <h2>Get listed in Austin</h2>
+      <p class="sub">Suggest a listing, an event, a job, or a news tip for Austin. Everything lands in a review queue first... nothing publishes without a human check, and community listings are free.</p>
+      <form class="gform" id="gform" action="https://echode-form-intake.longster.workers.dev/" method="post" aria-label="Get listed in Austin">
+        <div class="hp" aria-hidden="true"><label>Company<input name="company" type="text" tabindex="-1" autocomplete="off"></label></div>
+        <div>
+          <label for="g-name">Your name</label>
+          <input id="g-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div>
+          <label for="g-email">Your email</label>
+          <input id="g-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="full">
+          <label for="g-type">What's this for?</label>
+          <select id="g-type" name="type">
+            <option value="business">Business or service listing</option>
+            <option value="event">Event</option>
+            <option value="job">Job opening</option>
+            <option value="news">News tip</option>
+            <option value="resource">Resource</option>
+            <option value="correction">Correction or update</option>
+            <option value="general">General question</option>
+          </select>
+        </div>
+        <div class="full">
+          <label for="g-details">Details</label>
+          <textarea id="g-details" name="details" placeholder="Tell us about it: the place or event, where it is, a link if you have one... for a news tip, paste the headline and the link."></textarea>
+        </div>
+        <div class="full">
+          <button class="btn" type="submit">Send suggestion</button>
+          <p class="form-status" id="gStatus" role="status" aria-live="polite"></p>
+        </div>
+      </form>
     </section>
   </div>
 </main>
@@ -615,6 +654,41 @@ document.getElementById("year").textContent=new Date().getFullYear();
     input.value=""; activeCat="";
     tagBtns.forEach(function(x){ x.setAttribute("aria-pressed", x.getAttribute("data-filter")==="" ? "true" : "false"); });
     apply(); input.focus();
+  });
+})();
+</script>
+<script>
+(function(){
+  var form=document.getElementById("gform");
+  if(!form) return;
+  var status=document.getElementById("gStatus");
+  form.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    status.textContent="Sending..."; status.className="form-status";
+    var payload={
+      name: document.getElementById("g-name").value.trim(),
+      email: document.getElementById("g-email").value.trim(),
+      city: "Austin",
+      listing_type: document.getElementById("g-type").value,
+      message: document.getElementById("g-details").value.trim(),
+      company: (form.querySelector("[name=company]")||{}).value || ""
+    };
+    fetch("https://echode-form-intake.longster.workers.dev/", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(payload)})
+      .then(function(r){ return r.json().catch(function(){ return {ok:false}; }); })
+      .then(function(j){
+        if(j && j.ok){
+          form.reset();
+          status.textContent="Thanks, your suggestion is in the review queue. A person reads every one before anything goes live.";
+          status.className="form-status ok";
+        } else {
+          status.textContent="That did not send. Please check the fields and try again.";
+          status.className="form-status err";
+        }
+      })
+      .catch(function(){
+        status.textContent="That did not send. Please try again in a bit.";
+        status.className="form-status err";
+      });
   });
 })();
 </script>

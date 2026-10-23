@@ -148,6 +148,9 @@
   textarea{min-height:120px;resize:vertical}
   .full{grid-column:1/-1}
   .form-note{font-size:13.5px;color:var(--gray)}
+  .form-status{font-size:14.5px;margin-top:12px;color:var(--gray)}
+  .form-status.ok{color:#146c2e}
+  .form-status.err{color:#b3261e}
 
   footer{background:var(--char);color:#c9d2d9;padding:44px 0}
   footer .wrap{display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px}
@@ -854,7 +857,8 @@ gtag('config', 'G-Y56G4N26M4');
     <div class="wrap">
       <h2>Suggest a listing, an event, a city... or ask a question</h2>
       <p class="section-lede">This form is the growth engine. Every suggestion is reviewed by a person before anything goes live.</p>
-      <form action="#" method="post" aria-label="Suggest a listing, event, or city">
+      <form id="suggestForm" action="https://echode-form-intake.longster.workers.dev/" method="post" aria-label="Suggest a listing, event, job, or news tip">
+        <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label>Company<input name="company" type="text" tabindex="-1" autocomplete="off"></label></div>
         <div>
           <label for="f-name">Your name</label>
           <input id="f-name" name="name" type="text" autocomplete="name" required>
@@ -870,26 +874,31 @@ gtag('config', 'G-Y56G4N26M4');
             <option>Austin</option>
             <option>Dallas - Fort Worth</option>
             <option>San Antonio</option>
+            <option>Texas statewide</option>
             <option>Another Texas city</option>
           </select>
         </div>
         <div>
           <label for="f-type">What's this for?</label>
           <select id="f-type" name="type">
-            <option>Business or service listing</option>
-            <option>Event</option>
-            <option>Resource</option>
-            <option>New city</option>
-            <option>General question</option>
+            <option value="business">Business or service listing</option>
+            <option value="event">Event</option>
+            <option value="job">Job opening</option>
+            <option value="news">News tip</option>
+            <option value="resource">Resource</option>
+            <option value="city">New city</option>
+            <option value="correction">Correction or update</option>
+            <option value="general">General question</option>
           </select>
         </div>
         <div class="full">
           <label for="f-details">Details</label>
-          <textarea id="f-details" name="details" placeholder="Tell us about it: the place or event, where it is, a link if you have one... or just ask your question here."></textarea>
+          <textarea id="f-details" name="details" placeholder="Tell us about it: the place or event, where it is, a link if you have one... for a news tip, paste the headline and the link... or just ask your question here."></textarea>
         </div>
         <div class="full">
           <button class="btn" type="submit">Send suggestion</button>
-          <p class="form-note" style="margin-top:12px">Layout preview only: this form is not connected yet, so nothing sends. On the live site, suggestions land in a review queue first.</p>
+          <p class="form-note" style="margin-top:12px">Every suggestion lands in a review queue first, and a person reads it before anything goes live. News tips land as drafts, never published automatically.</p>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
         </div>
       </form>
     </div>
@@ -917,6 +926,41 @@ gtag('config', 'G-Y56G4N26M4');
   window.addEventListener("load",fit);
   window.addEventListener("resize",fit);
   fit();
+})();
+</script>
+<script>
+(function(){
+  var form=document.getElementById("suggestForm");
+  if(!form) return;
+  var status=document.getElementById("formStatus");
+  form.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    status.textContent="Sending..."; status.className="form-status";
+    var payload={
+      name: document.getElementById("f-name").value.trim(),
+      email: document.getElementById("f-email").value.trim(),
+      city: document.getElementById("f-city").value,
+      listing_type: document.getElementById("f-type").value,
+      message: document.getElementById("f-details").value.trim(),
+      company: (form.querySelector("[name=company]")||{}).value || ""
+    };
+    fetch("https://echode-form-intake.longster.workers.dev/", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(payload)})
+      .then(function(r){ return r.json().catch(function(){ return {ok:false}; }); })
+      .then(function(j){
+        if(j && j.ok){
+          form.reset();
+          status.textContent="Thanks, your suggestion is in the review queue. A person reads every one before anything goes live.";
+          status.className="form-status ok";
+        } else {
+          status.textContent="That did not send. Please check the fields and try again.";
+          status.className="form-status err";
+        }
+      })
+      .catch(function(){
+        status.textContent="That did not send. Please try again in a bit.";
+        status.className="form-status err";
+      });
+  });
 })();
 </script>
 </body>
