@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Echode Austin - Deaf Community Directory (Preview)</title>
-<link rel="icon" type="image/png" href="../favicon.png">
+<link rel="icon" type="image/png" href="../favicon.png" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/png" href="../favicon-dark.png" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <meta name="description" content="Echode Austin: Austin's Deaf community directory. Seeded listings, events, jobs, and guides, collecting now.">
 <style>
@@ -63,10 +64,10 @@
   .bg-aurora .b4{width:400px;height:400px;bottom:-130px;left:-70px;background:radial-gradient(circle at 40% 40%,rgba(10,116,184,.8),rgba(10,116,184,0) 70%);opacity:.26;animation:drift1 23s ease-in-out infinite alternate-reverse}
   .bg-aurora .b5{width:130vw;height:430px;top:-260px;left:-15vw;background:radial-gradient(ellipse at 50% 40%,rgba(140,200,240,.85),rgba(140,200,240,0) 70%);opacity:.43;animation:drift2 26s ease-in-out infinite alternate}
   .b6{width:460px;height:460px;top:16%;left:-150px;background:radial-gradient(circle at 40% 40%,rgba(243,174,72,.85),rgba(243,174,72,0) 70%);opacity:.38;animation:drift3 22s ease-in-out infinite alternate}
-  @keyframes drift1{from{transform:translate(0,0) scale(1)}to{transform:translate(-150px,90px) scale(1.2)}}
-  @keyframes drift2{from{transform:translate(0,0) scale(1.06)}to{transform:translate(120px,-80px) scale(.9)}}
-  @keyframes drift3{from{transform:translate(0,0) rotate(0deg) scale(1)}to{transform:translate(-100px,64px) rotate(16deg) scale(1.12)}}
-  @keyframes drift4{from{transform:translate(0,0) rotate(0deg) scale(1)}to{transform:translate(70px,90px) rotate(-8deg) scale(1.14)}}
+  @keyframes drift1{from{transform:translate(0,0) scale(1)}to{transform:translate(46vw,6vh) scale(1.15)}}
+  @keyframes drift2{from{transform:translate(0,0) scale(1.06)}to{transform:translate(-48vw,-5vh) scale(.94)}}
+  @keyframes drift3{from{transform:translate(0,0) rotate(0deg) scale(1)}to{transform:translate(34vw,-6vh) rotate(10deg) scale(1.1)}}
+  @keyframes drift4{from{transform:translate(0,0) rotate(0deg) scale(1)}to{transform:translate(-36vw,7vh) rotate(-8deg) scale(1.12)}}
   @media (prefers-reduced-motion:reduce){.bg-aurora i{animation:none !important}}
   .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
 
@@ -374,6 +375,50 @@ gtag('config', 'G-Y56G4N26M4');
     y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
 })(window, document, "clarity", "script", "z2a1q3zdjf");
 </script>
+<script>try{var t=localStorage.getItem('echode-theme');if(t){document.documentElement.setAttribute('data-theme',t);}}catch(e){}</script>
+
+<style>
+  /* ===== Dark theme: active when <html data-theme="dark">. Default stays light. ===== */
+  .theme-toggle{flex:none;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--gray);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+  .theme-toggle:hover{color:var(--blue-dark);border-color:var(--blue)}
+  .theme-toggle svg{width:20px;height:20px;fill:currentColor}
+  .theme-toggle .icon-sun{display:none}
+  :root[data-theme="dark"] .theme-toggle .icon-sun{display:block}
+  :root[data-theme="dark"] .theme-toggle .icon-moon{display:none}
+  :root[data-theme="dark"]{
+    --blue:#3aa5ec; --blue-dark:#8ecbf7; --blue-soft:#16334a;
+    --ink:#d9e5ee; --char:#eef4f9; --gray:#9db0bf; --line:#273845;
+    --bg:#0c141b; --bg-soft:#101a23; --chip:#1d2b37;
+    --ink2:#9db0bf; --hl:#273845;
+    --amber:#f2c169; --amberbg:#3d2f10; --amberline:#6b5518;
+    --sh:0 10px 30px rgba(0,0,0,.35); --shl:0 18px 44px rgba(0,0,0,.45);
+  }
+  :root[data-theme="dark"] body{background:linear-gradient(180deg,#0a1622,#0c141b 36%)}
+  :root[data-theme="dark"] .bar{background:rgba(13,22,30,.88);box-shadow:0 14px 34px rgba(0,0,0,.45)}
+  :root[data-theme="dark"] .wordmark img{content:url("../echode-logo-light.png")}
+  :root[data-theme="dark"] .bg-aurora{background:linear-gradient(180deg, rgba(16,70,120,.50), rgba(16,70,120,0) 460px)}
+  :root[data-theme="dark"] .bg-mesh{opacity:.35}
+  :root[data-theme="dark"] .btn{background:#0a74b8;border-color:#0a74b8}
+  :root[data-theme="dark"] .btn:hover{background:#0d6cb8;border-color:#0d6cb8}
+  :root[data-theme="dark"] .btn.ghost{background:#16222c;color:var(--blue-dark)}
+  :root[data-theme="dark"] .btn.ghost:hover{background:var(--blue-soft)}
+  :root[data-theme="dark"] .skip{background:#0a74b8}
+  :root[data-theme="dark"] .status.live{background:#0a74b8}
+  :root[data-theme="dark"] .status.collecting{background:#3d2f10;color:#f2c169}
+  :root[data-theme="dark"] .badge{background:#3d2f10;color:#f2c169;border-color:#6b5518}
+  :root[data-theme="dark"] .live-card,:root[data-theme="dark"] .status-card,:root[data-theme="dark"] .goal-card,:root[data-theme="dark"] .lcard,:root[data-theme="dark"] .evcard,:root[data-theme="dark"] .qa,:root[data-theme="dark"] .gl-band,:root[data-theme="dark"] .gform,:root[data-theme="dark"] .empty,:root[data-theme="dark"] .empty-note,:root[data-theme="dark"] form,:root[data-theme="dark"] .city,:root[data-theme="dark"] .step,:root[data-theme="dark"] .spec,:root[data-theme="dark"] .sw{background:#131e28}
+  :root[data-theme="dark"] .ghost-card{background:#131e28;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  :root[data-theme="dark"] .live-card,:root[data-theme="dark"] .status-card{border-color:#2b4356}
+  :root[data-theme="dark"] .stats span{background:#1d2b37}
+  :root[data-theme="dark"] .filter-btn{background:#131e28;color:var(--ink)}
+  :root[data-theme="dark"] .icon-btn{background:#131e28}
+  :root[data-theme="dark"] input,:root[data-theme="dark"] select,:root[data-theme="dark"] textarea{background:#0e1821;border-color:#33485a;color:var(--ink)}
+  :root[data-theme="dark"] .form-section{background:rgba(10,32,54,.55)}
+  :root[data-theme="dark"] .xcities .bar{background:rgba(15,24,33,.92)}
+  :root[data-theme="dark"] .rings g{stroke:#3aa5ec}
+  :root[data-theme="dark"] footer{background:#080d12}
+  @media (max-width:876px){:root[data-theme="dark"] header nav{background:#131e28}}
+</style>
 </head>
 <body>
 
@@ -388,7 +433,8 @@ gtag('config', 'G-Y56G4N26M4');
       <span class="div" aria-hidden="true"></span>
       <a class="city-name" href="#top" aria-label="Echode Austin home">AUSTIN</a>
     </span>
-    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="cityNav" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme" aria-pressed="false"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="fill:none"><path d="M12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-15v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M19.8 4.2L18 6M6 18l-1.8 1.8" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="cityNav" aria-label="Menu"><span></span><span></span><span></span></button>
     <nav id="cityNav" aria-label="Austin">
       <a href="#find-help">Find Help</a>
       <a href="#events">Events</a>
@@ -742,6 +788,7 @@ document.getElementById("year").textContent=new Date().getFullYear();
   });
 })();
 </script>
-<script>(function(){if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;var names=["drift1","drift2","drift3","drift4"];document.querySelectorAll(".bg-aurora i").forEach(function(el){el.style.animationName=names[Math.floor(Math.random()*names.length)];el.style.animationDuration=(15+Math.random()*18).toFixed(1)+"s";el.style.animationDelay=(-Math.random()*20).toFixed(1)+"s";el.style.animationDirection=Math.random()<.5?"alternate":"alternate-reverse";});})();</script>
+<script>(function(){if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;var names=["drift1","drift2","drift3","drift4"];document.querySelectorAll(".bg-aurora i").forEach(function(el){el.style.animationName=names[Math.floor(Math.random()*names.length)];el.style.animationDuration=(7+Math.random()*6).toFixed(1)+"s";el.style.animationDelay=(-Math.random()*20).toFixed(1)+"s";el.style.animationDirection=Math.random()<.5?"alternate":"alternate-reverse";});})();</script>
+<script>(function(){var b=document.getElementById('themeToggle');if(!b)return;function sync(){var d=document.documentElement.getAttribute('data-theme')==='dark';b.setAttribute('aria-label',d?'Switch to light theme':'Switch to dark theme');b.setAttribute('aria-pressed',d?'true':'false');}b.addEventListener('click',function(){var d=document.documentElement.getAttribute('data-theme')==='dark';if(d){document.documentElement.removeAttribute('data-theme');try{localStorage.removeItem('echode-theme');}catch(e){}}else{document.documentElement.setAttribute('data-theme','dark');try{localStorage.setItem('echode-theme','dark');}catch(e){}}sync();});sync();})();</script>
 </body>
 </html>

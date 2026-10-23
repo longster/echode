@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Echode - Texas Deaf Communities, City by City</title>
-<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/png" href="favicon.png" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/png" href="favicon-dark.png" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="description" content="Echode is the front door to Texas Deaf communities, city by city. Houston is live today through HoustonDeafNetwork.">
 <style>
@@ -63,10 +64,10 @@
   .bg-aurora .b4{width:400px;height:400px;bottom:-130px;left:-70px;background:radial-gradient(circle at 40% 40%,rgba(10,116,184,.8),rgba(10,116,184,0) 70%);opacity:.26;animation:drift1 23s ease-in-out infinite alternate-reverse}
   .bg-aurora .b5{width:130vw;height:430px;top:-260px;left:-15vw;background:radial-gradient(ellipse at 50% 40%,rgba(140,200,240,.85),rgba(140,200,240,0) 70%);opacity:.43;animation:drift2 26s ease-in-out infinite alternate}
   .b6{width:460px;height:460px;top:16%;left:-150px;background:radial-gradient(circle at 40% 40%,rgba(243,174,72,.85),rgba(243,174,72,0) 70%);opacity:.38;animation:drift3 22s ease-in-out infinite alternate}
-  @keyframes drift1{from{transform:translate(0,0) scale(1)}to{transform:translate(-150px,90px) scale(1.2)}}
-  @keyframes drift2{from{transform:translate(0,0) scale(1.06)}to{transform:translate(120px,-80px) scale(.9)}}
-  @keyframes drift3{from{transform:translate(0,0) rotate(0deg) scale(1)}to{transform:translate(-100px,64px) rotate(16deg) scale(1.12)}}
-  @keyframes drift4{from{transform:translate(0,0) rotate(0deg) scale(1)}to{transform:translate(70px,90px) rotate(-8deg) scale(1.14)}}
+  @keyframes drift1{from{transform:translate(0,0) scale(1)}to{transform:translate(46vw,6vh) scale(1.15)}}
+  @keyframes drift2{from{transform:translate(0,0) scale(1.06)}to{transform:translate(-48vw,-5vh) scale(.94)}}
+  @keyframes drift3{from{transform:translate(0,0) rotate(0deg) scale(1)}to{transform:translate(34vw,-6vh) rotate(10deg) scale(1.1)}}
+  @keyframes drift4{from{transform:translate(0,0) rotate(0deg) scale(1)}to{transform:translate(-36vw,7vh) rotate(-8deg) scale(1.12)}}
   @media (prefers-reduced-motion:reduce){.bg-aurora i{animation:none !important}}
   .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
 
@@ -248,6 +249,23 @@
   :root[data-theme="dark"] form{background:#131e28}
   :root[data-theme="dark"] input,:root[data-theme="dark"] select,:root[data-theme="dark"] textarea{background:#0e1821;border-color:#33485a;color:var(--ink)}
   :root[data-theme="dark"] footer{background:#080d12}
+  :root[data-theme="dark"] .btn{background:#0a74b8;border-color:#0a74b8}
+  :root[data-theme="dark"] .btn:hover{background:#0d6cb8;border-color:#0d6cb8}
+  :root[data-theme="dark"] .skip{background:#0a74b8}
+  :root[data-theme="dark"] .status.live{background:#0a74b8}
+  :root[data-theme="dark"] .step .num{background:#0a74b8}
+  :root[data-theme="dark"] #txgrad stop:first-child{stop-color:#1d3042}
+  :root[data-theme="dark"] #txgrad stop:last-child{stop-color:#101d29}
+  :root[data-theme="dark"] .map-box path[fill="#eef4f9"]{fill:#1a2a3a}
+  :root[data-theme="dark"] .map-box path[fill="#e6eff6"]{fill:#162635}
+  :root[data-theme="dark"] .map-box path[fill="#f4f8fb"]{fill:#1e2f42}
+  :root[data-theme="dark"] .map-box path[stroke="#cfe2f1"]{stroke:#2c4a66}
+  :root[data-theme="dark"] .map-box path[stroke="#0a74b8"]{stroke:#3aa5ec}
+  :root[data-theme="dark"] .map-box circle[fill="#7d97a8"]{fill:#8fa9bd}
+  :root[data-theme="dark"] .map-box circle[fill="#0a74b8"]{fill:#3aa5ec}
+  :root[data-theme="dark"] .map-box circle[stroke="#ffffff"]{stroke:#131e28}
+  :root[data-theme="dark"] .map-box text[fill="#2f4a5a"]{fill:#cfe3f2;stroke:#131e28}
+  :root[data-theme="dark"] .map-box text[fill="#075a8f"]{fill:#8ecbf7;stroke:#131e28}
 </style>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y56G4N26M4"></script>
@@ -975,7 +993,7 @@ gtag('config', 'G-Y56G4N26M4');
 </footer>
 
 <script>document.getElementById("year").textContent=new Date().getFullYear();</script>
-<script>(function(){if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;var names=["drift1","drift2","drift3","drift4"];document.querySelectorAll(".bg-aurora i").forEach(function(el){el.style.animationName=names[Math.floor(Math.random()*names.length)];el.style.animationDuration=(15+Math.random()*18).toFixed(1)+"s";el.style.animationDelay=(-Math.random()*20).toFixed(1)+"s";el.style.animationDirection=Math.random()<.5?"alternate":"alternate-reverse";});})();</script>
+<script>(function(){if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;var names=["drift1","drift2","drift3","drift4"];document.querySelectorAll(".bg-aurora i").forEach(function(el){el.style.animationName=names[Math.floor(Math.random()*names.length)];el.style.animationDuration=(7+Math.random()*6).toFixed(1)+"s";el.style.animationDelay=(-Math.random()*20).toFixed(1)+"s";el.style.animationDirection=Math.random()<.5?"alternate":"alternate-reverse";});})();</script>
 <script>
 (function(){
   var mesh=document.getElementById("bgMesh"), sec=document.getElementById("cities");
