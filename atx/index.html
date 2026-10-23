@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Echode Austin - Deaf Community Directory (Preview)</title>
+<link rel="icon" type="image/png" href="../echode-logo.png">
+<meta name="description" content="Echode Austin: the starting point for Austin's Deaf community directory. Seeded listings, events, and resources, collecting now.">
+<style>
+  :root{
+    --blue:#0a74b8; --blue-dark:#075a8f; --blue-soft:#e8f2f9;
+    --ink:#23272c; --char:#2b2e32; --gray:#5c6670; --line:#e3e7eb;
+    --bg:#ffffff; --bg-soft:#f7f9fb; --chip:#eef1f4;
+    --radius:16px; --max:1120px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  main,footer{position:relative;z-index:1}
+  main{padding-top:92px}
+  section[id]{scroll-margin-top:104px}
+  body{position:relative;font-family:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,#eef6fc,#fff 36%);line-height:1.55;font-size:17px}
+  a{color:var(--blue-dark)}
+  :focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:4px}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .skip{position:absolute;left:16px;top:-60px;z-index:50;background:var(--blue);color:#fff;font-weight:700;padding:12px 20px;border-radius:0 0 12px 12px;text-decoration:none;transition:top .15s ease}
+  .skip:focus{top:0;color:#fff}
+  .ext{display:inline-block;width:.62em;height:.62em;margin-left:.22em;vertical-align:.28em;fill:currentColor}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+  /* header */
+  header{position:fixed;top:10px;left:0;right:0;z-index:50;background:transparent;padding:0 6px}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 22px;background:rgba(255,255,255,.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:18px;box-shadow:0 14px 34px rgba(7,60,110,.12);margin-top:10px}
+  .wordmark{font-size:26px;font-weight:800;letter-spacing:.14em;text-decoration:none;color:var(--char)}
+  .wordmark .echo{color:var(--blue)}
+  .wordmark small{display:block;font-size:10.5px;font-weight:600;letter-spacing:.32em;color:var(--gray);margin-top:1px}
+  .wordmark img{display:block;height:22px;width:auto}
+  @media (max-width:560px){.wordmark img{height:18px}}
+  .fbrand small{display:block;font-size:10.5px;font-weight:600;letter-spacing:.32em;color:#9aa4ad;margin-top:9px}
+  .fbrand .flogo{display:block;height:30px;width:auto}
+  nav{display:flex;gap:28px;align-items:center}
+  nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:15.5px;padding:10px 2px}
+  nav a:hover{color:var(--blue)}
+  nav a.btn{color:#fff}
+  .btn{display:inline-block;background:var(--blue);color:#fff;text-decoration:none;font-weight:700;padding:12px 22px;border-radius:999px;border:2px solid var(--blue)}
+  .btn:hover{background:var(--blue-dark);border-color:var(--blue-dark)}
+  .btn.ghost{background:#fff;color:var(--blue-dark)}
+  .btn.ghost:hover{background:var(--blue-soft)}
+
+  /* hero */
+  .hero{position:relative;padding:44px 0 64px;background:transparent}
+  
+  .hero .wrap{position:relative;z-index:2}
+
+  /* animated aurora background */
+  .bg-aurora{background:linear-gradient(180deg,rgba(168,214,243,.55),rgba(168,214,243,0) 460px);position:absolute;top:0;left:0;right:0;height:140vh;min-height:920px;overflow:hidden;z-index:0;pointer-events:none;-webkit-mask-image:linear-gradient(180deg,#000 56%,transparent 97%);mask-image:linear-gradient(180deg,#000 56%,transparent 97%)}
+  .bg-dots{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22340%22%20height%3D%22240%22%3E%3Ccircle%20cx%3D%22230%22%20cy%3D%22139%22%20r%3D%222.3%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.06%22%2F%3E%3Ccircle%20cx%3D%22278%22%20cy%3D%2257%22%20r%3D%221.0%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.17%22%2F%3E%3Ccircle%20cx%3D%2247%22%20cy%3D%2250%22%20r%3D%221.5%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.16%22%2F%3E%3Ccircle%20cx%3D%22223%22%20cy%3D%2228%22%20r%3D%221.3%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.07%22%2F%3E%3Ccircle%20cx%3D%2242%22%20cy%3D%22141%22%20r%3D%221.0%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.07%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2284%22%20r%3D%221.1%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.18%22%2F%3E%3Ccircle%20cx%3D%2253%22%20cy%3D%22110%22%20r%3D%222.4%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.13%22%2F%3E%3Ccircle%20cx%3D%22174%22%20cy%3D%22123%22%20r%3D%221.1%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.08%22%2F%3E%3Ccircle%20cx%3D%22209%22%20cy%3D%22100%22%20r%3D%221.1%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.12%22%2F%3E%3Ccircle%20cx%3D%22259%22%20cy%3D%2214%22%20r%3D%222.3%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.19%22%2F%3E%3Ccircle%20cx%3D%2272%22%20cy%3D%2217%22%20r%3D%221.1%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.06%22%2F%3E%3Ccircle%20cx%3D%22172%22%20cy%3D%224%22%20r%3D%221.1%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.08%22%2F%3E%3Ccircle%20cx%3D%22335%22%20cy%3D%22115%22%20r%3D%221.1%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.13%22%2F%3E%3Ccircle%20cx%3D%22256%22%20cy%3D%2289%22%20r%3D%222.2%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.14%22%2F%3E%3Ccircle%20cx%3D%22334%22%20cy%3D%224%22%20r%3D%221.7%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.09%22%2F%3E%3Ccircle%20cx%3D%2213%22%20cy%3D%22169%22%20r%3D%221.5%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.13%22%2F%3E%3Ccircle%20cx%3D%22250%22%20cy%3D%22159%22%20r%3D%222.1%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.18%22%2F%3E%3Ccircle%20cx%3D%22159%22%20cy%3D%22201%22%20r%3D%221.2%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.19%22%2F%3E%3Ccircle%20cx%3D%22197%22%20cy%3D%2215%22%20r%3D%221.1%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.13%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%22123%22%20r%3D%221.6%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.12%22%2F%3E%3Ccircle%20cx%3D%22116%22%20cy%3D%2250%22%20r%3D%222.5%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.15%22%2F%3E%3Ccircle%20cx%3D%22204%22%20cy%3D%22212%22%20r%3D%222.0%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.16%22%2F%3E%3Ccircle%20cx%3D%22312%22%20cy%3D%2269%22%20r%3D%222.0%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.09%22%2F%3E%3Ccircle%20cx%3D%22175%22%20cy%3D%2296%22%20r%3D%222.2%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.17%22%2F%3E%3Ccircle%20cx%3D%22122%22%20cy%3D%22175%22%20r%3D%222.3%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.08%22%2F%3E%3Ccircle%20cx%3D%22170%22%20cy%3D%22112%22%20r%3D%221.4%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.07%22%2F%3E%3Ccircle%20cx%3D%22336%22%20cy%3D%2212%22%20r%3D%222.0%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.19%22%2F%3E%3Ccircle%20cx%3D%22290%22%20cy%3D%22165%22%20r%3D%221.4%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.20%22%2F%3E%3Ccircle%20cx%3D%22256%22%20cy%3D%22123%22%20r%3D%222.3%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.07%22%2F%3E%3Ccircle%20cx%3D%22253%22%20cy%3D%22225%22%20r%3D%221.6%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.19%22%2F%3E%3Ccircle%20cx%3D%22191%22%20cy%3D%2239%22%20r%3D%221.4%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.14%22%2F%3E%3Ccircle%20cx%3D%229%22%20cy%3D%22104%22%20r%3D%221.9%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.06%22%2F%3E%3Ccircle%20cx%3D%22138%22%20cy%3D%22192%22%20r%3D%221.5%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.18%22%2F%3E%3Ccircle%20cx%3D%22206%22%20cy%3D%2249%22%20r%3D%222.1%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.16%22%2F%3E%3Ccircle%20cx%3D%22130%22%20cy%3D%22127%22%20r%3D%221.1%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.14%22%2F%3E%3Ccircle%20cx%3D%2254%22%20cy%3D%22118%22%20r%3D%221.3%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.11%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%22228%22%20r%3D%221.7%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.19%22%2F%3E%3Ccircle%20cx%3D%22298%22%20cy%3D%2297%22%20r%3D%221.6%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.08%22%2F%3E%3Ccircle%20cx%3D%22250%22%20cy%3D%2281%22%20r%3D%222.5%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.17%22%2F%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%22156%22%20r%3D%221.7%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.08%22%2F%3E%3Ccircle%20cx%3D%2245%22%20cy%3D%2270%22%20r%3D%221.3%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.12%22%2F%3E%3Ccircle%20cx%3D%22146%22%20cy%3D%2295%22%20r%3D%221.1%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.08%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%22232%22%20r%3D%221.3%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.13%22%2F%3E%3Ccircle%20cx%3D%22157%22%20cy%3D%2219%22%20r%3D%221.8%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.14%22%2F%3E%3Ccircle%20cx%3D%22300%22%20cy%3D%22222%22%20r%3D%222.3%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.06%22%2F%3E%3Ccircle%20cx%3D%22227%22%20cy%3D%22218%22%20r%3D%221.1%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.16%22%2F%3E%3Ccircle%20cx%3D%22189%22%20cy%3D%22157%22%20r%3D%222.0%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.07%22%2F%3E%3Ccircle%20cx%3D%22116%22%20cy%3D%22195%22%20r%3D%221.8%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.15%22%2F%3E%3Ccircle%20cx%3D%22323%22%20cy%3D%22229%22%20r%3D%221.1%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.13%22%2F%3E%3Ccircle%20cx%3D%2293%22%20cy%3D%2275%22%20r%3D%221.4%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.10%22%2F%3E%3Ccircle%20cx%3D%2225%22%20cy%3D%2234%22%20r%3D%221.9%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.18%22%2F%3E%3Ccircle%20cx%3D%22146%22%20cy%3D%2245%22%20r%3D%221.7%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.18%22%2F%3E%3Ccircle%20cx%3D%22109%22%20cy%3D%2250%22%20r%3D%222.5%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.18%22%2F%3E%3Ccircle%20cx%3D%2214%22%20cy%3D%22163%22%20r%3D%221.2%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.10%22%2F%3E%3Ccircle%20cx%3D%22121%22%20cy%3D%2285%22%20r%3D%222.2%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.10%22%2F%3E%3Ccircle%20cx%3D%2268%22%20cy%3D%22116%22%20r%3D%221.9%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.14%22%2F%3E%3Ccircle%20cx%3D%22334%22%20cy%3D%2231%22%20r%3D%221.9%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.14%22%2F%3E%3Ccircle%20cx%3D%22255%22%20cy%3D%227%22%20r%3D%222.2%22%20fill%3D%22%230a74b8%22%20opacity%3D%220.07%22%2F%3E%3C%2Fsvg%3E");background-size:340px 240px;opacity:.5}
+  .bg-aurora i{position:absolute;border-radius:50%;filter:blur(60px);will-change:transform}
+  .bg-aurora .b1{width:720px;height:720px;top:-300px;right:-130px;background:radial-gradient(circle at 35% 35%,rgba(110,193,240,.85),rgba(110,193,240,0) 70%);opacity:.55;animation:drift1 18s ease-in-out infinite alternate}
+  .bg-aurora .b2{width:500px;height:500px;bottom:-190px;right:20%;background:radial-gradient(circle at 40% 40%,rgba(79,209,181,.8),rgba(79,209,181,0) 70%);opacity:.38;animation:drift2 21s ease-in-out infinite alternate}
+  .bg-aurora .b3{width:540px;height:540px;top:6%;left:33%;background:radial-gradient(circle at 40% 40%,rgba(147,165,245,.8),rgba(147,165,245,0) 70%);opacity:.34;animation:drift3 24s ease-in-out infinite alternate}
+  .bg-aurora .b4{width:400px;height:400px;bottom:-130px;left:-70px;background:radial-gradient(circle at 40% 40%,rgba(10,116,184,.75),rgba(10,116,184,0) 70%);opacity:.22;animation:drift1 23s ease-in-out infinite alternate-reverse}
+  .bg-aurora .b5{width:130vw;height:430px;top:-260px;left:-15vw;background:radial-gradient(ellipse at 50% 40%,rgba(140,200,240,.8),rgba(140,200,240,0) 70%);opacity:.4;animation:drift2 26s ease-in-out infinite alternate}
+  @keyframes drift1{from{transform:translate(0,0) scale(1)}to{transform:translate(-120px,74px) scale(1.16)}}
+  @keyframes drift2{from{transform:translate(0,0) scale(1.06)}to{transform:translate(96px,-64px) scale(.92)}}
+  @keyframes drift3{from{transform:translate(0,0) rotate(0deg) scale(1)}to{transform:translate(-80px,52px) rotate(12deg) scale(1.1)}}
+  @media (prefers-reduced-motion:reduce){.bg-aurora i{animation:none}}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+
+  /* city status card stack */
+  .stack{position:relative;max-width:470px;margin-left:auto;width:100%;padding-top:34px}
+  .ghost-card{position:absolute;left:0;right:0;top:34px;bottom:0;background:#fdfefe;border:1px solid var(--line);border-radius:20px;box-shadow:0 10px 30px rgba(7,60,110,.06)}
+  .ghost-card.g1{transform:translate(14px,-13px) rotate(1.4deg);opacity:.8}
+  .ghost-card.g2{transform:translate(27px,-25px) rotate(2.8deg);opacity:.55}
+  .live-card{position:relative;background:#fff;border:1px solid #cfe1ee;border-radius:20px;box-shadow:0 24px 60px rgba(7,60,110,.14);padding:28px}
+  .card-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+  .code-chip{font-weight:800;letter-spacing:.1em;font-size:13.5px;color:var(--blue-dark);background:var(--blue-soft);border-radius:8px;padding:5px 11px}
+  .live-badge{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.16em;color:var(--blue-dark)}
+  .pulse{position:relative;width:10px;height:10px;border-radius:50%;background:var(--blue)}
+  .pulse::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--blue);opacity:.55;animation:pulse-ring 2.2s ease-out infinite}
+  @keyframes pulse-ring{0%{transform:scale(.55);opacity:.6}70%{transform:scale(1.15);opacity:0}100%{opacity:0}}
+  @media (prefers-reduced-motion:reduce){.pulse::after{animation:none;opacity:0}}
+  .live-card h3{font-size:31px;color:var(--char);letter-spacing:-.01em}
+  .live-card .home{color:var(--gray);font-size:15.5px;margin-bottom:18px}
+  .card-rows{border-top:1px solid var(--line);margin-bottom:20px}
+  .card-rows div{display:grid;grid-template-columns:104px 1fr;gap:4px 14px;padding:11px 0;border-bottom:1px solid var(--line);font-size:15.5px;align-items:baseline}
+  .card-rows dt{font-weight:700;color:var(--char)}
+  .card-rows dd{color:var(--gray);text-align:left}
+  .progress-row{display:flex;align-items:center;gap:12px;margin-bottom:22px;font-size:14.5px;color:var(--gray)}
+  .progress-row .dots{display:inline-flex;gap:7px}
+  .progress-row .dots i{width:11px;height:11px;border-radius:50%;border:2px solid var(--blue);display:block}
+  .progress-row .dots i.on{background:var(--blue)}
+  .live-card .btn{display:block;text-align:center}
+  @media (max-width:1020px){.hero-grid{grid-template-columns:1fr;gap:44px}.stack{margin:6px auto 0;max-width:560px}}
+  .eyebrow{font-size:13px;font-weight:700;letter-spacing:.24em;color:var(--blue-dark);text-transform:uppercase;margin-bottom:18px}
+  h1{font-size:clamp(36px,4.6vw,56px);line-height:1.1;letter-spacing:-.01em;max-width:21ch;color:var(--char);text-wrap:balance}
+  h1 .accent{color:var(--blue)}
+  .lede{font-size:20px;color:var(--gray);max-width:56ch;margin:22px 0 32px}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap}
+
+  section{padding:72px 0}
+  h2{font-size:clamp(28px,3.4vw,36px);color:var(--char);letter-spacing:-.01em;margin-bottom:12px}
+  .section-lede{color:var(--gray);margin-bottom:36px}
+
+  /* cities */
+  .cities-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:stretch}
+  .map-box{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column}
+  .map-box svg{width:100%;flex:1 1 auto;min-height:320px;display:block}
+  .map-cap{font-size:13.5px;color:var(--gray);margin-top:14px;text-align:center}
+  .city-list{list-style:none;display:grid;gap:14px}
+  .city{display:flex;gap:18px;align-items:flex-start;border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;background:#fff}
+  .city.live{border-color:var(--blue);box-shadow:0 6px 24px rgba(10,116,184,.10)}
+  .city .code{font-weight:800;letter-spacing:.08em;font-size:14px;color:var(--blue-dark);background:var(--blue-soft);border-radius:8px;padding:6px 10px;min-width:58px;text-align:center;margin-top:2px}
+  .city.soon .code{color:var(--gray);background:var(--chip)}
+  .city h3{font-size:19px;color:var(--char)}
+  .city p{color:var(--gray);font-size:15.5px}
+  .status{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;border-radius:999px;padding:3px 10px;margin-left:8px;vertical-align:2px}
+  .status.live{background:var(--blue);color:#fff}
+  .status.soon{background:var(--chip);color:var(--gray)}
+  .city a{font-weight:700}
+
+  /* steps */
+  .steps{background:rgba(247,249,251,.9);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .step-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+  .step .num{width:42px;height:42px;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:16px}
+  .step h3{font-size:18.5px;color:var(--char);margin-bottom:8px}
+  .step p{color:var(--gray);font-size:15.5px}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:start}
+  .about-grid p{color:var(--gray);margin-bottom:16px;max-width:60ch}
+  .about-grid p strong{color:var(--char)}
+  .fact-card{background:var(--char);color:#eef1f4;border-radius:var(--radius);padding:28px}
+  .fact-card h3{color:#fff;font-size:17px;letter-spacing:.06em;margin-bottom:14px}
+  .fact-card li{margin:0 0 10px 20px;font-size:15.5px}
+  .fact-card li::marker{color:var(--blue-soft)}
+  .about-grid p.sign{color:var(--char);font-weight:600;margin-top:-6px}
+
+  /* form */
+  .form-section{background:rgba(232,242,249,.9)}
+  form{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  label{font-weight:600;font-size:15px;display:block;margin-bottom:7px;color:var(--char)}
+  input,select,textarea{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1.5px solid #c9d2d9;border-radius:10px;background:#fff;color:var(--ink)}
+  textarea{min-height:120px;resize:vertical}
+  .full{grid-column:1/-1}
+  .form-note{font-size:13.5px;color:var(--gray)}
+
+  footer{background:var(--char);color:#c9d2d9;padding:44px 0}
+  footer .wrap{display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px}
+  footer .fbrand{text-decoration:none}
+  footer .fbrand .flogo{margin:0 auto}
+  footer .copy{font-size:14px;color:#9aa4ad;margin:0}
+  footer .wordmark{color:#fff}
+  footer .wordmark small{color:#9aa4ad}
+  footer p{font-size:14.5px;max-width:44ch}
+  footer a{color:#fff}
+
+  @media (max-width:820px){
+    nav a:not(.btn){display:none}
+    .cities-grid,.about-grid{grid-template-columns:1fr}
+    .step-grid{grid-template-columns:1fr}
+    form{grid-template-columns:1fr}
+    .hero{padding:52px 0 44px}
+    section{padding:52px 0}
+  }
+
+  .city-lock{display:flex;align-items:center;gap:12px;text-decoration:none}
+  .city-lock .div{width:1px;height:26px;background:var(--line)}
+  .city-name{font-weight:800;letter-spacing:.22em;font-size:15px;color:var(--char)}
+  .pchip{display:inline-block;background:#fdf3e3;color:#8a5a00;border:1px solid #f0dcb2;font-weight:700;font-size:12.5px;letter-spacing:.08em;padding:6px 12px;border-radius:999px}
+  .stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+  .stats span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:14px;color:var(--ink2)}
+  .stats b{color:var(--char)}
+  .citysec{padding:54px 0 6px}
+  .citysec h2{font-size:30px;margin:0 0 8px;letter-spacing:-.01em}
+  .citysec .sub{color:var(--ink2);max-width:62ch;margin:0}
+  .catgroup{margin-top:32px}
+  .catgroup h3{font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-dark);margin:0 0 14px}
+  .lgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+  .lcard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column}
+  .lcard h4{margin:0 0 6px;font-size:17px;color:var(--char)}
+  .lcard p{margin:0 0 14px;color:var(--ink2);font-size:14.5px;flex:1}
+  .visit{color:var(--blue-dark);font-weight:600;text-decoration:none;font-size:14.5px}
+  .visit:hover{text-decoration:underline}
+  .evcard{background:#fff;border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:16px;padding:20px;max-width:640px}
+  .evcard h4{margin:0 0 6px;font-size:18px;color:var(--char)}
+  .evcard .when{font-weight:700;color:var(--blue-dark);margin:0 0 8px}
+  .evcard p{color:var(--ink2);margin:0 0 12px}
+  .empty{border:1.5px dashed var(--line);border-radius:16px;padding:22px;color:var(--ink2);max-width:640px;background:rgba(255,255,255,.55)}
+  .qa{background:#fff;border:1px solid var(--line);border-radius:14px;padding:4px 18px;margin-top:12px;max-width:760px}
+  .qa summary{cursor:pointer;font-weight:700;color:var(--char);padding:12px 0}
+  .qa p{color:var(--ink2);margin:0 0 14px}
+  @media (max-width:700px){.city-name{display:none}}
+</style>
+</head>
+<body id="top">
+<a class="skip" href="#directory">Skip to the directory</a>
+<header>
+  <div class="bar">
+    <span class="city-lock">
+      <a class="wordmark" href="../" aria-label="Echode home"><img src="../echode-logo.png" alt="" width="996" height="132"></a>
+      <span class="div" aria-hidden="true"></span>
+      <span class="city-name">AUSTIN</span>
+    </span>
+    <nav aria-label="Austin page">
+      <a href="#directory">Directory</a>
+      <a href="#events">Events</a>
+      <a href="#jobs">Jobs</a>
+      <a href="#faq">FAQ</a>
+      <a class="cta" href="../#suggest">Suggest</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <div class="hero">
+    <div>
+      <p class="eyebrow">Echode: Establishing Connections</p>
+      <h1>Austin, Texas</h1>
+      <p class="lede">Austin's Deaf community directory, in the making. These are the seeded starting listings: the schools, organizations, interpreters, churches, and socials that anchor Deaf life in Austin. Community submissions come next.</p>
+      <p style="margin-top:18px"><span class="pchip">PREVIEW · COLLECTING LISTINGS</span></p>
+      <div class="stats">
+        <span><b>22</b> seeded listings</span>
+        <span><b>7</b> categories</span>
+        <span><b>1</b> recurring event</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="citysec" id="directory">
+    <h2>Directory</h2>
+    <p class="sub">The starting set, researched and seeded by hand. If something is missing or out of date, use the Suggest button and it goes into the review queue.</p>
+    <div class="catgroup"><h3>Organizations &amp; Services</h3><div class="lgrid">
+      <article class="lcard"><h4>Texas Association of the Deaf</h4><p>Statewide Deaf advocacy nonprofit founded in 1886, headquartered in Austin.</p><a class="visit" href="https://www.txad.org/" target="_blank" rel="noopener">Visit website<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></article>
+      <article class="lcard"><h4>Greater Austin Foundation for the Deaf</h4><p>Foundation supporting the Deaf and hard of hearing community across the greater Austin area with funding, education, and events.</p><a class="visit" href="https://deaf.foundation/" target="_blank" rel="noopener">Visit website<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></article>
+      <article class="lcard"><h4>Texas HHSC Deaf and Hard of Hearing Services</h4><p>State office for deaf and hard of hearing services, based in Austin: interpreter certification (BEI), Camp Sign, STAP assistance, and resource specialists.</p><a class="visit" href="https://www.hhs.texas.gov/services/disability" target="_blank" rel="noopener">Visit website<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></article>
+      <article class="lcard"><h4>Texas Hands &amp; Voices</h4><p>Parent driven nonprofit supporting families of children who are deaf or hard of hearing across Texas.</p><a class="visit" href="https://txhv.org/" target="_blank" rel="noopener">Visit website<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></article>
+    </div></div>
+    <div class="catgroup"><h3>Education &amp; Career</h3><div class="lgrid">
+      <article class="lcard"><h4>Texas School for the Deaf</h4><p>State school in Austin for deaf and hard of hearing students from across Texas, since 1856. Community hub for public events and ASL classes.</p><a class="visit" href="https://www.tsd.texas.gov/" target="_blank" rel="noopener">Visit website<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></article>
+      <article class="lcard"><h4>Statewide Outreach Center at TSD</h4><p>Outreach arm of Texas School for the Deaf: deaf education resources, training, and support for students, families, and professionals statewide.</p><a class="visit" href="https://www.texasdeafed.org/" target="_blank" rel="noopener">Visit website<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></article>
+      <article class="lcard"><h4>Austin Community College ASL &amp; Interpreter Training</h4><p>ACC program offering ASL I through VI, an ASL Studies certificate, and an Interpreter Training AAS degree.</p><a class="visit" href="https://pss.austincc.edu/aslit/lab/" target="_blank" rel="noopener">Visit website<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></article>
+      <article class="lcard"><h4>University of Texas at Austin ASL Program</h4><p>UT Austin signed language program: ASL courses, an ASL Studies minor with Deaf Culture courses, and sign language linguistics research.</p><a class="visit" href="https://liberalarts.utexas.edu/linguistics/undergraduate-program/asl-program/index.html" target="_blank" rel="noopener">Visit website<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></article>
+    </div></div>
+    <div class="catgroup"><h3>Interpreting Agencies</h3><div class="lgrid">
+      <article class="lcard"><h4>Communication By Hand</h4><p>Austin interpreting agency providing 24/7 certified ASL interpreters across Central Texas since 1993, including DeafBlind tactile interpreting.</p><a class="visit" href="https://communicationbyhand.com/" target="_blank" rel="noopener">Visit website<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></article>
+      <article class="lcard"><h4>3 Bridges Sign Language Services</h4><p>Austin based ASL interpreting agency: on site interpreting, video remote interpreting, and CART captioning.</p><a class="visit" href="https://3bridgesaustin.com/" target="_blank" rel="noopener">Visit website<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></article>
+      <article class="lcard"><h4>Ploeger ASL Interpreting Services</h4><p>Austin area ASL interpreting company specializing in theatre and arts interpreting.</p><a class="visit" href="https://www.paslinterpreting.com/" target="_blank" rel="noopener">Visit website<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></article>
+      <article class="lcard"><h4>Texas Sign Language Interpreter Services</h4><p>Austin interpreting service offering on site ASL interpreting, video remote interpreting, and live CART captioning.</p><a class="visit" href="https://www.txasl.com/" target="_blank" rel="noopener">Visit website<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></article>
+      <article class="lcard"><h4>Texas Society of Interpreters for the Deaf</h4><p>Texas affiliate of RID, based in Austin: professional association for sign language interpreters, hosts the annual TSID conference.</p><a class="visit" href="https://tsid.org/" target="_blank" rel="noopener">Visit website<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></article>
+    </div></div>
+    <div class="catgroup"><h3>Social &amp; Meetup</h3><div class="lgrid">
+      <article class="lcard"><h4>Austin Deaf Club</h4><p>Deaf social club in south Austin: movie nights, game nights, workshops, and community events.</p><a class="visit" href="https://www.austindeafclub.org/" target="_blank" rel="noopener">Visit website<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></article>
+      <article class="lcard"><h4>Austin Deaf Pickleball</h4><p>Deaf pickleball community in Central Texas: leagues, clinics, and ASL socials. Hosted the National Deaf Pickleball Tournament.</p><a class="visit" href="https://austindeafpickleball.org/" target="_blank" rel="noopener">Visit website<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></article>
+    </div></div>
+    <div class="catgroup"><h3>Churches &amp; Ministries</h3><div class="lgrid">
+      <article class="lcard"><h4>Jesus Lutheran Church of the Deaf</h4><p>Deaf congregation next to Texas School for the Deaf, serving the Deaf community since 1931. ASL worship, youth nights, and sign language choir.</p><a class="visit" href="http://www.jesusdeafchurch.com/" target="_blank" rel="noopener">Visit website<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></article>
+      <article class="lcard"><h4>Austin Spirit of Life Deaf Church</h4><p>Deaf led church in south Austin: Saturday ASL worship, Sunday school, and classes for Deaf and hard of hearing kids and CODAs.</p><a class="visit" href="https://asldc.weebly.com/" target="_blank" rel="noopener">Visit website<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></article>
+      <article class="lcard"><h4>Diocese of Austin Deaf Apostolate</h4><p>Diocesan ministry fostering Deaf participation in Catholic parish life: interpreted Masses, Deaf Masses, and captioned resources.</p><a class="visit" href="https://www.austindiocese.org/deaf-apostolate" target="_blank" rel="noopener">Visit website<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></article>
+    </div></div>
+    <div class="catgroup"><h3>Deaf-Owned Business</h3><div class="lgrid">
+      <article class="lcard"><h4>Crêpe Crazy</h4><p>Deaf owned crêpe restaurant in Austin (plus Dripping Springs), founded by the Deaf Giterman family and staffed largely by Deaf workers. Ordering by signing or pointing.</p><a class="visit" href="https://crepecrazy.com/" target="_blank" rel="noopener">Visit website<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></article>
+      <article class="lcard"><h4>Deaf Austin Theatre</h4><p>Deaf owned and operated theatre company producing live theatre in ASL with spoken English and supertitles, plus workshops and acting camps.</p><a class="visit" href="https://deafaustintheatre.org/" target="_blank" rel="noopener">Visit website<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></article>
+      <article class="lcard"><h4>Pepperbox Coffee</h4><p>Deaf owned coffee truck started in 2017 by Deaf co-owner Nicholas Buchanan, staffed by deaf baristas.</p></article>
+    </div></div>
+    <div class="catgroup"><h3>Deaf-Friendly Business</h3><div class="lgrid">
+      <article class="lcard"><h4>The Contemporary Austin</h4><p>Art museum offering ASL interpreted access tours at its Jones Center and Laguna Gloria sites.</p><a class="visit" href="https://thecontemporaryaustin.org/accessibility/" target="_blank" rel="noopener">Visit website<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></article>
+    </div></div>
+  </section>
+
+  <section class="citysec" id="events">
+    <h2>Events</h2>
+    <p class="sub">Recurring first. One-off Austin events get added as they are announced.</p>
+    <div class="catgroup">
+      <article class="evcard">
+        <h4>Deaf Night Out ATX</h4>
+        <p class="when">Every 3rd Saturday · Next: Saturday, November 21, 2026</p>
+        <p>The venue rotates month to month and is announced in the Facebook group. Deaf adults, interpreters, CODAs, signing students, and the curious are welcome.</p>
+        <a class="visit" href="https://facebook.com/groups/308726428161/" target="_blank" rel="noopener">Deaf Night Out ATX on Facebook<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a>
+      </article>
+    </div>
+  </section>
+
+  <section class="citysec" id="jobs">
+    <h2>Jobs</h2>
+    <p class="sub">No Austin job listings yet.</p>
+    <div class="catgroup">
+      <div class="empty">Austin employers and job boards will appear here as they are submitted. Know one that hires Deaf Austinites? <a class="visit" href="../#suggest">Suggest it</a>.</div>
+    </div>
+  </section>
+
+  <section class="citysec" id="faq">
+    <h2>FAQ</h2>
+    <details class="qa"><summary>Is Echode Austin open?</summary><p>Not officially. Austin is in the collecting stage: seeded listings are in, and the page opens fully once the community starts adding to it and events recur. Houston is the live example of what an open city looks like.</p></details>
+    <details class="qa"><summary>How do I get listed?</summary><p>Use the Suggest button. Every suggestion goes to a review queue first, and community listings are always free. Businesses get the same review; paid visibility, when it exists, is always labeled.</p></details>
+    <details class="qa"><summary>Who runs this?</summary><p>Echode is a one person community project run by Long Duong in Houston, the same person behind HoustonDeafNetwork. Not a nonprofit, no office, just a directory built to last.</p></details>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="fbrand" href="#top" aria-label="Echode Austin, back to top"><img class="flogo" src="../echode-logo-light.png" alt="" width="996" height="132"><small>ESTABLISHING CONNECTIONS</small></a>
+    <p class="copy">&copy; <span id="year">2026</span> Echode. All rights reserved.</p>
+  </div>
+</footer>
+<script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+</body>
+</html>
