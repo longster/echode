@@ -85,6 +85,7 @@
   .live-card h3{font-size:31px;color:var(--char);letter-spacing:-.01em}
   .live-card .home{color:var(--gray);font-size:15.5px;margin-bottom:18px}
   .card-rows{border-top:1px solid var(--line);margin-bottom:20px}
+  .card-rows div[hidden]{display:none}
   .card-rows div{display:grid;grid-template-columns:104px 1fr;gap:4px 14px;padding:11px 0;border-bottom:1px solid var(--line);font-size:15.5px;align-items:baseline}
   .card-rows dt{font-weight:700;color:var(--char)}
   .card-rows dd{color:var(--gray);text-align:left}
@@ -199,6 +200,8 @@
   .card-rows dt{font-weight:700;color:var(--char)}
   .card-rows dd{color:var(--gray);text-align:left}
   .card-rows dd strong{color:var(--ink)}
+  .card-rows dd a{color:var(--blue-dark);text-decoration:none}
+  .card-rows dd a:hover{text-decoration:underline}
   @keyframes spotpulse{0%{box-shadow:0 0 0 0 rgba(243,174,72,.45)}70%{box-shadow:0 0 0 9px rgba(243,174,72,0)}100%{box-shadow:0 0 0 0 rgba(243,174,72,0)}}
   @media (prefers-reduced-motion:reduce){.pulse-dot{animation:none}.ring-anim{animation:none;opacity:0}}
   @media (max-width:1020px){.xhero-grid{grid-template-columns:1fr;gap:36px}.hero-visual{max-width:560px;width:100%;margin:0 auto}.stack{margin:6px auto 0}}
@@ -392,8 +395,7 @@ gtag('config', 'G-Y56G4N26M4');
             <p class="card-sub">Deaf community, gathering speed</p>
             <dl class="card-rows">
               <div><dt>Next gathering</dt><dd><strong id="cardNextName">Deaf Night Out ATX</strong><br><span id="cardNextWhen">Saturday, November 21, 2026 · Austin, venue announced in Facebook group</span></dd></div>
-              <div><dt>Directory</dt><dd><strong data-stat="listings">22</strong> listings in <strong data-stat="categories">7</strong> categories</dd></div>
-              <div><dt>Network</dt><dd>Houston is live, Texas statewide is collecting</dd></div>
+              <div id="newsRow" hidden><dt>Latest</dt><dd><a id="newsLink" href="#" target="_blank" rel="noopener"><strong id="newsTitle"></strong><svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg></a><br><span id="newsDate"></span></dd></div>
             </dl>
             <a class="btn" href="#events">See Austin events</a>
           </div>
@@ -542,6 +544,13 @@ gtag('config', 'G-Y56G4N26M4');
       cn.textContent="Nothing scheduled yet";
       cw.textContent="New gatherings are added as they are announced.";
     }
+  }
+  var nr=document.getElementById("newsRow"), nw=SITE_DATA.news;
+  if(nr && nw && nw.title && ok(nw.link)){
+    document.getElementById("newsTitle").textContent=nw.title;
+    document.getElementById("newsLink").href=nw.link;
+    document.getElementById("newsDate").textContent=nw.date ? new Date(nw.date+"T12:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"}) : "";
+    nr.hidden=false;
   }
   var jobs=SITE_DATA.postings||[];
   var jlist=document.getElementById("jobList"), jempty=document.getElementById("jobsEmpty"), jsub=document.getElementById("jobsSub");
