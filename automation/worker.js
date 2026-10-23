@@ -254,8 +254,9 @@ function setIf(props, schema, name, type, value) {
 
 // The Echode stamp: which city the submission serves, and that it
 // came from the form. Both properties are schema-gated.
-function stampCity(props, schema, servesCode) {
-  if (servesCode) setIf(props, schema, "Serves", "multi_select", [servesCode]);
+function stampCity(props, schema, servesCodes) {
+  const codes = [...new Set((servesCodes || []).filter(Boolean))];
+  if (codes.length) setIf(props, schema, "Serves", "multi_select", codes);
   setIf(props, schema, "Origin", "select", "Submitted");
 }
 
@@ -318,7 +319,12 @@ export default {
     if (!name || !isEmail(email) || !LISTING_TYPES.includes(type) || !message) {
       return jsonResponse(origin, 400, { ok: false, error: "invalid_input" });
     }
-    const servesCode = CITY_TO_SERVES[cityLabel] || "";
+    // Serves can carry several tags: the primary city plus any
+    // "also serves" labels the form sent (e.g. a Houston office
+    // that also serves all of Texas gets HTX + TX).
+    const alsoLabels = Array.isArray(body.also_serves) ? body.also_serves : [];
+    const servesCodes = [CITY_TO_SERVES[cityLabel] || "",
+      ...alsoLabels.map((l) => CITY_TO_SERVES[String(l || "").trim()] || "")];
     const today = new Date().toISOString().slice(0, 10);
 
     const dbKey = TYPE_TO_DB[type];
@@ -359,7 +365,7 @@ export default {
         setIf(props, schema, "Link", "url", parsed.urls.any || parsed.link);
         setIf(props, schema, "Date", "date", firstIsoDate(message) || today);
         setIf(props, schema, "Status", "select", "Draft");
-        stampCity(props, schema, servesCode);
+        stampCity(props, schema, servesCodes);
         // News has no Notes property today. If the owner adds one,
         // the submitter trail lands there automatically.
         setIf(props, schema, "Notes", "rich_text",
@@ -376,7 +382,7 @@ export default {
         setIf(props, schema, "Link", "url", parsed.link);
         setIf(props, schema, "Source", "rich_text", "Form submission - PENDING REVIEW");
         setIf(props, schema, "Status", "select", "Upcoming");
-        stampCity(props, schema, servesCode);
+        stampCity(props, schema, servesCodes);
         setIf(props, schema, "Notes", "rich_text",
           "Submitted by: " + name + " (" + email + ")\n\n" + parsed.raw);
       } else if (dbKey === "DATABASE_ID_JOBS") {
@@ -394,7 +400,7 @@ export default {
         }
         if (expiry) setIf(props, schema, "Expiry date", "date", expiry);
         setIf(props, schema, "Status", "select", "Filled");
-        stampCity(props, schema, servesCode);
+        stampCity(props, schema, servesCodes);
         setIf(props, schema, "Notes", "rich_text",
           "Submitted by: " + name + " (" + email + ")\n\n" + parsed.raw);
       } else {
@@ -412,7 +418,7 @@ export default {
         setIf(props, schema, "LinkedIn", "url", parsed.urls.linkedin);
         setIf(props, schema, "Notes", "rich_text", notes.join("\n"));
         setIf(props, schema, "Status", "select", "Pending review");
-        stampCity(props, schema, servesCode);
+        stampCity(props, schema, servesCodes);
       }
 
       page = await notionFetch(env, "/pages", {

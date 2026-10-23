@@ -304,6 +304,10 @@
   .gform textarea{min-height:120px;resize:vertical}
   .gform .full{grid-column:1/-1}
   .gform .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .gform .also-serves .as-label{font-weight:600;font-size:15px;display:block;margin-bottom:7px;color:var(--char)}
+  .gform .also-serves .as-row{display:flex;flex-wrap:wrap;gap:8px 18px}
+  .gform .also-serves label{display:inline-flex;align-items:center;gap:7px;font-weight:500;margin:0}
+  .gform .also-serves input{width:auto;padding:0}
   .form-status{font-size:14.5px;margin-top:12px;color:var(--gray)}
   .form-status.ok{color:#146c2e}
   .form-status.err{color:#b3261e}
@@ -510,6 +514,16 @@ gtag('config', 'G-Y56G4N26M4');
             <option value="general">General question</option>
           </select>
         </div>
+        <div class="full also-serves">
+          <span class="as-label">Also serves (optional)</span>
+          <div class="as-row">
+            <label><input type="checkbox" name="also" value="Houston"> Houston</label>
+            <label><input type="checkbox" name="also" value="Austin"> Austin</label>
+            <label><input type="checkbox" name="also" value="Dallas - Fort Worth"> Dallas - Fort Worth</label>
+            <label><input type="checkbox" name="also" value="San Antonio"> San Antonio</label>
+            <label><input type="checkbox" name="also" value="Texas statewide"> Texas statewide</label>
+          </div>
+        </div>
         <div class="full">
           <label for="g-details">Details</label>
           <textarea id="g-details" name="details" placeholder="Tell us about it: the place or event, where it is, a link if you have one... for a news tip, paste the headline and the link."></textarea>
@@ -682,6 +696,7 @@ document.getElementById("year").textContent=new Date().getFullYear();
       city: "Texas statewide",
       listing_type: document.getElementById("g-type").value,
       message: document.getElementById("g-details").value.trim(),
+      also_serves: Array.prototype.map.call(form.querySelectorAll("[name=also]:checked"), function(b){ return b.value; }),
       company: (form.querySelector("[name=company]")||{}).value || ""
     };
     fetch("https://echode-form-intake.longster.workers.dev/", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(payload)})
