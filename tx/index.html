@@ -222,7 +222,9 @@
   .filter-tags button:hover{text-decoration:underline}
   .filter-tags button[aria-pressed=true]{color:var(--char);text-decoration:underline;text-underline-offset:4px}
   .search-meta[hidden],.filter-panel[hidden],.empty-note[hidden]{display:none}
-  .search-meta{display:flex;flex-wrap:wrap;align-items:center;gap:.3rem .8rem;margin-top:.7rem;font-size:.9rem;color:var(--ink2)}
+  .search-meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.4rem 1rem;margin-top:.7rem;font-size:.9rem;color:var(--ink2)}
+  .meta-left{display:flex;align-items:center;gap:.55rem}
+  #activeFilter strong{color:var(--ink)}
   .clear-btn{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:none;border:1px solid var(--hl);border-radius:50%;color:var(--char);cursor:pointer;padding:0}
   .clear-btn:hover{border-color:var(--blue)}
   .empty-note{margin-top:1.4rem;background:#fff;border:1px solid var(--hl);border-radius:16px;padding:1.4rem;color:var(--ink2);box-shadow:var(--sh)}
@@ -381,8 +383,8 @@ gtag('config', 'G-Y56G4N26M4');
           <div class="filter-tags" id="categoryTags"><button type="button" data-filter="" aria-pressed="true">All</button><button type="button" data-filter="Organizations &amp; Services" aria-pressed="false">Organizations &amp; Services</button><button type="button" data-filter="Education &amp; Career" aria-pressed="false">Education &amp; Career</button><button type="button" data-filter="Interpreting Agencies" aria-pressed="false">Interpreting Agencies</button><button type="button" data-filter="Health &amp; Wellness" aria-pressed="false">Health &amp; Wellness</button></div>
         </div>
         <div class="search-meta" id="searchMeta" hidden>
-          <span id="searchCount"></span>
-          <button type="button" class="clear-btn" id="searchClear" aria-label="Clear search and filter" title="Clear search and filter"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+          <span class="meta-left"><span id="activeFilter"></span><button type="button" class="clear-btn" id="searchClear" aria-label="Clear search and filter" title="Clear search and filter"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span>
+          <span id="searchCount" role="status" aria-live="polite"></span>
         </div>
       </div>
       <p class="empty-note" id="directoryEmpty" hidden>No listings match your search. Try a different word, or <a href="#get-listed">suggest a listing</a>.</p>
@@ -516,6 +518,7 @@ document.getElementById("year").textContent=new Date().getFullYear();
       ft=document.getElementById("filterToggle"),
       meta=document.getElementById("searchMeta"),
       count=document.getElementById("searchCount"),
+      af=document.getElementById("activeFilter"),
       clear=document.getElementById("searchClear"),
       empty=document.getElementById("directoryEmpty"),
       cards=Array.prototype.slice.call(document.querySelectorAll(".lcard")),
@@ -536,7 +539,12 @@ document.getElementById("year").textContent=new Date().getFullYear();
     var filtering=!!(q || activeCat);
     meta.hidden=!filtering;
     empty.hidden=shown!==0;
-    if(filtering) count.textContent="Showing " + shown + " of " + cards.length + " listings" + (activeCat ? " in " + activeCat : "") + (q ? ' for "' + input.value.trim() + '"' : "");
+    if(filtering){
+      count.textContent="Showing " + shown + " of " + cards.length + " listings";
+      af.textContent="";
+      if(activeCat){ af.appendChild(document.createTextNode("Filtered by: ")); var st=document.createElement("strong"); st.textContent=activeCat; af.appendChild(st); }
+      if(q){ if(activeCat) af.appendChild(document.createTextNode(" \u00b7 ")); af.appendChild(document.createTextNode("\u201C" + input.value.trim() + "\u201D")); }
+    }
   }
   input.addEventListener("input", apply);
   tagBtns.forEach(function(b){
