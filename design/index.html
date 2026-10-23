@@ -43,7 +43,7 @@
   nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:15.5px;padding:10px 2px}
   nav a:hover{color:var(--blue)}
   nav a.btn{color:#fff}
-  .btn{display:inline-block;background:var(--blue);color:#fff;text-decoration:none;font-weight:700;padding:12px 22px;border-radius:999px;border:2px solid var(--blue)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;height:42px;background:var(--blue);color:#fff;text-decoration:none;font-weight:700;padding:0 22px;border-radius:999px;border:2px solid var(--blue)}
   .btn:hover{background:var(--blue-dark);border-color:var(--blue-dark)}
   .btn.ghost{background:#fff;color:var(--blue-dark)}
   .btn.ghost:hover{background:var(--blue-soft)}
@@ -94,7 +94,7 @@
   .progress-row .dots{display:inline-flex;gap:7px}
   .progress-row .dots i{width:11px;height:11px;border-radius:50%;border:2px solid var(--blue);display:block}
   .progress-row .dots i.on{background:var(--blue)}
-  .live-card .btn{display:block;text-align:center}
+  .live-card .btn{display:flex;align-items:center;justify-content:center;text-align:center}
   @media (max-width:1020px){.hero-grid{grid-template-columns:1fr;gap:44px}.stack{margin:6px auto 0;max-width:560px}}
   .eyebrow{font-size:13px;font-weight:700;letter-spacing:.24em;color:var(--blue-dark);text-transform:uppercase;margin-bottom:18px}
   h1{font-size:clamp(36px,4.6vw,56px);line-height:1.1;letter-spacing:-.01em;max-width:21ch;color:var(--char);text-wrap:balance}
@@ -452,7 +452,7 @@ gtag('config', 'G-Y56G4N26M4');
           <a class="btn ghost" href="#components">Ghost button</a>
           <a class="icon-btn" href="#components" title="Website" aria-label="Example website icon button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
           <a class="icon-btn" href="#components" title="Facebook" aria-label="Example Facebook icon button"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-          <span style="color:var(--ink2);font-size:.92rem">Icon buttons are 44px circles with a 20px glyph. The card title carries the main link; icon buttons keep their own targets.</span>
+          <span style="color:var(--ink2);font-size:.92rem">Icon buttons are 42px circles with a 20px glyph. The card title carries the main link; icon buttons keep their own targets.</span>
         </div>
       </div>
 
