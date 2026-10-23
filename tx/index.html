@@ -197,6 +197,10 @@
   .spotlight{display:flex;align-items:center;gap:9px;margin-top:16px;font-size:15.5px;color:var(--ink2)}
   .spotlight[hidden]{display:none}
   .spotlight strong{color:var(--ink)}
+  .newsline{display:flex;align-items:center;gap:9px;margin-top:10px;font-size:15.5px;color:var(--ink2)}
+  .newsline[hidden]{display:none}
+  .newsline a{color:var(--blue-dark);text-decoration:none}
+  .newsline a:hover{text-decoration:underline}
   .spot-dot{width:9px;height:9px;border-radius:50%;background:var(--amber);flex:none;animation:spotpulse 2.6s ease-out infinite}
   @keyframes spotpulse{0%{box-shadow:0 0 0 0 rgba(243,174,72,.45)}70%{box-shadow:0 0 0 9px rgba(243,174,72,0)}100%{box-shadow:0 0 0 0 rgba(243,174,72,0)}}
   @media (prefers-reduced-motion:reduce){.spot-dot{animation:none}}
@@ -367,6 +371,7 @@ gtag('config', 'G-Y56G4N26M4');
       <h1>Texas, statewide</h1>
       <p class="lede">Some services are not tied to one city. This is the layer above the city pages: virtual counseling, state agencies, and Texas-wide organizations that serve Deaf and hard of hearing Texans wherever they live.</p>
       <p class="spotlight" id="spotlight" hidden></p>
+      <p class="newsline" id="newsLine" hidden><span class="spot-dot" aria-hidden="true"></span><span>Latest: <a id="newsLink" href="#" target="_blank" rel="noopener"><strong id="newsTitle"></strong></a> &middot; <span id="newsDate"></span></span></p>
       <div class="hero-meta">
         <span class="pchip">PREVIEW · COLLECTING LISTINGS</span>
         <div class="stats">
@@ -790,6 +795,13 @@ gtag('config', 'G-Y56G4N26M4');
     var when=nx.date ? new Date(nx.date+"T12:00:00").toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"}) : "";
     spot.innerHTML='<span class="spot-dot" aria-hidden="true"></span><span>Next gathering: <strong>'+esc(nx.name)+'</strong>'+(when?' &middot; '+esc(when):'')+'</span>';
     spot.hidden=false;
+  }
+  var nline=document.getElementById("newsLine"), nw2=SITE_DATA.news;
+  if(nline && nw2 && nw2.title && ok(nw2.link)){
+    document.getElementById("newsTitle").textContent=nw2.title;
+    document.getElementById("newsLink").href=nw2.link;
+    document.getElementById("newsDate").textContent=nw2.date ? new Date(nw2.date+"T12:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"}) : "";
+    nline.hidden=false;
   }
   var jobs=SITE_DATA.postings||[];
   var jlist=document.getElementById("jobList"), jempty=document.getElementById("jobsEmpty"), jsub=document.getElementById("jobsSub");

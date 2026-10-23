@@ -11,6 +11,12 @@
 //   Events: Status = "Upcoming" AND Source does NOT contain
 //     "PENDING REVIEW", and Serves includes the city.
 //   Jobs: Status = "Active" only, and Serves includes the city.
+//   News: Status = "Published" only; each city page gets the
+//     newest Published item whose Serves includes it (or null).
+//     News is best-effort: if the News database cannot be read
+//     (for example the integration has not been connected to it
+//     yet), the sync warns and publishes news: null rather than
+//     failing the whole run.
 // The approval gate is absolute: each database publishes only rows
 // in its approved state, and if a database has no Status property,
 // the sync FAILS for that database and publishes nothing from it.
@@ -26,6 +32,10 @@
 //   Jobs: Title (title), Organization (rich_text), Description
 //     (rich_text), Link (url), Expiry date (date), Status (select),
 //     Serves (multi-select).
+//   News (Echode News): Headline (title), Link (url), Date (date),
+//     Serves (multi-select), Status (select). Its database ID is
+//     baked in below (DATABASE_ID_NEWS env can override); database
+//     IDs are identifiers, not secrets.
 // Logos: a Directory row's Logo file is fetched and embedded as a
 // data URI; otherwise the previous data.js logo for that record is
 // kept (same behavior as the HDN sync).
@@ -42,6 +52,9 @@ const CITIES = [
   { code: "ATX", dir: "atx" },
   { code: "TX", dir: "tx" },
 ];
+
+// Echode News database (created 2026-10-23 in the ECHODE workspace).
+const NEWS_DB_ID = process.env.DATABASE_ID_NEWS || "8946b47d-e077-4a48-b2ef-90bd93a210bd";
 
 const MAP = {
   directory: {
@@ -62,6 +75,12 @@ const MAP = {
     description: "Description",
     link: "Link",
     source: "Source",
+    status: "Status",
+    serves: "Serves",
+  },
+  news: {
+    link: "Link",
+    date: "Date",
     status: "Status",
     serves: "Serves",
   },
@@ -277,6 +296,27 @@ async function main() {
     })
     .filter((j) => j.name);
 
+  // ---- News (Published only; newest per city wins) ----
+  let newsAll = [];
+  try {
+    const newsSchema = await getSchema(NEWS_DB_ID);
+    if (!("Status" in newsSchema.props)) throw new Error("News has no Status property.");
+    const newsRows = await queryByStatus(NEWS_DB_ID, MAP.news.status, "Published");
+    newsAll = newsRows
+      .map((page) => ({
+        title: readTitle(page, newsSchema),
+        link: readUrl(page, MAP.news.link),
+        date: readDate(page, MAP.news.date),
+        created: page.created_time || "",
+        serves: readMultiSelect(page, MAP.news.serves),
+      }))
+      .filter((n) => n.title && n.link)
+      .sort((a, b) => (b.date || b.created).localeCompare(a.date || a.created));
+  } catch (err) {
+    console.warn("News skipped (continuing without it): " + err.message);
+    newsAll = [];
+  }
+
   // ---- Emit one data.js per city ----
   for (const city of CITIES) {
     const dataPath = city.dir + "/data.js";
@@ -329,6 +369,7 @@ async function main() {
       }))
       .sort(byName);
 
+    const newsHit = newsAll.find((n) => n.serves.includes(city.code));
     const next = {
       generated: today,
       source: "Notion CMS, ECHODE workspace",
@@ -336,6 +377,7 @@ async function main() {
       directory,
       events,
       postings,
+      news: newsHit ? { title: newsHit.title, link: newsHit.link, date: newsHit.date } : null,
     };
     const strip = (d) => {
       if (!d) return "";
