@@ -33,10 +33,10 @@
   .wordmark{font-size:26px;font-weight:800;letter-spacing:.14em;text-decoration:none;color:var(--char)}
   .wordmark .echo{color:var(--blue)}
   .wordmark small{display:block;font-size:10.5px;font-weight:600;letter-spacing:.32em;color:var(--gray);margin-top:1px}
-  .wordmark img{display:block;height:22px;width:auto}
-  @media (max-width:560px){.wordmark img{height:18px}}
+  .wordmark img{display:block;height:19px;width:auto}
+  @media (max-width:560px){.wordmark img{height:15px}}
   .fbrand small{display:block;font-size:10.5px;font-weight:600;letter-spacing:.32em;color:#9aa4ad;margin-top:9px}
-  .fbrand .flogo{display:block;height:30px;width:auto}
+  .fbrand .flogo{display:block;height:26px;width:auto}
   nav{display:flex;gap:28px;align-items:center}
   nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:15.5px;padding:10px 2px}
   nav a:hover{color:var(--blue)}
@@ -293,6 +293,12 @@
   .design-link{font-size:14px;color:#c9d2d9;text-decoration:none;font-weight:600}
   .design-link:hover{color:#fff;text-decoration:underline}
   @media (max-width:640px){.foot-row{flex-direction:column;justify-content:center}.foot-row .copy{text-align:center}}
+
+  .lcard h3 a{color:var(--blue)}
+  .lcard:hover h3 a{color:var(--blue-dark)}
+  .goal-card .goal-title{color:var(--blue)}
+  .goal-card:hover .goal-title{color:var(--blue-dark)}
+    .foot-links{display:flex;gap:22px}
 </style>
 </head>
 <body>
@@ -410,7 +416,7 @@
 <footer>
   <div class="wrap">
     <a class="fbrand" href="#top" aria-label="Echode design, back to top"><img class="flogo" src="../echode-logo-light.png" alt="" width="996" height="132"><small>ESTABLISHING CONNECTIONS</small></a>
-    <div class="foot-row"><p class="copy">&copy; <span id="year">2026</span> Echode. All rights reserved.</p><a class="design-link" href="./">Design</a></div>
+    <div class="foot-row"><p class="copy">&copy; <span id="year">2026</span> Echode. All rights reserved.</p><span class="foot-links"><a class="design-link" href="../privacy/">Privacy</a><a class="design-link" href="./">Design</a></span></div>
   </div>
 </footer>
 <script>document.getElementById("year").textContent=new Date().getFullYear();</script>

@@ -33,10 +33,10 @@
   .wordmark{font-size:26px;font-weight:800;letter-spacing:.14em;text-decoration:none;color:var(--char)}
   .wordmark .echo{color:var(--blue)}
   .wordmark small{display:block;font-size:10.5px;font-weight:600;letter-spacing:.32em;color:var(--gray);margin-top:1px}
-  .wordmark img{display:block;height:22px;width:auto}
-  @media (max-width:560px){.wordmark img{height:18px}}
+  .wordmark img{display:block;height:19px;width:auto}
+  @media (max-width:560px){.wordmark img{height:15px}}
   .fbrand small{display:block;font-size:10.5px;font-weight:600;letter-spacing:.32em;color:#9aa4ad;margin-top:9px}
-  .fbrand .flogo{display:block;height:30px;width:auto}
+  .fbrand .flogo{display:block;height:26px;width:auto}
   nav{display:flex;gap:28px;align-items:center}
   nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:15.5px;padding:10px 2px}
   nav a:hover{color:var(--blue)}
@@ -179,6 +179,13 @@
   .design-link{font-size:14px;color:#c9d2d9;text-decoration:none;font-weight:600}
   .design-link:hover{color:#fff;text-decoration:underline}
   @media (max-width:640px){.foot-row{flex-direction:column;justify-content:center}.foot-row .copy{text-align:center}}
+
+  .map-title{font-size:19px;color:var(--char);margin:0 0 6px}
+  .map-copy{color:var(--gray);margin:0 0 18px;line-height:1.6}
+  .map-link{text-decoration:none;color:inherit}
+  .city h3 .card-hit{color:var(--blue)}
+  .city.is-link:hover h3 .card-hit{color:var(--blue-dark)}
+  .foot-links{display:flex;gap:22px}
 </style>
 </head>
 <body>
@@ -247,7 +254,7 @@
       <div class="cities-grid">
         <div class="map-box">
           <!-- Stylized Texas outline, decorative: the list beside it carries the same information -->
-          <a class="map-link" href="tx/" aria-label="Texas statewide services page"><svg viewBox="-2 -2 474 394" aria-hidden="true" focusable="false">
+          <a class="map-link" href="tx/" aria-label="Texas statewide services page"><h3 class="map-title">Texas <span class="status collecting">Collecting</span></h3><p class="map-copy">Statewide and online services that serve every Texas city: virtual counseling, state agencies, and Texas-wide organizations.</p><svg viewBox="-2 -2 474 394" aria-hidden="true" focusable="false">
             <defs>
               <linearGradient id="txgrad" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stop-color="#f2f9fd"/><stop offset="1" stop-color="#dfeef8"/>
@@ -273,13 +280,13 @@
               <text x="350" y="242" text-anchor="end" fill="#075a8f" style="paint-order:stroke" stroke="#ffffff" stroke-width="3.5">Houston</text>
             </g>
           </svg></a>
-          <p class="map-cap">The list on the right carries the same information in text.</p>
+          <p class="map-cap">Tap the map to open the Texas statewide page. The city list is on the right.</p>
         </div>
         <ul class="city-list">
           <li class="city live is-link">
             <span class="code">HTX</span>
             <div>
-              <h3><a class="card-hit" href="https://houstondeafnetwork.com" target="_blank" rel="noopener">Houston<span class="status live">Live</span><span class="sr-only">(external site, opens in a new tab)</span></a></h3>
+              <h3><a class="card-hit" href="https://houstondeafnetwork.com" target="_blank" rel="noopener">Houston<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="status live">Live</span><span class="sr-only">(external site, opens in a new tab)</span></a></h3>
               <p>Directory, events, and community, run by HoustonDeafNetwork since day one.</p>
               
             </div>
@@ -305,13 +312,7 @@
               <p>Home to a strong Deaf community and the Texas state tournament scene. On the radar.</p>
             </div>
           </li>
-          <li class="city soon is-link">
-            <span class="code">TX</span>
-            <div>
-              <h3><a class="card-hit" href="tx/">Texas<span class="status collecting">Collecting</span></a></h3>
-              <p>Statewide and online services that serve every Texas city: virtual counseling, state agencies, and Texas-wide organizations.</p>
-            </div>
-          </li>
+          
         </ul>
       </div>
     </div>
@@ -419,7 +420,7 @@
 <footer>
   <div class="wrap">
     <a class="fbrand" href="#top" aria-label="Echode, back to top"><img class="flogo" src="echode-logo-light.png" alt="" width="996" height="132"><small>ESTABLISHING CONNECTIONS</small></a>
-    <div class="foot-row"><p class="copy">&copy; <span id="year">2026</span> Echode. All rights reserved.</p><a class="design-link" href="design/">Design</a></div>
+    <div class="foot-row"><p class="copy">&copy; <span id="year">2026</span> Echode. All rights reserved.</p><span class="foot-links"><a class="design-link" href="privacy/">Privacy</a><a class="design-link" href="design/">Design</a></span></div>
   </div>
 </footer>
 
