@@ -213,6 +213,41 @@
   .name-link:hover{color:var(--blue-dark);text-decoration:underline}
   .sign .name-link{color:inherit}
 </style>
+<style>
+  /* ===== Dark theme (DRAFT 2026-10-23): active when <html data-theme="dark">. Default stays light. ===== */
+  .theme-toggle{flex:none;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--gray);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+  .theme-toggle:hover{color:var(--blue-dark);border-color:var(--blue)}
+  .theme-toggle svg{width:20px;height:20px;fill:currentColor}
+  .theme-toggle .icon-sun{display:none}
+  :root[data-theme="dark"] .theme-toggle .icon-sun{display:block}
+  :root[data-theme="dark"] .theme-toggle .icon-moon{display:none}
+  :root[data-theme="dark"]{
+    --blue:#3aa5ec; --blue-dark:#8ecbf7; --blue-soft:#16334a;
+    --ink:#d9e5ee; --char:#eef4f9; --gray:#9db0bf; --line:#273845;
+    --bg:#0c141b; --bg-soft:#101a23; --chip:#1d2b37;
+  }
+  :root[data-theme="dark"] body{background:linear-gradient(180deg,#0a1622,#0c141b 36%)}
+  :root[data-theme="dark"] .bar{background:rgba(13,22,30,.88);box-shadow:0 14px 34px rgba(0,0,0,.45)}
+  :root[data-theme="dark"] .wordmark img{content:url("echode-logo-light.png")}
+  :root[data-theme="dark"] .bg-aurora{background:linear-gradient(180deg, rgba(16,70,120,.50), rgba(16,70,120,0) 460px)}
+  :root[data-theme="dark"] .bg-mesh{opacity:.35}
+  :root[data-theme="dark"] .btn.ghost{background:#16222c;color:var(--blue-dark)}
+  :root[data-theme="dark"] .btn.ghost:hover{background:var(--blue-soft)}
+  :root[data-theme="dark"] .ghost-card{background:#131e28;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  :root[data-theme="dark"] .live-card{background:#131e28;border-color:#2b4356;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+  :root[data-theme="dark"] .map-box{background:#131e28}
+  :root[data-theme="dark"] .city{background:#131e28}
+  :root[data-theme="dark"] .city.live{box-shadow:0 6px 24px rgba(0,0,0,.4)}
+  :root[data-theme="dark"] .city.is-link:hover{box-shadow:0 10px 26px rgba(0,0,0,.45)}
+  :root[data-theme="dark"] .status.collecting{background:#3d2f10;color:#f2c169}
+  :root[data-theme="dark"] .steps{background:rgba(13,22,30,.85)}
+  :root[data-theme="dark"] .step{background:#131e28}
+  :root[data-theme="dark"] .fact-card{background:#1b2836}
+  :root[data-theme="dark"] .form-section{background:rgba(10,32,54,.55)}
+  :root[data-theme="dark"] form{background:#131e28}
+  :root[data-theme="dark"] input,:root[data-theme="dark"] select,:root[data-theme="dark"] textarea{background:#0e1821;border-color:#33485a;color:var(--ink)}
+  :root[data-theme="dark"] footer{background:#080d12}
+</style>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y56G4N26M4"></script>
 <script>
@@ -228,6 +263,7 @@ gtag('config', 'G-Y56G4N26M4');
     y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
 })(window, document, "clarity", "script", "z2a1q3zdjf");
 </script>
+<script>try{var t=localStorage.getItem('echode-theme');if(t){document.documentElement.setAttribute('data-theme',t);}}catch(e){}</script>
 </head>
 <body>
 
@@ -244,6 +280,7 @@ gtag('config', 'G-Y56G4N26M4');
       <a href="#cities">Cities</a>
       <a href="#how">How a city opens</a>
       <a href="#about">About</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme" aria-pressed="false"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="fill:none"><path d="M12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-15v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M19.8 4.2L18 6M6 18l-1.8 1.8" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></button>
       <a class="btn" href="#suggest">Suggest a listing</a>
     </nav>
   </div>
@@ -987,5 +1024,6 @@ gtag('config', 'G-Y56G4N26M4');
   });
 })();
 </script>
+<script>(function(){var b=document.getElementById('themeToggle');if(!b)return;function sync(){var d=document.documentElement.getAttribute('data-theme')==='dark';b.setAttribute('aria-label',d?'Switch to light theme':'Switch to dark theme');b.setAttribute('aria-pressed',d?'true':'false');}b.addEventListener('click',function(){var d=document.documentElement.getAttribute('data-theme')==='dark';if(d){document.documentElement.removeAttribute('data-theme');try{localStorage.removeItem('echode-theme');}catch(e){}}else{document.documentElement.setAttribute('data-theme','dark');try{localStorage.setItem('echode-theme','dark');}catch(e){}}sync();});sync();})();</script>
 </body>
 </html>
