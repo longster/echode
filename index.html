@@ -110,10 +110,17 @@
   .map-box svg{width:100%;flex:1 1 auto;min-height:320px;display:block}
   .map-cap{font-size:13.5px;color:var(--gray);margin-top:14px;text-align:center}
   .city-list{list-style:none;display:grid;gap:14px}
-  .city{display:flex;gap:18px;align-items:flex-start;border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;background:#fff}
+  .city{display:flex;gap:18px;align-items:stretch;border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;background:#fff}
   .city.live{border-color:var(--blue);box-shadow:0 6px 24px rgba(10,116,184,.10)}
-  .city .code{font-weight:800;letter-spacing:.08em;font-size:14px;color:var(--blue-dark);background:var(--blue-soft);border-radius:8px;padding:6px 10px;min-width:58px;text-align:center;margin-top:2px}
-  .city.soon .code{color:var(--gray);background:var(--chip)}
+  .city .thumb{position:relative;flex:0 0 196px;border-radius:14px;overflow:hidden;background:var(--chip)}
+  .city .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1);transition:transform .35s ease,filter .35s ease,opacity .35s ease}
+  .city:not(.is-link) .thumb img{opacity:.5}
+  .city.is-link:hover .thumb img{filter:none;transform:scale(1.05)}
+  .city .meta{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--gray);margin:0 0 7px}
+  .city .meta .code{font-weight:800;letter-spacing:.1em;color:var(--blue-dark)}
+  .city .meta .status{margin-left:0}
+  @media (max-width:640px){.city{flex-direction:column}.city .thumb{flex:none;width:100%;height:150px}}
+  .city.soon .meta .code{color:var(--gray)}
   .city h3{font-size:19px;color:var(--char)}
   .city p{color:var(--gray);font-size:15.5px}
   .status{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;border-radius:999px;padding:3px 10px;margin-left:8px;vertical-align:2px}
@@ -771,35 +778,37 @@ gtag('config', 'G-Y56G4N26M4');
         </div>
         <ul class="city-list">
           <li class="city live is-link">
-            <span class="code">HTX</span>
+            <span class="thumb"><img src="https://images.pexels.com/photos/10893475/pexels-photo-10893475.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" loading="lazy"></span>
             <div>
-              <h3><a class="card-hit" href="https://houstondeafnetwork.com" target="_blank" rel="noopener">Houston<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="status live">Live</span><span class="sr-only">(external site, opens in a new tab)</span></a></h3>
+              <p class="meta"><span class="code">HTX</span><span aria-hidden="true">•</span><span class="status live">Live</span></p>
+              <h3><a class="card-hit" href="https://houstondeafnetwork.com" target="_blank" rel="noopener">Houston<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></h3>
               <p>Directory, events, and community, run by HoustonDeafNetwork since day one.</p>
-              
             </div>
           </li>
           <li class="city soon is-link">
-            <span class="code">ATX</span>
+            <span class="thumb"><img src="https://images.pexels.com/photos/13684294/pexels-photo-13684294.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" loading="lazy"></span>
             <div>
-              <h3><a class="card-hit" href="atx/">Austin<span class="status collecting">Collecting</span></a></h3>
+              <p class="meta"><span class="code">ATX</span><span aria-hidden="true">•</span><span class="status collecting">Collecting</span></p>
+              <h3><a class="card-hit" href="atx/">Austin</a></h3>
               <p>Seeded listings are in and the preview page is up. Community submissions come next.</p>
             </div>
           </li>
           <li class="city soon">
-            <span class="code">DFW</span>
+            <span class="thumb"><img src="https://images.pexels.com/photos/11926780/pexels-photo-11926780.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" loading="lazy"></span>
             <div>
-              <h3>Dallas - Fort Worth<span class="status soon">Exploring</span></h3>
+              <p class="meta"><span class="code">DFW</span><span aria-hidden="true">•</span><span class="status soon">Exploring</span></p>
+              <h3>Dallas - Fort Worth</h3>
               <p>One metro, two proud cities. Watching for local partners and recurring events.</p>
             </div>
           </li>
           <li class="city soon">
-            <span class="code">SAT</span>
+            <span class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/San_Antonio_River_Walk_at_night.jpg/960px-San_Antonio_River_Walk_at_night.jpg" alt="" loading="lazy"></span>
             <div>
-              <h3>San Antonio<span class="status soon">Exploring</span></h3>
+              <p class="meta"><span class="code">SAT</span><span aria-hidden="true">•</span><span class="status soon">Exploring</span></p>
+              <h3>San Antonio</h3>
               <p>Home to a strong Deaf community and the Texas state tournament scene. On the radar.</p>
             </div>
           </li>
-          
         </ul>
       </div>
     </div>
