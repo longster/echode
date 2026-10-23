@@ -116,6 +116,7 @@
   .status{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;border-radius:999px;padding:3px 10px;margin-left:8px;vertical-align:2px}
   .status.live{background:var(--blue);color:#fff}
   .status.soon{background:var(--chip);color:var(--gray)}
+  .status.collecting{background:#fdf3e3;color:#8a5a00}
   .city a{font-weight:700}
 
   /* steps */
@@ -198,7 +199,7 @@
         </div>
       </div>
       <div class="stack">
-        <p class="sr-only">City status card: Houston is live now, one of four cities open. Austin and Dallas Fort Worth are still exploring.</p>
+        <p class="sr-only">City status card: Houston is live now. Austin is collecting listings, with a preview page up. Dallas Fort Worth and San Antonio are still exploring.</p>
         <div class="ghost-card g2" aria-hidden="true"></div>
         <div class="ghost-card g1" aria-hidden="true"></div>
         <div class="live-card">
@@ -271,8 +272,9 @@
           <li class="city soon">
             <span class="code">ATX</span>
             <div>
-              <h3>Austin<span class="status soon">Exploring</span></h3>
-              <p>Collecting listings and events. Suggest something below and Austin moves up the list.</p>
+              <h3>Austin<span class="status collecting">Collecting</span></h3>
+              <p>Seeded listings are in and the preview page is up. Community submissions come next.</p>
+              <p><a href="atx/">Visit the Austin page</a></p>
             </div>
           </li>
           <li class="city soon">
