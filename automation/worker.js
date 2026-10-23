@@ -410,7 +410,14 @@ export default {
         notes.push("");
         notes.push(parsed.raw);
         setIf(props, schema, schema.titleProp, "title", parsed.name);
-        setIf(props, schema, "Category", "select", matchCategory(message));
+        // Category was a select and is a multi_select after the
+        // 2026-10-23 conversion; write whichever shape the field has.
+        const catMatch = matchCategory(message);
+        if (catMatch && schema.props["Category"] === "multi_select") {
+          props["Category"] = prop.multiSelect([catMatch]);
+        } else {
+          setIf(props, schema, "Category", "select", catMatch);
+        }
         setIf(props, schema, "Description", "rich_text", parsed.description);
         setIf(props, schema, "Website", "url", parsed.urls.website);
         setIf(props, schema, "Facebook", "url", parsed.urls.facebook);
