@@ -238,6 +238,8 @@
   .xsec{padding:4.5rem 0;position:relative}
   .xsec::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:100vw;border-top:1px solid var(--hl)}
   .xsec.first::before{display:none}
+  .xsec.band::before{height:100%;background:rgba(247,249,251,.9)}
+  .xsec.band.form::before{background:rgba(232,242,249,.9)}
   .xsec.first{border-top:none}
   .xsec h2{font-size:clamp(1.7rem,3.4vw,2.15rem);letter-spacing:-.015em;line-height:1.15;margin:0 0 .8rem;color:var(--char);text-wrap:balance}
   .xsec .sub{color:var(--ink2);max-width:62ch;margin:0 0 1.6rem}
@@ -442,6 +444,8 @@ gtag('config', 'G-Y56G4N26M4');
   :root[data-theme="dark"] .bg-aurora .b4{--bo:.22}
   :root[data-theme="dark"] .bg-aurora .b5{--bo:.34}
   :root[data-theme="dark"] .bg-aurora .b6{--bo:.30}
+    :root[data-theme="dark"] .xsec.band::before{background:rgba(13,22,30,.85)}
+  :root[data-theme="dark"] .xsec.band.form::before{background:rgba(10,32,54,.55)}
   @media (max-width:876px){:root[data-theme="dark"] header nav{background:#131e28}}
 </style>
 </head>
@@ -541,7 +545,7 @@ gtag('config', 'G-Y56G4N26M4');
       <noscript><p class="empty-note">This directory needs JavaScript to load its listings.</p></noscript>
     </section>
 
-    <section class="xsec" id="events">
+    <section class="xsec band" id="events">
       <h2>Events</h2>
       <p class="sub" id="eventsSub" data-full="Virtual and statewide happenings: conferences, camps, and online events.">No statewide events listed yet.</p>
       <div id="eventList"></div>
@@ -555,7 +559,7 @@ gtag('config', 'G-Y56G4N26M4');
       <div class="empty" id="jobsEmpty">Remote and statewide roles will appear here as they are submitted. Know one? <a href="#get-listed">Get listed</a>.</div>
     </section>
 
-    <section class="xsec" id="guides">
+    <section class="xsec band" id="guides">
       <h2>Guides</h2>
       <p class="sub">How the statewide layer works. Drafts, open to your edits.</p>
       <details class="qa"><summary>What counts as statewide?<span class="acc-ic" aria-hidden="true"></span></summary><div class="qa-body"><p>A listing earns the Texas tag one of two ways: it serves the whole state in person, like a state agency, or it works fully online, like virtual counseling by video. If a service only covers one metro, it belongs on that city's page instead... the tags keep the directory honest.</p></div></details>
@@ -570,7 +574,7 @@ gtag('config', 'G-Y56G4N26M4');
       <details class="qa"><summary>Who runs this?<span class="acc-ic" aria-hidden="true"></span></summary><div class="qa-body"><p>Echode is a one person community project run by <a class="name-link" href="https://lduong.com" target="_blank" rel="noopener">Long Duong<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(opens Long Duong's homepage in a new tab)</span></a> in Houston, the same person behind HoustonDeafNetwork. Not a nonprofit, no office, just a directory built to last.</p></div></details>
     </section>
 
-    <section class="xsec" id="explore">
+    <section class="xsec band" id="explore">
       <h2>Explore other cities</h2>
       <p class="sub">Every Echode city gets the same directory, events, and jobs treatment. Here is where each one stands.</p>
       <ul class="xcities">
@@ -581,7 +585,7 @@ gtag('config', 'G-Y56G4N26M4');
       </ul>
     </section>
 
-    <section class="xsec" id="get-listed">
+    <section class="xsec band form" id="get-listed">
       <h2>Get listed in Texas State</h2>
       <p class="sub">Suggest a statewide listing, an event, a job, or a news tip. Everything lands in a review queue first... nothing publishes without a human check, and community listings are free.</p>
       <form class="gform" id="gform" action="https://echode-form-intake.longster.workers.dev/" method="post" aria-label="Get listed in Texas State">
