@@ -176,7 +176,8 @@
   .xhero{padding:3.2rem 0 .5rem}
   .xhero h1{font-size:clamp(36px,4.6vw,56px);line-height:1.1;letter-spacing:-.01em;margin:6px 0 1.3rem;color:var(--char);text-wrap:balance}
   .pchip{display:inline-block;background:#fdf3e3;color:var(--amber);border:1px solid #f0dcb2;font-weight:700;font-size:12.5px;letter-spacing:.08em;padding:6px 12px;border-radius:999px}
-  .stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+  .hero-meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-top:18px}
+  .stats{display:flex;flex-wrap:wrap;gap:10px}
   .stats span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:14px;color:var(--ink2)}
   .stats b{color:var(--char)}
   .goal-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.1rem;margin-top:36px}
@@ -338,11 +339,13 @@ gtag('config', 'G-Y56G4N26M4');
       <p class="eyebrow">Echode: Establishing Connections</p>
       <h1>Austin, Texas</h1>
       <p class="lede">Austin's Deaf community directory, in the making. These are the seeded starting listings: the schools, organizations, interpreters, churches, and socials that anchor Deaf life in Austin. Community submissions come next.</p>
-      <p style="margin-top:18px"><span class="pchip">PREVIEW · COLLECTING LISTINGS</span></p>
-      <div class="stats">
+      <div class="hero-meta">
+        <span class="pchip">PREVIEW · COLLECTING LISTINGS</span>
+        <div class="stats">
         <span><b data-stat="listings">22</b> listings</span>
         <span><b data-stat="categories">7</b> categories</span>
         <span id="statEvents"><b>1</b> upcoming event</span>
+        </div>
       </div>
       <div class="goal-cards">
         <a class="goal-card" href="#find-help"><span class="goal-num" aria-hidden="true">01</span><span class="goal-title">Find help or a service</span><span class="goal-text">Browse Austin resources, interpreters, schools, and Deaf-owned businesses.</span><svg class="goal-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v15M6 13l6 6 6-6"/></svg></a>
