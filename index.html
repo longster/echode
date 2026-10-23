@@ -18,7 +18,7 @@
   main,footer{position:relative;z-index:1}
   main{padding-top:92px}
   section[id]{scroll-margin-top:104px}
-  body{position:relative;font-family:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,#eef6fc,#fff 36%);line-height:1.55;font-size:17px}
+  body{position:relative;overflow-x:hidden;overflow-x:clip;font-family:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,#eef6fc,#fff 36%);line-height:1.55;font-size:17px}
   a{color:var(--blue-dark)}
   :focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:4px}
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
@@ -67,7 +67,7 @@
   .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
 
   /* city status card stack */
-  .stack{position:relative;max-width:470px;margin-left:auto;width:100%;padding-top:34px}
+  .stack{position:relative;max-width:470px;margin-left:auto;margin-right:30px;width:auto;padding-top:34px}
   .ghost-card{position:absolute;left:0;right:0;top:34px;bottom:0;background:#fdfefe;border:1px solid var(--line);border-radius:20px;box-shadow:0 10px 30px rgba(7,60,110,.06)}
   .ghost-card.g1{transform:translate(14px,-13px) rotate(1.4deg);opacity:.8}
   .ghost-card.g2{transform:translate(27px,-25px) rotate(2.8deg);opacity:.55}
@@ -164,6 +164,21 @@
     .hero{padding:52px 0 44px}
     section{padding:52px 0}
   }
+
+  .city{position:relative}
+  .city.is-link{cursor:pointer;transition:border-color .2s ease, box-shadow .2s ease}
+  .city.is-link:hover{border-color:var(--blue);box-shadow:0 10px 26px rgba(7,60,110,.10)}
+  .city.is-link:focus-within{outline:2px solid var(--blue);outline-offset:3px}
+  .city .card-hit{color:inherit;text-decoration:none}
+  .city .card-hit::after{content:"";position:absolute;inset:0;border-radius:var(--radius)}
+  .city .card-hit:focus{outline:none}
+  .map-link{display:block;border-radius:12px}
+  .map-link:hover{opacity:.93}
+  .map-link:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+  .foot-row{width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;border-top:1px solid rgba(255,255,255,.14);padding-top:18px;flex-wrap:wrap}
+  .design-link{font-size:14px;color:#c9d2d9;text-decoration:none;font-weight:600}
+  .design-link:hover{color:#fff;text-decoration:underline}
+  @media (max-width:640px){.foot-row{flex-direction:column;justify-content:center}.foot-row .copy{text-align:center}}
 </style>
 </head>
 <body>
@@ -232,7 +247,7 @@
       <div class="cities-grid">
         <div class="map-box">
           <!-- Stylized Texas outline, decorative: the list beside it carries the same information -->
-          <svg viewBox="-2 -2 474 394" role="img" aria-label="Map of Texas with markers for Houston, Austin, Dallas Fort Worth, and San Antonio">
+          <a class="map-link" href="tx/" aria-label="Texas statewide services page"><svg viewBox="-2 -2 474 394" aria-hidden="true" focusable="false">
             <defs>
               <linearGradient id="txgrad" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stop-color="#f2f9fd"/><stop offset="1" stop-color="#dfeef8"/>
@@ -257,24 +272,23 @@
               <circle cx="369" cy="237" r="6.5" fill="#0a74b8" stroke="#ffffff" stroke-width="2"/>
               <text x="350" y="242" text-anchor="end" fill="#075a8f" style="paint-order:stroke" stroke="#ffffff" stroke-width="3.5">Houston</text>
             </g>
-          </svg>
+          </svg></a>
           <p class="map-cap">The list on the right carries the same information in text.</p>
         </div>
         <ul class="city-list">
-          <li class="city live">
+          <li class="city live is-link">
             <span class="code">HTX</span>
             <div>
-              <h3>Houston<span class="status live">Live</span></h3>
+              <h3><a class="card-hit" href="https://houstondeafnetwork.com" target="_blank" rel="noopener">Houston<span class="status live">Live</span><span class="sr-only">(external site, opens in a new tab)</span></a></h3>
               <p>Directory, events, and community, run by HoustonDeafNetwork since day one.</p>
-              <p><a href="https://houstondeafnetwork.com" target="_blank" rel="noopener">Visit HoustonDeafNetwork.com<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="sr-only">(external site, opens in a new tab)</span></a></p>
+              
             </div>
           </li>
-          <li class="city soon">
+          <li class="city soon is-link">
             <span class="code">ATX</span>
             <div>
-              <h3>Austin<span class="status collecting">Collecting</span></h3>
+              <h3><a class="card-hit" href="atx/">Austin<span class="status collecting">Collecting</span></a></h3>
               <p>Seeded listings are in and the preview page is up. Community submissions come next.</p>
-              <p><a href="atx/">Visit the Austin page</a></p>
             </div>
           </li>
           <li class="city soon">
@@ -289,6 +303,13 @@
             <div>
               <h3>San Antonio<span class="status soon">Exploring</span></h3>
               <p>Home to a strong Deaf community and the Texas state tournament scene. On the radar.</p>
+            </div>
+          </li>
+          <li class="city soon is-link">
+            <span class="code">TX</span>
+            <div>
+              <h3><a class="card-hit" href="tx/">Texas<span class="status collecting">Collecting</span></a></h3>
+              <p>Statewide and online services that serve every Texas city: virtual counseling, state agencies, and Texas-wide organizations.</p>
             </div>
           </li>
         </ul>
@@ -398,7 +419,7 @@
 <footer>
   <div class="wrap">
     <a class="fbrand" href="#top" aria-label="Echode, back to top"><img class="flogo" src="echode-logo-light.png" alt="" width="996" height="132"><small>ESTABLISHING CONNECTIONS</small></a>
-    <p class="copy">&copy; <span id="year">2026</span> Echode. All rights reserved.</p>
+    <div class="foot-row"><p class="copy">&copy; <span id="year">2026</span> Echode. All rights reserved.</p><a class="design-link" href="design/">Design</a></div>
   </div>
 </footer>
 
