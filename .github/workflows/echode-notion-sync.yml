@@ -1,0 +1,32 @@
+name: Echode Notion sync
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 13 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Sync city data from Notion
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          DATABASE_ID_DIRECTORY: ${{ secrets.DATABASE_ID_DIRECTORY }}
+          DATABASE_ID_EVENTS: ${{ secrets.DATABASE_ID_EVENTS }}
+          DATABASE_ID_JOBS: ${{ secrets.DATABASE_ID_JOBS }}
+        run: node automation/sync.mjs
+      - name: Commit changes if any
+        run: |
+          git config user.name "echode-sync"
+          git config user.email "actions@github.com"
+          git add atx/data.js tx/data.js
+          git diff --cached --quiet || git commit -m "Sync city data from Notion"
+          git push
