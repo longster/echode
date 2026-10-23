@@ -57,15 +57,15 @@
   .bg-aurora{background:linear-gradient(180deg,rgba(168,214,243,.58),rgba(168,214,243,0) 460px);position:absolute;top:0;left:0;right:0;height:140vh;min-height:920px;overflow:hidden;z-index:0;pointer-events:none;-webkit-mask-image:linear-gradient(180deg,#000 56%,transparent 97%);mask-image:linear-gradient(180deg,#000 56%,transparent 97%)}
   .bg-mesh{position:absolute;left:0;right:0;top:0;height:640px;overflow:hidden;z-index:0;pointer-events:none;-webkit-mask-image:linear-gradient(to bottom,#000 58%,transparent 99%);mask-image:linear-gradient(to bottom,#000 58%,transparent 99%)}
   .bg-mesh svg{width:100%;height:100%;display:block}
-  .bg-aurora i{position:absolute;border-radius:50%;filter:blur(55px);will-change:transform}
-  .bg-aurora .b1{width:880px;height:470px;top:-300px;right:-130px;background:radial-gradient(ellipse at 35% 35%,rgba(110,193,240,.9),rgba(110,193,240,0) 70%);opacity:.6;animation:driftL 18s ease-in-out infinite alternate}
-  .bg-aurora .b2{width:640px;height:340px;bottom:-190px;right:20%;background:radial-gradient(ellipse at 40% 40%,rgba(52,199,123,.85),rgba(52,199,123,0) 70%);opacity:.44;animation:driftR 21s ease-in-out infinite alternate}
-  .bg-aurora .b3{width:700px;height:380px;top:6%;left:33%;background:radial-gradient(ellipse at 40% 40%,rgba(147,165,245,.85),rgba(147,165,245,0) 70%);opacity:.39;animation:driftL 24s ease-in-out infinite alternate}
-  .bg-aurora .b4{width:520px;height:300px;bottom:-130px;left:-70px;background:radial-gradient(ellipse at 40% 40%,rgba(10,116,184,.8),rgba(10,116,184,0) 70%);opacity:.26;animation:driftL 23s ease-in-out infinite alternate-reverse}
-  .bg-aurora .b5{width:130vw;height:430px;top:-260px;left:-15vw;background:radial-gradient(ellipse at 50% 40%,rgba(140,200,240,.85),rgba(140,200,240,0) 70%);opacity:.43;animation:driftR 26s ease-in-out infinite alternate}
-  .b6{width:600px;height:330px;top:16%;left:-150px;background:radial-gradient(ellipse at 40% 40%,rgba(243,174,72,.85),rgba(243,174,72,0) 70%);opacity:.38;animation:driftL 22s ease-in-out infinite alternate}
-  @keyframes driftL{from{transform:translate(-52vw,2vh) scale(1)}to{transform:translate(52vw,-2vh) scale(1.08)}}
-  @keyframes driftR{from{transform:translate(52vw,-2vh) scale(1.05)}to{transform:translate(-52vw,2vh) scale(.97)}}
+  .bg-aurora i{position:absolute;border-radius:50%;filter:blur(55px);will-change:transform;opacity:var(--bo,1)}
+  .bg-aurora .b1{width:880px;height:470px;top:-300px;right:-130px;background:radial-gradient(ellipse at 35% 35%,rgba(110,193,240,.9),rgba(110,193,240,0) 70%);--bo:.6;animation:driftL 18s ease-in-out infinite alternate}
+  .bg-aurora .b2{width:640px;height:340px;bottom:-190px;right:20%;background:radial-gradient(ellipse at 40% 40%,rgba(52,199,123,.85),rgba(52,199,123,0) 70%);--bo:.44;animation:driftR 21s ease-in-out infinite alternate}
+  .bg-aurora .b3{width:700px;height:380px;top:6%;left:33%;background:radial-gradient(ellipse at 40% 40%,rgba(147,165,245,.85),rgba(147,165,245,0) 70%);--bo:.39;animation:driftL 24s ease-in-out infinite alternate}
+  .bg-aurora .b4{width:520px;height:300px;bottom:-130px;left:-70px;background:radial-gradient(ellipse at 40% 40%,rgba(10,116,184,.8),rgba(10,116,184,0) 70%);--bo:.26;animation:driftL 23s ease-in-out infinite alternate-reverse}
+  .bg-aurora .b5{width:130vw;height:430px;top:-260px;left:-15vw;background:radial-gradient(ellipse at 50% 40%,rgba(140,200,240,.85),rgba(140,200,240,0) 70%);--bo:.43;animation:driftR 26s ease-in-out infinite alternate}
+  .b6{width:600px;height:330px;top:16%;left:-150px;background:radial-gradient(ellipse at 40% 40%,rgba(243,174,72,.85),rgba(243,174,72,0) 70%);--bo:.38;animation:driftL 22s ease-in-out infinite alternate}
+  @keyframes driftL{0%{transform:translate(-52vw,2vh) scale(1);opacity:0}14%{opacity:var(--bo,1)}86%{opacity:var(--bo,1)}100%{transform:translate(52vw,-2vh) scale(1.08);opacity:0}}
+  @keyframes driftR{0%{transform:translate(52vw,-2vh) scale(1.05);opacity:0}14%{opacity:var(--bo,1)}86%{opacity:var(--bo,1)}100%{transform:translate(-52vw,2vh) scale(.97);opacity:0}}
   
   
   @media (prefers-reduced-motion:reduce){.bg-aurora i{animation:none !important}}
@@ -267,12 +267,12 @@
   :root[data-theme="dark"] .map-box circle[stroke="#ffffff"]{stroke:#131e28}
   :root[data-theme="dark"] .map-box text[fill="#2f4a5a"]{fill:#cfe3f2;stroke:#131e28}
   :root[data-theme="dark"] .map-box text[fill="#075a8f"]{fill:#8ecbf7;stroke:#131e28}
-  :root[data-theme="dark"] .bg-aurora .b1{opacity:.48}
-  :root[data-theme="dark"] .bg-aurora .b2{opacity:.36}
-  :root[data-theme="dark"] .bg-aurora .b3{opacity:.32}
-  :root[data-theme="dark"] .bg-aurora .b4{opacity:.22}
-  :root[data-theme="dark"] .bg-aurora .b5{opacity:.34}
-  :root[data-theme="dark"] .bg-aurora .b6{opacity:.30}
+  :root[data-theme="dark"] .bg-aurora .b1{--bo:.48}
+  :root[data-theme="dark"] .bg-aurora .b2{--bo:.36}
+  :root[data-theme="dark"] .bg-aurora .b3{--bo:.32}
+  :root[data-theme="dark"] .bg-aurora .b4{--bo:.22}
+  :root[data-theme="dark"] .bg-aurora .b5{--bo:.34}
+  :root[data-theme="dark"] .bg-aurora .b6{--bo:.30}
 </style>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y56G4N26M4"></script>
