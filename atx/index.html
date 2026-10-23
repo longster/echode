@@ -221,23 +221,24 @@
   .xsec.first{border-top:none}
   .xsec h2{font-size:clamp(1.7rem,3.4vw,2.15rem);letter-spacing:-.015em;line-height:1.15;margin:0 0 .8rem;color:var(--char);text-wrap:balance}
   .xsec .sub{color:var(--ink2);max-width:62ch;margin:0 0 1.6rem}
-  /* explore other cities band: compact echo of the homepage city list, above Get Listed */
-  .xcities{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:0;padding:0}
-  .xcities>li{display:flex}
-  .xcities .city{flex:1;display:flex;gap:12px;align-items:center;border:1px solid var(--hl);border-radius:14px;padding:14px 16px;background:#fff;text-decoration:none}
-  .xcities .city .code{font-weight:800;letter-spacing:.08em;font-size:12.5px;color:var(--blue-dark);background:var(--blue-soft);border-radius:8px;padding:5px 9px;min-width:48px;text-align:center;flex:none}
-  .xcities .city.soon .code{color:var(--gray);background:var(--chip)}
-  .xcities .city h3{font-size:16.5px;color:var(--char);line-height:1.3;margin:0}
-  .xcities a.city h3{color:var(--blue)}
-  .xcities a.city{transition:border-color .15s ease,box-shadow .15s ease,transform .15s ease}
-  .xcities a.city:hover{border-color:var(--blue);box-shadow:var(--shl);transform:translateY(-2px)}
-  .xcities a.city:hover h3{color:var(--blue-dark)}
-  .xcities .city.here{background:var(--blue-soft);border-color:#cfe1ee}
-  .xcities .status{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:2px;white-space:nowrap}
+  /* explore other cities: photo card buttons, above Get Listed */
+  .xcities{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:0;padding:0}
+  .xcities .city{position:relative;display:block;border-radius:22px;overflow:hidden;aspect-ratio:4/5;background:var(--chip);text-decoration:none}
+  .xcities .city img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease}
+  .xcities a.city{transition:box-shadow .2s ease}
+  .xcities a.city:hover{box-shadow:var(--shl)}
+  .xcities a.city:hover img{transform:scale(1.045)}
+  .xcities a.city:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+  .xcities .city.here{box-shadow:0 0 0 2.5px var(--blue)}
+  .xcities .bar{position:absolute;left:10px;right:10px;bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:8px;background:rgba(255,255,255,.93);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:15px;padding:11px 14px}
+  .xcities .nm{font-size:16px;font-weight:700;color:var(--char);line-height:1.25;min-width:0}
+  .xcities a.city .nm{color:var(--blue)}
+  .xcities a.city:hover .nm{color:var(--blue-dark)}
+  .xcities .status{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;padding:2px 8px;white-space:nowrap;flex:none}
   .xcities .status.live{background:var(--blue);color:#fff}
   .xcities .status.collecting{background:#fdf3e3;color:#8a5a00}
   .xcities .status.soon{background:var(--chip);color:var(--gray)}
-  .xcities .status.here{background:#fff;color:var(--blue-dark);border:1px solid #cfe1ee}
+  .xcities .status.here{background:var(--blue-soft);color:var(--blue-dark)}
   .toolbar{max-width:none}
   .search-label{display:block;font-weight:700;color:var(--char);margin-bottom:10px}
   .sf-row{display:flex;gap:.6rem;align-items:stretch}
@@ -495,11 +496,11 @@ gtag('config', 'G-Y56G4N26M4');
       <h2>Explore other cities</h2>
       <p class="sub">Every Echode city gets the same directory, events, and jobs treatment. Here is where each one stands.</p>
       <ul class="xcities">
-        <li><a class="city" href="https://houstondeafnetwork.com" target="_blank" rel="noopener"><span class="code">HTX</span><h3>Houston<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg><span class="status live">Live</span><span class="sr-only">(external site, opens in a new tab)</span></h3></a></li>
-        <li class="city here" aria-current="page"><span class="code">ATX</span><h3>Austin<span class="status here">You're here</span></h3></li>
-        <li class="city soon"><span class="code">DFW</span><h3>Dallas - Fort Worth<span class="status soon">Exploring</span></h3></li>
-        <li class="city soon"><span class="code">SAT</span><h3>San Antonio<span class="status soon">Exploring</span></h3></li>
-        <li><a class="city" href="../tx/"><span class="code">TX</span><h3>Texas<span class="status collecting">Collecting</span></h3></a></li>
+        <li><a class="city" href="https://houstondeafnetwork.com" target="_blank" rel="noopener"><img src="https://images.pexels.com/photos/10893475/pexels-photo-10893475.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" loading="lazy"><span class="bar"><span class="nm">Houston<svg class="ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg></span><span class="status live">Live</span></span><span class="sr-only">(external site, opens in a new tab)</span></a></li>
+        <li class="city here" aria-current="page"><img src="https://images.pexels.com/photos/13684294/pexels-photo-13684294.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" loading="lazy"><span class="bar"><span class="nm">Austin</span><span class="status here">You're here</span></span></li>
+        <li class="city soon"><img src="https://images.pexels.com/photos/11926780/pexels-photo-11926780.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" loading="lazy"><span class="bar"><span class="nm">Dallas - Fort Worth</span><span class="status soon">Exploring</span></span></li>
+        <li class="city soon"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/San_Antonio_River_Walk_at_night.jpg/960px-San_Antonio_River_Walk_at_night.jpg" alt="" loading="lazy"><span class="bar"><span class="nm">San Antonio</span><span class="status soon">Exploring</span></span></li>
+        <li><a class="city" href="../tx/"><img src="https://images.pexels.com/photos/18554155/pexels-photo-18554155.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" loading="lazy"><span class="bar"><span class="nm">Texas</span><span class="status collecting">Collecting</span></span></a></li>
       </ul>
     </section>
 
