@@ -50,12 +50,14 @@ html{overflow-x:clip}
 @media (max-width:876px){.nav-toggle{display:flex;flex-direction:column;align-items:center;justify-content:center}}
 @media (max-width:876px){header nav{display:none;position:absolute;top:calc(100% + 8px);left:0;right:0;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 38px rgba(7,60,110,.16);padding:10px;flex-direction:column;align-items:stretch}}
 @media (max-width:876px){header nav.open{display:flex}}
-@media (max-width:876px){header nav a{padding:12px 14px}}
-@media (max-width:876px){header nav.open a{display:block}}
+@media (max-width:876px){header nav a:not(.btn){padding:8px 14px}}
+@media (max-width:876px){header nav.open a:not(.btn){display:block}}
 header nav a{white-space:nowrap}
 :root[data-theme="dark"] .wordmark img{content:url("../echode-logo-light.png")}
 :root[data-theme="dark"] .status.collecting{background:#3d2f10;color:#f2c169}
 @media (max-width:876px){:root[data-theme="dark"] header nav{background:#131e28}}
+.nav-cta{display:flex;align-items:center;gap:14px}
+@media (max-width:876px){.nav-cta .btn{flex:1}}
 </style>
 </head>
 <body>
@@ -72,15 +74,15 @@ header nav a{white-space:nowrap}
       <a class="city-name" href="#top" aria-label="Echode Austin home">AUSTIN</a>
     </span>
     
-      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="cityNav" aria-label="Menu"><span></span><span></span><span></span></button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="cityNav" aria-label="Menu"><span></span><span></span></button>
     <nav id="cityNav" aria-label="Austin">
       <a href="#find-help">Find Help</a>
       <a href="#events">Events</a>
       <a href="#jobs">Jobs</a>
       <a href="#guides">Guides</a>
       <a href="#faq">FAQ</a>
-      <a class="btn" href="#get-listed">Get Listed</a>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Theme: Auto. Switch theme"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="fill:none"><path d="M12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-15v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M19.8 4.2L18 6M6 18l-1.8 1.8" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg><svg class="icon-auto" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z"/></svg></button>
+      <span class="nav-cta"><a class="btn" href="#get-listed">Get Listed</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Theme: Auto. Switch theme"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="fill:none"><path d="M12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-15v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M19.8 4.2L18 6M6 18l-1.8 1.8" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg><svg class="icon-auto" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z"/></svg></button></span>
     </nav>
   </div>
 </header>

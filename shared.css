@@ -21,7 +21,7 @@ header{position:fixed;top:10px;left:0;right:0;z-index:50;background:transparent;
 .wordmark img{display:block;height:19px;width:auto}
 .fbrand small{display:block;font-size:10.5px;font-weight:600;letter-spacing:.32em;color:#9aa4ad;margin-top:9px}
 .fbrand .flogo{display:block;height:26px;width:auto}
-nav{display:flex;gap:28px;align-items:center}
+nav{display:flex;gap:14px;align-items:center}
 nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:15.5px;padding:10px 2px}
 nav a:hover{color:var(--blue)}
 nav a.btn{color:#fff}
@@ -86,7 +86,7 @@ h2{font-size:clamp(28px,3.4vw,36px);color:var(--char);letter-spacing:-.01em;marg
 .step h3{font-size:18.5px;color:var(--char);margin-bottom:8px}
 .step p{color:var(--gray);font-size:15.5px}
 .about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:start}
-.about-grid p{color:var(--gray);margin-bottom:16px;max-width:60ch}
+.about-grid p{color:var(--gray);margin-bottom:16px}
 .about-grid p strong{color:var(--char)}
 .fact-card{background:var(--char);color:#eef1f4;border-radius:var(--radius);padding:28px}
 .fact-card h3{color:#fff;font-size:17px;letter-spacing:.06em;margin-bottom:14px}
@@ -351,3 +351,4 @@ footer a{color:#fff}
 @keyframes pulse-ring{0%{transform:scale(.55);opacity:.6}70%{transform:scale(1.15);opacity:0}100%{opacity:0}}
 @keyframes ringx{0%{transform:scale(.35);opacity:0}25%{opacity:.16}100%{transform:scale(1.6);opacity:0}}
 @keyframes spotpulse{0%{box-shadow:0 0 0 0 rgba(243,174,72,.45)}70%{box-shadow:0 0 0 9px rgba(243,174,72,0)}100%{box-shadow:0 0 0 0 rgba(243,174,72,0)}}
+:root[data-theme="dark"] .sf-row input[type=search]{background:#0e1821;border-color:#33485a;color:var(--ink)}
