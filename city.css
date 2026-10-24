@@ -32,3 +32,7 @@ header nav a{white-space:nowrap}
 
 .status.collecting{background:#fdf3e3;color:#8a5a00}
 .map-link:hover{opacity:.93}
+#eventList{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;align-items:stretch}
+#eventList:not(:empty){margin-top:2.2rem}
+@media (max-width:876px){#eventList{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){#eventList{grid-template-columns:1fr}}
