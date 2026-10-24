@@ -46,8 +46,7 @@
   nav a.btn{color:#fff}
   .btn{display:inline-flex;align-items:center;justify-content:center;height:42px;background:var(--blue);color:#fff;text-decoration:none;font-weight:700;padding:0 22px;border-radius:999px;border:2px solid var(--blue)}
   .btn:hover{background:var(--blue-dark);border-color:var(--blue-dark)}
-  .btn
-  .btn.ghost:hover{background:var(--blue-soft)}
+  .btn.ghost{background:#fff;color:var(--blue-dark)} .btn.ghost:hover{background:var(--blue-soft)}
 
   /* hero */
   .hero{position:relative;padding:44px 0 64px;background:transparent}
@@ -285,9 +284,9 @@
   .icon-btn:hover{border-color:var(--blue);background:var(--blue-soft)}
   .icon-btn svg{width:20px;height:20px;display:block}
   .evcard{display:flex;flex-direction:column;background:#fff;border:1px solid var(--hl);border-radius:16px;padding:1.4rem;box-shadow:var(--sh);position:relative}
-  .evcard .when{font-weight:700;color:var(--amber);margin:0 0 .45rem}
-  .evcard h3{font-size:1.18rem;font-weight:700;color:var(--char);margin:0 0 .45rem}
-  .evcard .desc{font-size:.95rem;color:var(--ink2);margin:0;line-height:1.6}
+  .evcard .when{font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin:0 0 .35rem}
+  .evcard h3{font-size:1.18rem;font-weight:700;line-height:1.25;letter-spacing:-.01em;color:var(--char);margin:0 0 .45rem;text-wrap:balance}
+  .evcard .desc{font-size:.95rem;color:var(--ink2);margin:0;line-height:1.6} .evcard.is-link{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease} .evcard.is-link:hover{transform:translateY(-3px);border-color:var(--blue);box-shadow:var(--shl)} .evcard.is-link:focus-within{outline:2px solid var(--blue);outline-offset:3px} .evcard h3 a{color:inherit;text-decoration:none} .evcard h3 a::after{content:"";position:absolute;inset:0;border-radius:16px} .evcard h3 a:focus{outline:none} .evcard.is-link h3 a{color:var(--blue)}
   .empty{border:1.5px dashed var(--hl);border-radius:16px;padding:1.4rem;color:var(--ink2);background:rgba(255,255,255,.55)}
   .empty a{color:var(--blue-dark);font-weight:600}
   .qa{border:1px solid var(--hl);border-radius:16px;margin-bottom:.7rem;background:#fff;box-shadow:var(--sh);overflow:hidden;transition:border-color .2s ease}
@@ -403,15 +402,13 @@ gtag('config', 'G-Y56G4N26M4');
   :root[data-theme="dark"] .bg-mesh{opacity:.25}
   :root[data-theme="dark"] .btn{background:#0a74b8;border-color:#0a74b8}
   :root[data-theme="dark"] .btn:hover{background:#0d6cb8;border-color:#0d6cb8}
-  :root[data-theme="dark"] .btn
-  :root[data-theme="dark"] .btn.ghost:hover{background:var(--blue-soft)}
+  :root[data-theme="dark"] .btn.ghost{background:#16222c;color:var(--blue-dark)} :root[data-theme="dark"] .btn.ghost:hover{background:var(--blue-soft)}
   :root[data-theme="dark"] .skip{background:#0a74b8}
   :root[data-theme="dark"] .status.live{background:#0a74b8}
   :root[data-theme="dark"] .status.collecting{background:#3d2f10;color:#f2c169}
   :root[data-theme="dark"] .badge{background:#3d2f10;color:#f2c169;border-color:#6b5518}
   :root[data-theme="dark"] .pchip{background:#3d2f10;border-color:#6b5518;color:#f2c169}
   :root[data-theme="dark"] .live-card,:root[data-theme="dark"] .status-card,:root[data-theme="dark"] .goal-card,:root[data-theme="dark"] .lcard,:root[data-theme="dark"] .evcard,:root[data-theme="dark"] .qa,:root[data-theme="dark"] .gl-band,:root[data-theme="dark"] .gform,:root[data-theme="dark"] .empty,:root[data-theme="dark"] .empty-note,:root[data-theme="dark"] form,:root[data-theme="dark"] .city,:root[data-theme="dark"] .step,:root[data-theme="dark"] .spec,:root[data-theme="dark"] .sw{background:#131e28}
-  :root[data-theme="dark"] 
   :root[data-theme="dark"] .live-card,:root[data-theme="dark"] .status-card{border-color:#2b4356}
   :root[data-theme="dark"] .stats span{background:#1d2b37}
   :root[data-theme="dark"] .filter-btn{background:#131e28;color:var(--ink)}
@@ -669,12 +666,12 @@ gtag('config', 'G-Y56G4N26M4');
   if(elist){
     elist.innerHTML=evs.map(function(e){
       var when=fmtDate(e.date); if(e.location) when=(when?when+" \u00b7 ":"")+e.location;
-      var foot="";
+      var etitle=ok(e.link)?'<a href="'+esc(e.link)+'" target="_blank" rel="noopener">'+esc(e.name)+EXT+'<span class="sr-only">(external site, opens in a new tab)</span></a>':esc(e.name); var foot="";
       if(ok(e.link)){
         var isFb=/facebook\.com/i.test(e.link);
         foot='<div class="dir-foot"><div class="card-links">'+btn(e.link, isFb?"Facebook group":"Event page", e.name+(isFb?" Facebook group":" event page")+", opens in a new tab", isFb?FB:GLOBE)+'</div></div>';
       }
-      return '<article class="evcard">'+(when?'<p class="when">'+esc(when)+'</p>':"")+'<h3>'+esc(e.name)+'</h3>'+(e.description?'<p class="desc">'+esc(e.description)+'</p>':"")+foot+'</article>';
+      return '<article class="evcard'+(ok(e.link)?" is-link":"")+'">'+(when?'<p class="when">'+esc(when)+'</p>':"")+'<h3>'+etitle+'</h3>'+(e.description?'<p class="desc">'+esc(e.description)+'</p>':"")+foot+'</article>';
     }).join("");
     if(eempty) eempty.hidden=evs.length>0;
     if(esub && evs.length>0 && esub.getAttribute("data-full")) esub.textContent=esub.getAttribute("data-full");
