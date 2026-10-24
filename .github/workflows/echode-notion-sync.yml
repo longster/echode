@@ -27,6 +27,6 @@ jobs:
         run: |
           git config user.name "echode-sync"
           git config user.email "actions@github.com"
-          git add atx/data.js tx/data.js
+          git add atx/data.js dfw/data.js tx/data.js
           git diff --cached --quiet || git commit -m "Sync city data from Notion"
           git push
