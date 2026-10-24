@@ -56,7 +56,7 @@ html{overflow-x:clip}
 .rules li{margin-left:0;margin-bottom:.3rem}
 .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.1rem}
 .sw{border:1px solid var(--hl);border-radius:16px;overflow:hidden;background:#fff;box-shadow:var(--sh)}
-.sw .chip{height:84px}
+
 .sw .meta{padding:.9rem 1rem}
 .sw .meta b{display:block;color:var(--char)}
 .sw .meta span{display:block;font-size:.9rem;color:var(--ink2)}
@@ -75,6 +75,11 @@ html{overflow-x:clip}
 :root[data-theme="dark"] .status.collecting{background:#3d2f10;color:#f2c169}
 :root[data-theme="dark"] .dsec.band{background:rgba(13,22,30,.85);box-shadow:0 0 0 100vmax rgba(13,22,30,.85)}
 :root[data-theme="dark"] .logo-card:not(.dark){background:#f4f7fa}
+.sw .chip{height:84px;border-bottom:1px solid var(--line)}
+.swatches.dark .sw{background:#131e28}
+.swatches.dark .sw .meta b{color:#eef4f9}
+.swatches.dark .sw .meta code{color:#8ecbf7}
+.swatches.dark .sw .meta span{color:#a9bdcc}
 </style>
 </head>
 <body>
@@ -125,7 +130,10 @@ html{overflow-x:clip}
     <section class="dsec band" id="colors">
       <h2>Colors</h2>
       <p class="sub">Echode's palette. One rule does most of the work: blue means it is a link or a button. Labels that are not links use amber.</p>
-      <div class="swatches"><div class="sw"><div class="chip" style="background:#0a74b8"></div><div class="meta"><b>Echode Blue</b><code>#0a74b8</code><span>Primary buttons, accents, hover states</span></div></div><div class="sw"><div class="chip" style="background:#075a8f"></div><div class="meta"><b>Link Blue</b><code>#075a8f</code><span>Text links and icon buttons</span></div></div><div class="sw"><div class="chip" style="background:#e8f2f9"></div><div class="meta"><b>Blue Soft</b><code>#e8f2f9</code><span>Tint backgrounds, hover fills</span></div></div><div class="sw"><div class="chip" style="background:#2b2e32"></div><div class="meta"><b>Charcoal</b><code>#2b2e32</code><span>Headings</span></div></div><div class="sw"><div class="chip" style="background:#23272c"></div><div class="meta"><b>Ink</b><code>#23272c</code><span>Body text</span></div></div><div class="sw"><div class="chip" style="background:#5c6670"></div><div class="meta"><b>Gray</b><code>#5c6670</code><span>Secondary text</span></div></div><div class="sw"><div class="chip" style="background:#8a5a00"></div><div class="meta"><b>Label Amber</b><code>#8a5a00</code><span>Non-link labels only: categories, dates, status</span></div></div><div class="sw"><div class="chip" style="background:#e3e7eb"></div><div class="meta"><b>Line</b><code>#e3e7eb</code><span>Borders and hairlines</span></div></div><div class="sw"><div class="chip" style="background:#f7f9fb"></div><div class="meta"><b>Soft Background</b><code>#f7f9fb</code><span>Banded sections</span></div></div></div>
+      <p class="sub"><strong>Light theme</strong></p><div class="swatches"><div class="sw"><div class="chip" style="background:#0a74b8"></div><div class="meta"><b>Echode Blue</b><code>#0a74b8</code><span>Primary buttons, accents, hover states</span></div></div><div class="sw"><div class="chip" style="background:#075a8f"></div><div class="meta"><b>Link Blue</b><code>#075a8f</code><span>Text links and icon buttons</span></div></div><div class="sw"><div class="chip" style="background:#e8f2f9"></div><div class="meta"><b>Blue Soft</b><code>#e8f2f9</code><span>Tint backgrounds, hover fills</span></div></div><div class="sw"><div class="chip" style="background:#2b2e32"></div><div class="meta"><b>Charcoal</b><code>#2b2e32</code><span>Headings</span></div></div><div class="sw"><div class="chip" style="background:#23272c"></div><div class="meta"><b>Ink</b><code>#23272c</code><span>Body text</span></div></div><div class="sw"><div class="chip" style="background:#5c6670"></div><div class="meta"><b>Gray</b><code>#5c6670</code><span>Secondary text</span></div></div><div class="sw"><div class="chip" style="background:#8a5a00"></div><div class="meta"><b>Label Amber</b><code>#8a5a00</code><span>Non-link labels only: categories, dates, status</span></div></div><div class="sw"><div class="chip" style="background:#e3e7eb"></div><div class="meta"><b>Line</b><code>#e3e7eb</code><span>Borders and hairlines</span></div></div><div class="sw"><div class="chip" style="background:#f7f9fb"></div><div class="meta"><b>Soft Background</b><code>#f7f9fb</code><span>Banded sections</span></div></div></div>
+
+    <p class="sub"><strong>Dark theme</strong> — the same roles, remapped for dark surfaces. Label pills use amber on #3d2f10 with a #6b5518 border.</p>
+    <div class="swatches dark"><div class="sw"><div class="chip" style="background:#3aa5ec"></div><div class="meta"><b>Echode Blue</b><code>#3aa5ec</code><span>Primary buttons, accents, hover states</span></div></div><div class="sw"><div class="chip" style="background:#8ecbf7"></div><div class="meta"><b>Link Blue</b><code>#8ecbf7</code><span>Text links and icon buttons</span></div></div><div class="sw"><div class="chip" style="background:#16334a"></div><div class="meta"><b>Blue Soft</b><code>#16334a</code><span>Tint backgrounds, hover fills</span></div></div><div class="sw"><div class="chip" style="background:#eef4f9"></div><div class="meta"><b>Charcoal</b><code>#eef4f9</code><span>Headings</span></div></div><div class="sw"><div class="chip" style="background:#d9e5ee"></div><div class="meta"><b>Ink</b><code>#d9e5ee</code><span>Body text</span></div></div><div class="sw"><div class="chip" style="background:#a9bdcc"></div><div class="meta"><b>Gray</b><code>#a9bdcc</code><span>Secondary text</span></div></div><div class="sw"><div class="chip" style="background:#f2c169"></div><div class="meta"><b>Label Amber</b><code>#f2c169</code><span>Non-link labels only: categories, dates, status</span></div></div><div class="sw"><div class="chip" style="background:#273845"></div><div class="meta"><b>Line</b><code>#273845</code><span>Borders and hairlines</span></div></div><div class="sw"><div class="chip" style="background:#101a23"></div><div class="meta"><b>Soft Background</b><code>#101a23</code><span>Banded sections</span></div></div></div>
     </section>
 
     <section class="dsec" id="type">
