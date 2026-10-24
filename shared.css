@@ -130,7 +130,7 @@ footer a{color:#fff}
 .foot-links{display:flex;gap:22px}
 .name-link{color:var(--blue);font-weight:600;text-decoration:none}
 .name-link:hover{color:var(--blue-dark);text-decoration:underline}
-.sign .name-link{color:inherit}
+
 .theme-toggle{flex:none;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--gray);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
 .theme-toggle:hover{color:var(--blue-dark);border-color:var(--blue)}
 .theme-toggle svg{width:20px;height:20px;fill:currentColor}
