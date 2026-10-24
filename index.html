@@ -9,75 +9,12 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="description" content="Echode is the front door to Texas Deaf communities, city by city. Houston is live today through HoustonDeafNetwork.">
 <link rel="stylesheet" href="shared.css?v=1">
-<style>
-.bg-aurora{height:140vh}
-.bg-mesh{z-index:0;pointer-events:none;-webkit-mask-image:linear-gradient(to bottom,#000 58%,transparent 99%);mask-image:linear-gradient(to bottom,#000 58%,transparent 99%)}
-.card-rows div{display:grid;grid-template-columns:104px 1fr;gap:4px 14px;padding:11px 0;border-bottom:1px solid var(--line);font-size:15.5px;align-items:baseline}
-.card-rows dd{color:var(--gray);text-align:left}
-.cta-row{gap:14px}
-.map-box{background:#fff;transition:border-color .2s ease, box-shadow .2s ease}
-.city{align-items:stretch;position:relative}
-.city .thumb{position:relative;flex:0 0 196px;border-radius:14px;overflow:hidden;background:var(--chip)}
-.city .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1);transition:transform .35s ease,filter .35s ease,opacity .35s ease}
-.city:not(.is-link) .thumb img{opacity:.5}
-.city.is-link:hover .thumb img{filter:none;transform:scale(1.05)}
-.city .meta{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--gray);margin:0 0 7px}
-.city .meta .code{font-weight:800;letter-spacing:.1em;color:var(--blue-dark)}
-.city .meta .status{margin-left:0}
-@media (max-width:640px){.city{flex-direction:column}}
-@media (max-width:640px){.city .thumb{flex:none;width:100%;height:150px}}
-.city.soon .meta .code{color:var(--gray)}
-.status.collecting{background:#fdf3e3;color:#8a5a00}
-.also-serves .as-label{font-weight:600;font-size:15px;display:block;margin-bottom:7px;color:var(--char)}
-.also-serves .as-row{display:flex;flex-wrap:wrap;gap:8px 18px}
-.also-serves label{display:inline-flex;align-items:center;gap:7px;font-weight:500;margin:0}
-.also-serves input{width:auto;padding:0}
-.map-link{text-decoration:none;color:inherit}
-.map-link:hover{opacity:1}
-.map-title{color:var(--blue)}
-.map-box:hover{border-color:var(--blue);box-shadow:0 10px 26px rgba(7,60,110,.10)}
-.map-box:hover .map-title{color:var(--blue-dark)}
-:root[data-theme="dark"] .wordmark img{content:url("echode-logo-light.png")}
-:root[data-theme="dark"] .live-card{background:#131e28;border-color:#2b4356;box-shadow:0 24px 60px rgba(0,0,0,.5)}
-:root[data-theme="dark"] .map-box{background:#131e28}
-:root[data-theme="dark"] .city{background:#131e28}
-:root[data-theme="dark"] .city.live{box-shadow:0 6px 24px rgba(0,0,0,.4)}
-:root[data-theme="dark"] .city.is-link:hover{box-shadow:0 10px 26px rgba(0,0,0,.45)}
-:root[data-theme="dark"] .status.collecting{background:#3d2f10;color:#f2c169}
-:root[data-theme="dark"] .steps{background:rgba(13,22,30,.85)}
-:root[data-theme="dark"] .step{background:#131e28}
-:root[data-theme="dark"] .fact-card{background:#1b2836}
-:root[data-theme="dark"] form{background:#131e28}
-:root[data-theme="dark"] .step .num{background:#0a74b8}
-:root[data-theme="dark"] #txgrad stop:first-child{stop-color:#1d3042}
-:root[data-theme="dark"] #txgrad stop:last-child{stop-color:#101d29}
-:root[data-theme="dark"] .map-box polygon[fill="#eef4f9"]{fill:#1d3042}
-:root[data-theme="dark"] .map-box polygon[fill="#e6eff6"]{fill:#182a3c}
-:root[data-theme="dark"] .map-box polygon[fill="#f4f8fb"]{fill:#22364c}
-:root[data-theme="dark"] .map-box g[stroke="#cfe2f1"]{stroke:#3d6a94}
-:root[data-theme="dark"] .map-box path[stroke="#0a74b8"]{stroke:#3aa5ec}
-:root[data-theme="dark"] .map-box circle[fill="#7d97a8"]{fill:#8fa9bd}
-:root[data-theme="dark"] .map-box circle[fill="#0a74b8"]{fill:#3aa5ec}
-:root[data-theme="dark"] .map-box circle[stroke="#ffffff"]{stroke:#131e28}
-:root[data-theme="dark"] .map-box text[fill="#2f4a5a"]{fill:#cfe3f2;stroke:#131e28}
-:root[data-theme="dark"] .map-box text[fill="#075a8f"]{fill:#8ecbf7;stroke:#131e28}
-</style>
+<link rel="stylesheet" href="index.css?v=1">
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y56G4N26M4"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-Y56G4N26M4');
-</script>
-<script type="text/javascript">
-(function(c,l,a,r,i,t,y){
-    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-})(window, document, "clarity", "script", "z2a1q3zdjf");
-</script>
-<script>try{var m=localStorage.getItem('echode-theme')||'auto';document.documentElement.setAttribute('data-mode',m);var d=m==='dark'||(m==='auto'&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.setAttribute('data-theme',d?'dark':'light');}catch(e){}</script>
+<script src="head.js?v=1"></script>
+
+
 </head>
 <body>
 
@@ -786,57 +723,10 @@ gtag('config', 'G-Y56G4N26M4');
   </div>
 </footer>
 
-<script>document.getElementById("year").textContent=new Date().getFullYear();</script>
-<script>(function(){if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;var names=["driftL","driftR"];document.querySelectorAll(".bg-aurora i").forEach(function(el){el.style.animationName=names[Math.floor(Math.random()*names.length)];el.style.animationDuration=(13+Math.random()*8).toFixed(1)+"s";el.style.animationDelay=(-Math.random()*20).toFixed(1)+"s";el.style.animationDirection="normal";el.style.rotate=((Math.random()*56)-28).toFixed(0)+"deg";});})();</script>
-<script>
-(function(){
-  var mesh=document.getElementById("bgMesh"), sec=document.getElementById("cities");
-  if(!mesh||!sec) return;
-  function fit(){
-    var bottom=sec.getBoundingClientRect().bottom + window.scrollY;
-    mesh.style.height=Math.round(bottom+24)+"px";
-  }
-  window.addEventListener("load",fit);
-  window.addEventListener("resize",fit);
-  fit();
-})();
-</script>
-<script>
-(function(){
-  var form=document.getElementById("suggestForm");
-  if(!form) return;
-  var status=document.getElementById("formStatus");
-  form.addEventListener("submit", function(ev){
-    ev.preventDefault();
-    status.textContent="Sending..."; status.className="form-status";
-    var payload={
-      name: document.getElementById("f-name").value.trim(),
-      email: document.getElementById("f-email").value.trim(),
-      city: document.getElementById("f-city").value,
-      listing_type: document.getElementById("f-type").value,
-      message: document.getElementById("f-details").value.trim(),
-      also_serves: Array.prototype.map.call(form.querySelectorAll("[name=also]:checked"), function(b){ return b.value; }),
-      company: (form.querySelector("[name=company]")||{}).value || ""
-    };
-    fetch("https://echode-form-intake.longster.workers.dev/", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(payload)})
-      .then(function(r){ return r.json().catch(function(){ return {ok:false}; }); })
-      .then(function(j){
-        if(j && j.ok){
-          form.reset();
-          status.textContent="Thanks, your suggestion is in the review queue. A person reads every one before anything goes live.";
-          status.className="form-status ok";
-        } else {
-          status.textContent="That did not send. Please check the fields and try again.";
-          status.className="form-status err";
-        }
-      })
-      .catch(function(){
-        status.textContent="That did not send. Please try again in a bit.";
-        status.className="form-status err";
-      });
-  });
-})();
-</script>
-<script>(function(){var b=document.getElementById('themeToggle');if(!b)return;var mq=window.matchMedia('(prefers-color-scheme: dark)');function apply(m){document.documentElement.setAttribute('data-mode',m);var d=m==='dark'||(m==='auto'&&mq.matches);document.documentElement.setAttribute('data-theme',d?'dark':'light');b.setAttribute('aria-label','Theme: '+m+'. Switch theme');}b.addEventListener('click',function(){var m=document.documentElement.getAttribute('data-mode')||'auto';var n=m==='auto'?'light':(m==='light'?'dark':'auto');try{localStorage.setItem('echode-theme',n);}catch(e){}apply(n);});if(mq.addEventListener){mq.addEventListener('change',function(){if((document.documentElement.getAttribute('data-mode')||'auto')==='auto'){apply('auto');}});}apply(document.documentElement.getAttribute('data-mode')||'auto');})();</script>
+
+
+<script src="index.js?v=1"></script>
+
+<script src="shared.js?v=1"></script>
 </body>
 </html>

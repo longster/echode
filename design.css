@@ -1,0 +1,54 @@
+html{overflow-x:clip}
+.bg-aurora{height:140vh}
+.bg-mesh{-webkit-mask-image:linear-gradient(to bottom,#000 52%,transparent 97%);mask-image:linear-gradient(to bottom,#000 52%,transparent 97%)}
+.card-rows div{display:grid;grid-template-columns:104px 1fr;gap:4px 14px;padding:11px 0;border-bottom:1px solid var(--line);font-size:15.5px;align-items:baseline}
+.card-rows dd{color:var(--gray);text-align:left}
+.cta-row{gap:14px}
+.map-box{background:var(--bg-soft)}
+.city{align-items:flex-start}
+.city .code{font-weight:800;letter-spacing:.08em;font-size:14px;color:var(--blue-dark);background:var(--blue-soft);border-radius:8px;padding:6px 10px;min-width:58px;text-align:center;margin-top:2px}
+.city.soon .code{color:var(--gray);background:var(--chip)}
+.xhero{overflow-x:clip}
+.stats{margin-top:20px}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:10px}
+.nav-toggle span{display:block;width:22px;height:2px;background:var(--char);margin:5px 0;border-radius:2px}
+@media (max-width:760px){.xsec{padding:3.4rem 0}}
+.dsec{padding:4.5rem 0;position:relative}
+.dsec::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:100vw;border-top:1px solid var(--hl)}
+.dsec.band{background:rgba(247,249,251,.9);box-shadow:0 0 0 100vmax rgba(247,249,251,.9);clip-path:inset(0 -100vmax)}
+.dsec h2{font-size:clamp(1.7rem,3.4vw,2.15rem);letter-spacing:-.015em;line-height:1.15;margin:0 0 .8rem;color:var(--char)}
+.dsec .sub{color:var(--ink2);max-width:none;margin:0 0 1.6rem}
+.logo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.1rem}
+.logo-card{border:1px solid var(--hl);border-radius:16px;padding:2rem 1.6rem;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh)}
+.logo-card img{width:min(300px,80%);height:auto}
+.logo-card.dark{background:#23272c}
+.logo-cap{font-size:.9rem;color:var(--ink2);margin-top:.6rem}
+.rules{color:var(--ink2);line-height:1.7;max-width:none;padding-left:22px;margin-top:1.8rem}
+.rules li{margin-left:0;margin-bottom:.3rem}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.1rem}
+.sw{border:1px solid var(--hl);border-radius:16px;overflow:hidden;background:#fff;box-shadow:var(--sh)}
+
+.sw .meta{padding:.9rem 1rem}
+.sw .meta b{display:block;color:var(--char)}
+.sw .meta span{display:block;font-size:.9rem;color:var(--ink2)}
+.sw .meta code{font-size:.85rem;color:var(--blue-dark)}
+.type-row{border-top:1px solid var(--hl);padding:1.1rem 0;display:flex;flex-wrap:wrap;gap:.4rem 2rem;align-items:baseline}
+.type-row .tag{font-size:.85rem;color:var(--amber);font-weight:700;letter-spacing:.08em;text-transform:uppercase;min-width:120px}
+.spec-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.1rem}
+.spec{border:1px solid var(--hl);border-radius:16px;padding:1.2rem 1.4rem;background:#fff;box-shadow:var(--sh)}
+.spec b{display:block;color:var(--char);margin-bottom:.35rem}
+.spec span{font-size:.92rem;color:var(--ink2);line-height:1.6;display:block}
+.demo{margin-bottom:2.2rem}
+.demo .cap{font-size:.85rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);margin:0 0 1rem}
+.btnrow{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center}
+@media (max-width:760px){.dsec{padding:3.4rem 0}}
+:root[data-theme="dark"] .wordmark img{content:url("../echode-logo-light.png")}
+:root[data-theme="dark"] .status.collecting{background:#3d2f10;color:#f2c169}
+:root[data-theme="dark"] .dsec.band{background:rgba(13,22,30,.85);box-shadow:0 0 0 100vmax rgba(13,22,30,.85)}
+:root[data-theme="dark"] .logo-card:not(.dark){background:#f4f7fa}
+.sw .chip{height:84px;border-bottom:1px solid var(--line)}
+.swatches.dark .sw{background:#131e28}
+.swatches.dark .sw .meta b{color:#eef4f9}
+.swatches.dark .sw .meta code{color:#8ecbf7}
+.swatches.dark .sw .meta span{color:#a9bdcc}
+.swatches + .sub{margin-top:2.4rem}

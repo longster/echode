@@ -11,52 +11,11 @@
 <link rel="stylesheet" href="../shared.css?v=1">
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y56G4N26M4"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-Y56G4N26M4');
-</script>
-<script type="text/javascript">
-(function(c,l,a,r,i,t,y){
-    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-})(window, document, "clarity", "script", "z2a1q3zdjf");
-</script>
-<script>try{var m=localStorage.getItem('echode-theme')||'auto';document.documentElement.setAttribute('data-mode',m);var d=m==='dark'||(m==='auto'&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.setAttribute('data-theme',d?'dark':'light');}catch(e){}</script>
+<script src="../head.js?v=1"></script>
 
-<style>
-html{overflow-x:clip}
-main{flex:1 0 auto;width:100%}
-body{display:flex;flex-direction:column;min-height:100vh}
-.bg-aurora{height:100%}
-.bg-mesh{-webkit-mask-image:linear-gradient(to bottom,#000 52%,transparent 97%);mask-image:linear-gradient(to bottom,#000 52%,transparent 97%)}
-.card-rows div{display:grid;grid-template-columns:104px 1fr;gap:4px 14px;padding:11px 0;border-bottom:1px solid var(--line);font-size:15.5px;align-items:baseline}
-.card-rows dd{color:var(--gray);text-align:left}
-.cta-row{gap:14px}
-.map-box{background:var(--bg-soft)}
-.city{align-items:flex-start;position:relative}
-.city .code{font-weight:800;letter-spacing:.08em;font-size:14px;color:var(--blue-dark);background:var(--blue-soft);border-radius:8px;padding:6px 10px;min-width:58px;text-align:center;margin-top:2px}
-.city.soon .code{color:var(--gray);background:var(--chip)}
-.status.collecting{background:#fdf3e3;color:#8a5a00}
-.map-link{text-decoration:none;color:inherit}
-.map-link:hover{opacity:.93}
-.map-title{color:var(--char)}
-.psec{padding:3.2rem 0 .5rem;border-top:1px solid var(--hl,#e3e9ee);margin-top:3.2rem}
-.psec.first{border-top:none;margin-top:0;padding-top:2.6rem}
-.psec h2{font-size:clamp(1.7rem,3.4vw,2.15rem);letter-spacing:-.015em;line-height:1.15;margin:0 0 1rem;color:var(--char)}
-.prose{max-width:none;color:var(--ink2,#5c6670);line-height:1.7}
-.prose p{margin:0 0 1rem}
-.prose ul{margin:0 0 1rem;padding-left:1.3rem}
-.prose li{margin-bottom:.45rem}
-.prose b{color:var(--char)}
-.updated{margin-top:2.6rem;font-size:.92rem;color:var(--ink2,#5c6670)}
-.psec#disclaimer{padding-bottom:4.5rem}
-:root[data-theme="dark"] .wordmark img{content:url("../echode-logo-light.png")}
-:root[data-theme="dark"] .status.collecting{background:#3d2f10;color:#f2c169}
-@media (max-width:876px){:root[data-theme="dark"] header nav{background:#131e28}}
-</style>
+
+
+<link rel="stylesheet" href="../privacy.css?v=1">
 </head>
 <body>
 
@@ -120,8 +79,8 @@ body{display:flex;flex-direction:column;min-height:100vh}
     <div class="foot-row"><p class="copy">&copy; <span id="year">2026</span> Echode. All rights reserved.</p><span class="foot-links"><a class="design-link" href="./">Privacy</a><a class="design-link" href="../design/">Design</a></span></div>
   </div>
 </footer>
-<script>document.getElementById("year").textContent=new Date().getFullYear();</script>
-<script>(function(){if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;var names=["driftL","driftR"];document.querySelectorAll(".bg-aurora i").forEach(function(el){el.style.animationName=names[Math.floor(Math.random()*names.length)];el.style.animationDuration=(13+Math.random()*8).toFixed(1)+"s";el.style.animationDelay=(-Math.random()*20).toFixed(1)+"s";el.style.animationDirection="normal";el.style.rotate=((Math.random()*56)-28).toFixed(0)+"deg";});})();</script>
-<script>(function(){var b=document.getElementById('themeToggle');if(!b)return;var mq=window.matchMedia('(prefers-color-scheme: dark)');function apply(m){document.documentElement.setAttribute('data-mode',m);var d=m==='dark'||(m==='auto'&&mq.matches);document.documentElement.setAttribute('data-theme',d?'dark':'light');b.setAttribute('aria-label','Theme: '+m+'. Switch theme');}b.addEventListener('click',function(){var m=document.documentElement.getAttribute('data-mode')||'auto';var n=m==='auto'?'light':(m==='light'?'dark':'auto');try{localStorage.setItem('echode-theme',n);}catch(e){}apply(n);});if(mq.addEventListener){mq.addEventListener('change',function(){if((document.documentElement.getAttribute('data-mode')||'auto')==='auto'){apply('auto');}});}apply(document.documentElement.getAttribute('data-mode')||'auto');})();</script>
+
+<script src="../shared.js?v=1"></script>
+
 </body>
 </html>
