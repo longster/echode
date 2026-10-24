@@ -50,6 +50,7 @@ const MAX_LOGO_BYTES = 500_000;
 // page opens (Phase 7); the code is the Serves value in Notion.
 const CITIES = [
   { code: "ATX", dir: "atx" },
+  { code: "DFW", dir: "dfw" },
   { code: "TX", dir: "tx" },
 ];
 
@@ -364,7 +365,7 @@ async function main() {
     const events = eventsAll
       .filter((e) => e.serves.includes(city.code))
       .map(({ source, serves, ...rest }) => rest)
-      .sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+      .sort((a, b) => { if (!a.date && !b.date) return 0; if (!a.date) return 1; if (!b.date) return -1; return a.date.localeCompare(b.date); });
 
     const postings = postingsAll
       .filter((j) => j.serves.includes(city.code))
