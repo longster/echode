@@ -45,7 +45,7 @@
   nav a.btn{color:#fff}
   .btn{display:inline-flex;align-items:center;justify-content:center;height:42px;background:var(--blue);color:#fff;text-decoration:none;font-weight:700;padding:0 22px;border-radius:999px;border:2px solid var(--blue)}
   .btn:hover{background:var(--blue-dark);border-color:var(--blue-dark)}
-  .btn.ghost{background:#fff;color:var(--blue-dark)}
+  .btn
   .btn.ghost:hover{background:var(--blue-soft)}
 
   /* hero */
@@ -72,10 +72,10 @@
   .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
 
   /* city status card stack */
-  .stack{position:relative;max-width:470px;margin-left:auto;margin-right:30px;width:auto;padding-top:34px}
-  .ghost-card{position:absolute;left:0;right:0;top:34px;bottom:0;background:#fdfefe;border:1px solid rgba(180,205,228,.5);border-radius:20px;box-shadow:0 16px 38px rgba(7,60,110,.05)}
-  .ghost-card.g1{transform:translate(14px,-13px) rotate(1.8deg);opacity:.75}
-  .ghost-card.g2{transform:translate(27px,-25px) rotate(3.6deg);opacity:.5}
+  .stack{position:relative;max-width:470px;margin-left:auto;width:auto;padding-top:34px}
+  
+  .ghost-card
+  .ghost-card
   .live-card{position:relative;background:#fff;border:1px solid #cfe1ee;border-radius:20px;box-shadow:0 24px 60px rgba(7,60,110,.14);padding:28px}
   .card-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
   .code-chip{font-weight:800;letter-spacing:.1em;font-size:13.5px;color:var(--blue-dark);background:var(--blue-soft);border-radius:8px;padding:5px 11px}
@@ -234,9 +234,9 @@
   :root[data-theme="dark"] .wordmark img{content:url("echode-logo-light.png")}
   :root[data-theme="dark"] .bg-aurora{background:linear-gradient(180deg, rgba(16,70,120,.50), rgba(16,70,120,0) 460px)}
   :root[data-theme="dark"] .bg-mesh{opacity:.25}
-  :root[data-theme="dark"] .btn.ghost{background:#16222c;color:var(--blue-dark)}
+  :root[data-theme="dark"] .btn
   :root[data-theme="dark"] .btn.ghost:hover{background:var(--blue-soft)}
-  :root[data-theme="dark"] .ghost-card{background:#131e28;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  :root[data-theme="dark"] 
   :root[data-theme="dark"] .live-card{background:#131e28;border-color:#2b4356;box-shadow:0 24px 60px rgba(0,0,0,.5)}
   :root[data-theme="dark"] .map-box{background:#131e28}
   :root[data-theme="dark"] .city{background:#131e28}
@@ -328,8 +328,6 @@ gtag('config', 'G-Y56G4N26M4');
       </div>
       <div class="stack">
         <p class="sr-only">City status card: Houston is live now. Austin is collecting listings, with a preview page up. Dallas Fort Worth and San Antonio are still exploring.</p>
-        <div class="ghost-card g2" aria-hidden="true"></div>
-        <div class="ghost-card g1" aria-hidden="true"></div>
         <div class="live-card">
           <div class="card-top">
             <span class="code-chip">HTX</span>

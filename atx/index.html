@@ -46,7 +46,7 @@
   nav a.btn{color:#fff}
   .btn{display:inline-flex;align-items:center;justify-content:center;height:42px;background:var(--blue);color:#fff;text-decoration:none;font-weight:700;padding:0 22px;border-radius:999px;border:2px solid var(--blue)}
   .btn:hover{background:var(--blue-dark);border-color:var(--blue-dark)}
-  .btn.ghost{background:#fff;color:var(--blue-dark)}
+  .btn
   .btn.ghost:hover{background:var(--blue-soft)}
 
   /* hero */
@@ -74,9 +74,9 @@
 
   /* city status card stack */
   .stack{position:relative;max-width:470px;margin-left:auto;width:100%;padding-top:34px}
-  .ghost-card{position:absolute;left:0;right:0;top:34px;bottom:0;background:#fdfefe;border:1px solid rgba(180,205,228,.5);border-radius:20px;box-shadow:0 16px 38px rgba(7,60,110,.05)}
-  .ghost-card.g1{transform:translate(14px,-13px) rotate(1.8deg);opacity:.75}
-  .ghost-card.g2{transform:translate(27px,-25px) rotate(3.6deg);opacity:.5}
+  
+  .ghost-card
+  .ghost-card
   .live-card{position:relative;background:#fff;border:1px solid #cfe1ee;border-radius:20px;box-shadow:0 24px 60px rgba(7,60,110,.14);padding:28px}
   .card-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
   .code-chip{font-weight:800;letter-spacing:.1em;font-size:13.5px;color:var(--blue-dark);background:var(--blue-soft);border-radius:8px;padding:5px 11px}
@@ -188,10 +188,10 @@
   .ring-anim{transform-box:fill-box;transform-origin:center;animation:ringx 5.5s ease-out infinite}
   .ring-anim.d2{animation-delay:2.75s}
   @keyframes ringx{0%{transform:scale(.35);opacity:0}25%{opacity:.16}100%{transform:scale(1.6);opacity:0}}
-  .stack{position:relative;max-width:470px;margin-left:auto;margin-right:30px;width:auto;padding-top:34px;z-index:1}
-  .ghost-card{position:absolute;left:0;right:0;top:34px;bottom:0;background:#fdfefe;border:1px solid rgba(180,205,228,.5);border-radius:20px;box-shadow:0 16px 38px rgba(7,60,110,.05)}
-  .ghost-card.g1{transform:translate(14px,-13px) rotate(1.8deg);opacity:.75}
-  .ghost-card.g2{transform:translate(27px,-25px) rotate(3.6deg);opacity:.5}
+  .stack{position:relative;max-width:470px;margin-left:auto;width:auto;z-index:1}
+  
+  .ghost-card
+  .ghost-card
   .status-card{position:relative;background:#fff;border:1px solid #cfe1ee;border-radius:20px;box-shadow:0 24px 60px rgba(7,60,110,.14);padding:28px}
   .card-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
   .code-chip{font-weight:800;letter-spacing:.1em;font-size:13.5px;color:var(--blue-dark);background:var(--blue-soft);border-radius:8px;padding:5px 11px}
@@ -407,7 +407,7 @@ gtag('config', 'G-Y56G4N26M4');
   :root[data-theme="dark"] .bg-mesh{opacity:.25}
   :root[data-theme="dark"] .btn{background:#0a74b8;border-color:#0a74b8}
   :root[data-theme="dark"] .btn:hover{background:#0d6cb8;border-color:#0d6cb8}
-  :root[data-theme="dark"] .btn.ghost{background:#16222c;color:var(--blue-dark)}
+  :root[data-theme="dark"] .btn
   :root[data-theme="dark"] .btn.ghost:hover{background:var(--blue-soft)}
   :root[data-theme="dark"] .skip{background:#0a74b8}
   :root[data-theme="dark"] .status.live{background:#0a74b8}
@@ -415,7 +415,7 @@ gtag('config', 'G-Y56G4N26M4');
   :root[data-theme="dark"] .badge{background:#3d2f10;color:#f2c169;border-color:#6b5518}
   :root[data-theme="dark"] .pchip{background:#3d2f10;border-color:#6b5518;color:#f2c169}
   :root[data-theme="dark"] .live-card,:root[data-theme="dark"] .status-card,:root[data-theme="dark"] .goal-card,:root[data-theme="dark"] .lcard,:root[data-theme="dark"] .evcard,:root[data-theme="dark"] .qa,:root[data-theme="dark"] .gl-band,:root[data-theme="dark"] .gform,:root[data-theme="dark"] .empty,:root[data-theme="dark"] .empty-note,:root[data-theme="dark"] form,:root[data-theme="dark"] .city,:root[data-theme="dark"] .step,:root[data-theme="dark"] .spec,:root[data-theme="dark"] .sw{background:#131e28}
-  :root[data-theme="dark"] .ghost-card{background:#131e28;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  :root[data-theme="dark"] 
   :root[data-theme="dark"] .live-card,:root[data-theme="dark"] .status-card{border-color:#2b4356}
   :root[data-theme="dark"] .stats span{background:#1d2b37}
   :root[data-theme="dark"] .filter-btn{background:#131e28;color:var(--ink)}
@@ -484,8 +484,6 @@ gtag('config', 'G-Y56G4N26M4');
         <svg class="rings" viewBox="0 0 600 600" aria-hidden="true" focusable="false"><g fill="none" stroke="#0a74b8"><circle cx="300" cy="300" r="90" opacity=".16"/><circle cx="300" cy="300" r="150" opacity=".12"/><circle cx="300" cy="300" r="210" opacity=".09"/><circle cx="300" cy="300" r="270" opacity=".06"/><circle class="ring-anim" cx="300" cy="300" r="120" opacity="0"/><circle class="ring-anim d2" cx="300" cy="300" r="120" opacity="0"/></g></svg>
         <div class="stack">
           <p class="sr-only">Austin status card: Austin is collecting listings. The next gathering is Deaf Night Out ATX.</p>
-          <div class="ghost-card g2" aria-hidden="true"></div>
-          <div class="ghost-card g1" aria-hidden="true"></div>
           <div class="status-card">
             <div class="card-top">
               <span class="code-chip">ATX</span>
