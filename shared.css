@@ -61,7 +61,7 @@ nav a.btn{color:#fff}
 .eyebrow{font-size:13px;font-weight:700;letter-spacing:.24em;color:var(--blue-dark);text-transform:uppercase;margin-bottom:18px}
 h1{font-size:clamp(36px,4.6vw,56px);line-height:1.1;letter-spacing:-.01em;max-width:21ch;color:var(--char);text-wrap:balance}
 h1 .accent{color:var(--blue)}
-.lede{font-size:20px;color:var(--gray);max-width:56ch;margin:22px 0 32px}
+.lede{font-size:20px;color:var(--gray);margin:22px 0 32px}
 .cta-row{display:flex;flex-wrap:wrap}
 section{padding:72px 0}
 h2{font-size:clamp(28px,3.4vw,36px);color:var(--char);letter-spacing:-.01em;margin-bottom:12px}
@@ -323,9 +323,9 @@ footer a{color:#fff}
 }
 @media (max-width:1020px){
   .hero-grid{grid-template-columns:1fr;gap:44px}
-  .stack{margin:6px auto 0;max-width:560px}
+  .stack{margin:6px 0 0;max-width:none}
   .xhero-grid{grid-template-columns:1fr;gap:36px}
-  .hero-visual{max-width:560px;width:100%;margin:0 auto}
+  .hero-visual{max-width:none;width:100%;margin:0}
 }
 @media (max-width:640px){
   .foot-row{flex-direction:column;justify-content:center}
