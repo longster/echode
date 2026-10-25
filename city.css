@@ -24,6 +24,7 @@ html{overflow-x:clip}
 @media (max-width:876px){header nav a:not(.btn){padding:8px 14px}}
 @media (max-width:876px){header nav.open a:not(.btn){display:block}}
 header nav a{white-space:nowrap}
+#cityNav{margin-left:auto} /* keeps nav right once theme leaves it */
 :root[data-theme="dark"] .wordmark img{content:url("../echode-logo-light.png")}
 :root[data-theme="dark"] .status.collecting{background:#3d2f10;color:#f2c169}
 @media (max-width:876px){:root[data-theme="dark"] header nav{background:#131e28}}
@@ -36,3 +37,12 @@ header nav a{white-space:nowrap}
 #eventList:not(:empty){margin-top:2.2rem}
 @media (max-width:876px){#eventList{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:560px){#eventList{grid-template-columns:1fr}}
+
+/* Theme parks next to the hamburger on mobile, not inside the menu. */
+@media (max-width:876px){.theme-toggle{margin-left:auto}}
+/* Hamburger animates to an X while the menu is open (flex-column spans sit
+   12px center to center, so each line travels 6px to meet). */
+.nav-toggle span{transition:transform .25s ease}
+.nav-toggle[aria-expanded="true"] span:first-child{transform:translateY(6px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span:last-child{transform:translateY(-6px) rotate(-45deg)}
+@media (prefers-reduced-motion: reduce){.nav-toggle span{transition:none}}

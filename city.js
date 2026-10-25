@@ -92,6 +92,7 @@
     tgl.setAttribute("aria-expanded", open ? "true" : "false");
   });
   nav.addEventListener("click",function(e){ if(e.target.tagName==="A"){ nav.classList.remove("open"); tgl.setAttribute("aria-expanded","false"); }});
+  document.addEventListener("click",function(e){ if(nav.classList.contains("open") && !nav.contains(e.target) && !tgl.contains(e.target)){ nav.classList.remove("open"); tgl.setAttribute("aria-expanded","false"); }});
   var input=document.getElementById("directory-search"),
       panel=document.getElementById("categoryPanel"),
       ft=document.getElementById("filterToggle"),
