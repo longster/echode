@@ -51,6 +51,7 @@ const MAX_LOGO_BYTES = 500_000;
 const CITIES = [
   { code: "ATX", dir: "atx" },
   { code: "DFW", dir: "dfw" },
+  { code: "SAT", dir: "sat" },
   { code: "TX", dir: "tx" },
 ];
 

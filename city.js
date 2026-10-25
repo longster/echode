@@ -61,7 +61,7 @@
     if(evs.length){
       var nx=evs[0];
       cn.textContent=nx.name;
-      cw.textContent=(nx.date ? new Date(nx.date+"T12:00:00").toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"}) : "") + (nx.location ? " \u00b7 " + nx.location : "");
+      cw.textContent=nx.date ? (new Date(nx.date+"T12:00:00").toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"}) + (nx.location ? " \u00b7 " + nx.location : "")) : (nx.location || "");
       if(er) er.hidden=false;
     } else {
       cn.textContent="Nothing scheduled yet";
