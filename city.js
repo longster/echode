@@ -19,11 +19,12 @@
   }
   function cardHTML(r){
     var search=esc((r.name+" "+(r.description||"")+" "+catsOf(r).join(" ")).toLowerCase());
-    var title=ok(r.website)
-      ? '<a href="'+esc(r.website)+'" target="_blank" rel="noopener">'+esc(r.name)+EXT+'<span class="sr-only">(external site, opens in a new tab)</span></a>'
+    var href=ok(r.website)?r.website:(ok(r.facebook)?r.facebook:"");
+    var title=href
+      ? '<a href="'+esc(href)+'" target="_blank" rel="noopener">'+esc(r.name)+EXT+'<span class="sr-only">(external site, opens in a new tab)</span></a>'
       : esc(r.name);
     var links=linksHTML(r);
-    return '<article class="lcard'+(ok(r.website)?" is-link":"")+'" data-cat="'+esc(r.category)+'" data-cats="'+esc(catsOf(r).join("|"))+'" data-search="'+search+'">'
+    return '<article class="lcard'+(href?" is-link":"")+'" data-cat="'+esc(r.category)+'" data-cats="'+esc(catsOf(r).join("|"))+'" data-search="'+search+'">'
       +'<p class="dir-eyebrow">'+esc(r.category)+'</p><h3>'+title+'</h3>'
       +'<p class="dir-desc">'+esc(r.description)+'</p>'
       +(links?'<div class="dir-foot"><div class="card-links">'+links+'</div></div>':"")
