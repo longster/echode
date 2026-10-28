@@ -148,6 +148,7 @@
   form.addEventListener("submit", function(ev){
     ev.preventDefault();
     status.textContent="Sending..."; status.className="form-status";
+    var btn=form.querySelector('button[type="submit"]'); if(btn) btn.disabled=true;
     var payload={
       name: document.getElementById("g-name").value.trim(),
       email: document.getElementById("g-email").value.trim(),
@@ -155,11 +156,12 @@
       listing_type: document.getElementById("g-type").value,
       message: document.getElementById("g-details").value.trim(),
       also_serves: Array.prototype.map.call(form.querySelectorAll("[name=also]:checked"), function(b){ return b.value; }),
-      company: (form.querySelector("[name=company]")||{}).value || ""
+      mx_check: (form.querySelector("[name=mx_check]")||{}).value || ""
     };
     fetch("https://echode-form-intake.longster.workers.dev/", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(payload)})
       .then(function(r){ return r.json().catch(function(){ return {ok:false}; }); })
       .then(function(j){
+        if(btn) btn.disabled=false;
         if(j && j.ok){
           form.reset();
           status.textContent="Thanks, your suggestion is in the review queue. A person reads every one before anything goes live.";
@@ -170,6 +172,7 @@
         }
       })
       .catch(function(){
+        if(btn) btn.disabled=false;
         status.textContent="That did not send. Please try again in a bit.";
         status.className="form-status err";
       });
