@@ -72,7 +72,6 @@ h2{font-size:clamp(28px,3.4vw,36px);color:var(--char);letter-spacing:-.01em;marg
 .map-cap{font-size:13.5px;color:var(--gray);margin-top:14px;text-align:center}
 .city-list{list-style:none;display:grid;gap:14px}
 .city{display:flex;gap:18px;border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;background:#fff}
-.city.live{border-color:var(--blue);box-shadow:0 6px 24px rgba(10,116,184,.10)}
 .city h3{font-size:19px;color:var(--char)}
 .city p{color:var(--gray);font-size:15.5px}
 .status{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;border-radius:999px;padding:3px 10px;margin-left:8px;vertical-align:2px}
