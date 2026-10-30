@@ -1,4 +1,42 @@
 (function(){
+  var CITIES=[
+    {code:"HTX", name:"Houston", href:"https://houstondeafnetwork.com", img:"https://images.pexels.com/photos/10893475/pexels-photo-10893475.jpeg?auto=compress&cs=tinysrgb&w=900", blurb:"Directory, events, and community, run by HoustonDeafNetwork since day one.", live:true},
+    {code:"ATX", name:"Austin", href:"atx/", img:"https://images.pexels.com/photos/13684294/pexels-photo-13684294.jpeg?auto=compress&cs=tinysrgb&w=900", blurb:"Live directory of Deaf-friendly businesses, events, and community in Austin.", live:true},
+    {code:"DFW", name:"Dallas - Fort Worth", href:"dfw/", img:"https://images.pexels.com/photos/11926780/pexels-photo-11926780.jpeg?auto=compress&cs=tinysrgb&w=900", blurb:"Live directory of Deaf-friendly businesses, events, and community in Dallas-Fort Worth.", live:true},
+    {code:"SATX", name:"San Antonio", href:"satx/", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/San_Antonio_River_Walk_at_night.jpg/960px-San_Antonio_River_Walk_at_night.jpg", blurb:"Live directory of Deaf-friendly businesses, events, and community in San Antonio.", live:true}
+  ];
+  function cesc(t){return String(t==null?"":t).replace(/[&<>"']/g,function(x){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[x];});}
+  function joinNames(arr){
+    if(arr.length<=1) return arr.join("");
+    return arr.slice(0,-1).join(", ")+" and "+arr[arr.length-1];
+  }
+  var ul=document.querySelector(".city-list");
+  if(ul){
+    ul.innerHTML=CITIES.map(function(c){
+      return '<li class="city '+(c.live?"live":"soon")+' is-link">'
+        +'<span class="thumb"><img src="'+cesc(c.img)+'" alt="" loading="lazy"></span>'
+        +'<div><p class="meta"><span class="code">'+cesc(c.code)+'</span></p>'
+        +'<h3><a class="card-hit" href="'+cesc(c.href)+'">'+cesc(c.name)+'</a></h3>'
+        +'<p>'+cesc(c.blurb)+'</p></div></li>';
+    }).join("");
+  }
+  var liveNames=CITIES.filter(function(c){return c.live;}).map(function(c){return c.name;});
+  var soonNames=CITIES.filter(function(c){return !c.live;}).map(function(c){return c.name;});
+  var lede=document.getElementById("ledeStatus");
+  if(lede){
+    var lt=joinNames(liveNames)+" are all live today.";
+    if(soonNames.length) lt+=" "+joinNames(soonNames)+" coming soon.";
+    lede.textContent=lt;
+  }
+  var sr=document.getElementById("srCityStatus");
+  if(sr){
+    var st="City status card: "+joinNames(liveNames)+" are all live now.";
+    if(soonNames.length) st+=" "+joinNames(soonNames)+" coming soon.";
+    sr.textContent=st;
+  }
+})();
+
+(function(){
   var mesh=document.getElementById("bgMesh"), sec=document.getElementById("cities");
   if(!mesh||!sec) return;
   function fit(){
