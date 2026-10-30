@@ -66,7 +66,7 @@ h1 .accent{color:var(--blue)}
 section{padding:72px 0}
 h2{font-size:clamp(28px,3.4vw,36px);color:var(--char);letter-spacing:-.01em;margin-bottom:12px}
 .section-lede{color:var(--gray);margin-bottom:36px}
-.cities-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:stretch}
+.cities-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;align-items:stretch}
 .map-box{border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column}
 .map-box svg{width:100%;flex:1 1 auto;min-height:320px;display:block}
 .map-cap{font-size:13.5px;color:var(--gray);margin-top:14px;text-align:center}
