@@ -50,7 +50,7 @@
 :root[data-theme="dark"] .map-box text[fill="#075a8f"]{fill:#8ecbf7;stroke:#131e28}
 
 /* About ECHO + DE diagram: light/dark swap follows the page theme */
-.about-diagram{max-width:560px;margin:18px auto 0}
+.about-diagram{max-width:560px;margin:30px auto 0}
 .about-diagram img{display:block;width:100%;height:auto}
 .about-diagram img.about-diagram-dark{display:none}
 :root[data-theme="dark"] .about-diagram-light{display:none}
