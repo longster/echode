@@ -409,6 +409,24 @@ async function main() {
       " directory, " + events.length + " events, " + postings.length + " postings."
     );
   }
+
+  // ---- Sitemap: regenerated from the city list + static pages so it
+  // never goes stale when cities or pages are added. ----
+  const sitemapPaths = ["", ...CITIES.map((c) => c.dir + "/"), "design/", "privacy/"];
+  const sitemap =
+    '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+    sitemapPaths
+      .map((p) => `  <url><loc>https://echode.com/${p}</loc><lastmod>${today}</lastmod></url>`)
+      .join("\n") +
+    "\n</urlset>\n";
+  const oldSitemap = existsSync("sitemap.xml") ? readFileSync("sitemap.xml", "utf8") : "";
+  if (oldSitemap !== sitemap) {
+    writeFileSync("sitemap.xml", sitemap);
+    console.log("sitemap.xml: wrote " + sitemapPaths.length + " urls.");
+  } else {
+    console.log("sitemap.xml: no changes.");
+  }
 }
 
 main().catch((err) => {
