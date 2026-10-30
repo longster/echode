@@ -52,7 +52,7 @@
 /* About ECHO + DE diagram: light/dark swap follows the page theme */
 .about-diagram{max-width:560px;margin:18px auto 0}
 .about-diagram img{display:block;width:100%;height:auto}
-.about-diagram-dark{display:none}
+.about-diagram img.about-diagram-dark{display:none}
 :root[data-theme="dark"] .about-diagram-light{display:none}
 :root[data-theme="dark"] .about-diagram-dark{display:block}
 
