@@ -93,6 +93,15 @@
   });
   nav.addEventListener("click",function(e){ if(e.target.tagName==="A"){ nav.classList.remove("open"); tgl.setAttribute("aria-expanded","false"); }});
   document.addEventListener("click",function(e){ if(nav.classList.contains("open") && !nav.contains(e.target) && !tgl.contains(e.target)){ nav.classList.remove("open"); tgl.setAttribute("aria-expanded","false"); }});
+  var tagsEl=document.getElementById("categoryTags");
+  if(tagsEl){
+    var catList=Object.keys(cats).sort(function(a,b){return a.toLowerCase().localeCompare(b.toLowerCase());});
+    var tagsHtml='<button type="button" data-filter="" aria-pressed="true">All</button>';
+    catList.forEach(function(c){
+      tagsHtml+='<button type="button" data-filter="'+esc(c)+'" aria-pressed="false">'+esc(c)+'</button>';
+    });
+    tagsEl.innerHTML=tagsHtml;
+  }
   var input=document.getElementById("directory-search"),
       panel=document.getElementById("categoryPanel"),
       ft=document.getElementById("filterToggle"),
