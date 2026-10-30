@@ -70,7 +70,7 @@ h2{font-size:clamp(28px,3.4vw,36px);color:var(--char);letter-spacing:-.01em;marg
 .map-box{border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column}
 .map-box svg{width:100%;flex:1 1 auto;min-height:320px;display:block}
 .map-cap{font-size:13.5px;color:var(--gray);margin-top:14px;text-align:center}
-.city-list{list-style:none;display:grid;gap:14px}
+.city-list{list-style:none;display:grid;gap:1.1rem}
 .city{display:flex;gap:18px;border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;background:#fff}
 .city h3{font-size:19px;color:var(--char)}
 .city p{color:var(--gray);font-size:15.5px}
@@ -79,7 +79,7 @@ h2{font-size:clamp(28px,3.4vw,36px);color:var(--char);letter-spacing:-.01em;marg
 .status.soon{background:var(--chip);color:var(--gray)}
 .city a{font-weight:700}
 .steps{background:rgba(247,249,251,.9);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.step-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.step-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
 .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px}
 .step .num{width:48px;height:48px;border-radius:14px;background:var(--blue-soft);color:var(--blue-dark);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px}
 .step h3{font-size:18.5px;color:var(--char);margin-bottom:8px}
@@ -334,6 +334,7 @@ footer a{color:#fff}
 @media (max-width:820px){
   nav a:not(.btn){display:none}
   .cities-grid,.about-grid{grid-template-columns:1fr}
+  .cities-grid{gap:1.1rem}
   .step-grid{grid-template-columns:1fr}
   form{grid-template-columns:1fr}
   .hero{padding:52px 0 44px}
