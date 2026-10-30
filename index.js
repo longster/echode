@@ -98,7 +98,7 @@
   function parseDataJS(text){
     var m=text.match(/const SITE_DATA = (\{[\s\S]*\})\s*;?\s*$/);
     if(!m) return null;
-    try{return JSON.parse(m.group(1));}catch(e){return null;}
+    try{return JSON.parse(m[1]);}catch(e){return null;}
   }
   function upcoming(evts){
     var t=new Date(); t.setHours(0,0,0,0);
@@ -126,8 +126,10 @@
         if(!seenE[k]){seenE[k]=1;nE++;}
       });
     });
-    elL.textContent=nL;
-    elE.textContent=nE;
-    elC.textContent=nC+" of "+CODES.length;
+    if(nC===CODES.length){
+      elL.textContent=nL;
+      elE.textContent=nE;
+      elC.textContent=nC+" of "+CODES.length;
+    }
   }).catch(function(){/* keep painted fallback values */});
 })();
