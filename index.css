@@ -29,7 +29,6 @@
 :root[data-theme="dark"] .live-card{background:#131e28;border-color:#2b4356;box-shadow:0 24px 60px rgba(0,0,0,.5)}
 :root[data-theme="dark"] .map-box{background:#131e28}
 :root[data-theme="dark"] .city{background:#131e28}
-:root[data-theme="dark"] .city.live{box-shadow:0 6px 24px rgba(0,0,0,.4)}
 :root[data-theme="dark"] .city.is-link:hover{box-shadow:0 10px 26px rgba(0,0,0,.45)}
 :root[data-theme="dark"] .status.collecting{background:#3d2f10;color:#f2c169}
 :root[data-theme="dark"] .steps{background:rgba(13,22,30,.85)}
@@ -51,8 +50,22 @@
 :root[data-theme="dark"] .map-box text[fill="#075a8f"]{fill:#8ecbf7;stroke:#131e28}
 
 /* About ECHO + DE diagram: light/dark swap follows the page theme */
-.about-diagram{max-width:560px;margin:12px auto 28px}
+.about-diagram{max-width:560px;margin:18px auto 0}
 .about-diagram img{display:block;width:100%;height:auto}
 .about-diagram-dark{display:none}
 :root[data-theme="dark"] .about-diagram-light{display:none}
 :root[data-theme="dark"] .about-diagram-dark{display:block}
+
+.about-lede{color:var(--gray);font-size:1.05rem;line-height:1.7;margin:16px 0 0}
+.about-lede strong{color:var(--char)}
+.about-cards{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin:2.6rem 0 0;padding:0}
+.about-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.6rem;cursor:default}
+.about-ic{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:14px;background:var(--blue-soft);color:var(--blue-dark);margin-bottom:1rem}
+.about-ic svg{width:26px;height:26px;display:block}
+.about-card h3{font-size:1.08rem;font-weight:700;letter-spacing:-.01em;color:var(--char);margin:0 0 .4rem}
+.about-card p{font-size:.95rem;color:var(--gray);line-height:1.6;margin:0}
+.about-note{color:var(--gray);font-size:1.02rem;line-height:1.7;margin:2.6rem 0 0}
+#about p.sign{color:var(--char);font-weight:600;margin:14px 0 0}
+:root[data-theme="dark"] .about-card{background:#131e28}
+@media (max-width:876px){.about-cards{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.about-cards{grid-template-columns:1fr}}
