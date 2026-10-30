@@ -85,3 +85,49 @@
       });
   });
 })();
+
+/* Homepage network stats: computed live from the city data.js files (deduped),
+   never typed by hand. Painted values in HTML are today's verified counts as
+   a graceful fallback; this recomputes on every load. */
+(function(){
+  var CODES=["atx","dfw","satx","tx"];
+  var elL=document.getElementById("statListings"),
+      elE=document.getElementById("statEvents"),
+      elC=document.getElementById("statCities");
+  if(!elL||!elE||!elC) return;
+  function parseDataJS(text){
+    var m=text.match(/const SITE_DATA = (\{[\s\S]*\})\s*;?\s*$/);
+    if(!m) return null;
+    try{return JSON.parse(m.group(1));}catch(e){return null;}
+  }
+  function upcoming(evts){
+    var t=new Date(); t.setHours(0,0,0,0);
+    return (evts||[]).filter(function(e){
+      if(!e.date) return true;
+      return new Date(e.date+"T12:00:00")>=t;
+    });
+  }
+  Promise.all(CODES.map(function(c){
+    return fetch(c+"/data.js").then(function(r){
+      if(!r.ok) throw new Error("stats:"+c);
+      return r.text();
+    }).then(parseDataJS);
+  })).then(function(sets){
+    var seenL={}, seenE={}, nL=0, nE=0, nC=0;
+    sets.forEach(function(d){
+      if(!d) return;
+      nC++;
+      (d.directory||[]).forEach(function(l){
+        var k=String(l.name||"").trim().toLowerCase();
+        if(k&&!seenL[k]){seenL[k]=1;nL++;}
+      });
+      upcoming(d.events).forEach(function(e){
+        var k=(String(e.name||"").trim()+"|"+String(e.date||"")).toLowerCase();
+        if(!seenE[k]){seenE[k]=1;nE++;}
+      });
+    });
+    elL.textContent=nL;
+    elE.textContent=nE;
+    elC.textContent=nC+" of "+CODES.length;
+  }).catch(function(){/* keep painted fallback values */});
+})();

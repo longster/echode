@@ -22,7 +22,7 @@
 <meta name="twitter:description" content="Echode is the front door to Texas Deaf communities, city by city. Houston is live today through HoustonDeafNetwork.">
 <meta name="twitter:image" content="https://echode.com/og-image.png">
 <link rel="stylesheet" href="shared.css?v=7">
-<link rel="stylesheet" href="index.css?v=6">
+<link rel="stylesheet" href="index.css?v=7">
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y56G4N26M4"></script>
 <script src="head.js?v=1"></script>
@@ -65,24 +65,19 @@
         </div>
       </div>
       <div class="stack">
-        <p class="sr-only" id="srCityStatus">City status card: Houston, Austin, Dallas - Fort Worth and San Antonio are all live now.</p>
+        <p class="sr-only" id="srCityStatus">Echode network stats: live counts of directory listings, upcoming events, and open cities.</p>
         <div class="live-card">
           <div class="card-top">
-            <span class="code-chip">HTX</span>
+            <span class="code-chip">ECHODE</span>
             <span class="live-badge"><span class="pulse"></span>LIVE NOW</span>
           </div>
-          <h3>Houston</h3>
-          <p class="home">Home: HoustonDeafNetwork.com</p>
+          <h3>Right now on Echode</h3>
           <dl class="card-rows">
-            <div><dt>Directory</dt><dd>Deaf-owned &amp; Deaf-friendly listings</dd></div>
-            <div><dt>Events</dt><dd>Meetups, socials, interpreted shows</dd></div>
-            <div><dt>Community</dt><dd>Facebook Page &amp; group, 570+ members</dd></div>
+            <div><dt>Listings</dt><dd><span class="stat-n" id="statListings">54</span> Deaf-friendly places and services</dd></div>
+            <div><dt>Events</dt><dd><span class="stat-n" id="statEvents">8</span> upcoming gatherings</dd></div>
+            <div><dt>Cities</dt><dd><span class="stat-n" id="statCities">4 of 4</span> open</dd></div>
           </dl>
-          <div class="progress-row">
-            <span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
-            <span><strong style="color:var(--char)">4 of 4</strong> cities open</span>
-          </div>
-          <a class="btn" href="https://houstondeafnetwork.com">Visit HTX</a>
+          <a class="btn" href="#cities">Explore the cities</a>
         </div>
       </div>
     </div>
@@ -725,7 +720,7 @@
 
 
 
-<script src="index.js?v=3"></script>
+<script src="index.js?v=4"></script>
 
 <script src="shared.js?v=1"></script>
 </body>

@@ -68,3 +68,4 @@
 :root[data-theme="dark"] .about-card{background:#131e28}
 @media (max-width:876px){.about-cards{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:560px){.about-cards{grid-template-columns:1fr}}
+.stat-n{font-weight:800;color:var(--blue-dark);font-size:1.1em;margin-right:2px}
