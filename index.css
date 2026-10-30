@@ -35,7 +35,6 @@
 :root[data-theme="dark"] .step{background:#131e28}
 :root[data-theme="dark"] .fact-card{background:#1b2836}
 :root[data-theme="dark"] form{background:#131e28}
-:root[data-theme="dark"] .step .num{background:#0a74b8}
 :root[data-theme="dark"] #txgrad stop:first-child{stop-color:#1d3042}
 :root[data-theme="dark"] #txgrad stop:last-child{stop-color:#101d29}
 :root[data-theme="dark"] .map-box polygon[fill="#eef4f9"]{fill:#1d3042}

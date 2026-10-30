@@ -81,7 +81,7 @@ h2{font-size:clamp(28px,3.4vw,36px);color:var(--char);letter-spacing:-.01em;marg
 .steps{background:rgba(247,249,251,.9);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .step-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px}
-.step .num{width:42px;height:42px;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:16px}
+.step .num{width:48px;height:48px;border-radius:14px;background:var(--blue-soft);color:var(--blue-dark);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px}
 .step h3{font-size:18.5px;color:var(--char);margin-bottom:8px}
 .step p{color:var(--gray);font-size:15.5px}
 .about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:start}
