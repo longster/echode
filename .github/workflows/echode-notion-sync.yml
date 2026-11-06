@@ -16,6 +16,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
+      - name: Pull jobs from company boards
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          DATABASE_ID_JOBS: ${{ secrets.DATABASE_ID_JOBS }}
+        run: node automation/jobs-pull.mjs
       - name: Sync city data from Notion
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
