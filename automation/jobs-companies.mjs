@@ -55,6 +55,19 @@ export const COMPANIES = [
       "https://phg.tbe.taleo.net/phg01/ats/careers/v2/searchResults?org=PRPL&cws=53",
     ],
   },
+  {
+    key: "masterword",
+    name: "MasterWord",
+    org: "MasterWord",
+    parser: "wordpress",
+    boards: [
+      // MasterWord's own WordPress careers page: Elementor
+      // accordions, one per role, with "Location:" / "Status:"
+      // lines in the body. No per-role page and no ATS; the
+      // parser links each role to the page with ?role=<slug>.
+      "https://www.masterword.com/careers/",
+    ],
+  },
   // PHASE 2 (not built — parser interface only, add when ready):
   // {
   //   key: "convo",

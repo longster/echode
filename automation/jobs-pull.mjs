@@ -305,12 +305,56 @@ async function parseTaleo(boardUrl) {
   return roles;
 }
 
+// WordPress careers page built with Elementor nested accordions
+// (MasterWord). Each open role is an accordion item: the title is
+// an <h2 class="e-n-accordion-item-title-text"> and the body opens
+// with "Location: <place>" and "Status: <type>". There is no
+// per-role page and no apply link on the page, so the link is the
+// careers page with a ?role=<slug> query. The page ignores the
+// param, and the slug keeps each role distinct for dedupe (the
+// URL normalizer drops fragments, so a #anchor would collapse
+// all roles into one). Only items with a Location line count as
+// roles, so other accordions on the page are ignored.
+const WORDPRESS_ROLE_RE =
+  /<h2 class="e-n-accordion-item-title-text">\s*(.*?)\s*<\/h2>/g;
+
+function wordpressSlug(title) {
+  return cleanText(title)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+async function parseWordpress(boardUrl) {
+  const html = await fetchText(boardUrl);
+  const titles = [...html.matchAll(WORDPRESS_ROLE_RE)];
+  if (titles.length === 0) throw new Error("WordPress: no role accordions found");
+  const base = boardUrl.split("?")[0].replace(/\/$/, "");
+  const roles = [];
+  for (let i = 0; i < titles.length; i++) {
+    const title = cleanText(decodeEntities(titles[i][1]));
+    const chunk = html.slice(titles[i].index, titles[i + 1] ? titles[i + 1].index : html.length);
+    const text = cleanText(decodeEntities(chunk.replace(/<[^>]+>/g, " ")));
+    const loc = text.match(
+      /Location:\s*(.+?)(?:\s+Status:|\s+General Duties|\s+The ideal candidate|\s+Required Qualifications|$)/i
+    );
+    if (!loc) continue;
+    roles.push({
+      title,
+      location: cleanText(loc[1]),
+      url: `${base}/?role=${wordpressSlug(title)}`,
+    });
+  }
+  if (roles.length === 0) throw new Error("WordPress: roles found but none with a Location line");
+  return roles.filter((r) => r.title && r.url);
+}
+
 // Parser registry. Adding a board type = one function here + the
 // parser name in jobs-companies.mjs. Unknown names fail loudly.
-const PARSERS = { paylocity: parsePaylocity, ukg: parseUkg, taleo: parseTaleo };
+const PARSERS = { paylocity: parsePaylocity, ukg: parseUkg, taleo: parseTaleo, wordpress: parseWordpress };
 
 // Exported for offline testing (node --input-type=module -e).
-export { parsePaylocity, parseUkg, parseTaleo, classify, normUrl };
+export { parsePaylocity, parseUkg, parseTaleo, parseWordpress, classify, normUrl };
 
 // ------------------------------------------------------------------
 // Notion (direct REST, same shapes as sync.mjs / worker.js)
