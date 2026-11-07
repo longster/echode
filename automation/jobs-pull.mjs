@@ -30,7 +30,7 @@
 // one company's outage must not block the others or the sync.
 // A Notion failure is fatal (exit 1), like sync.mjs.
 
-import { COMPANIES, CITY_MAP, TEXAS_PATTERN, REMOTE_PATTERN } from "./jobs-companies.mjs";
+import { COMPANIES, CITY_MAP, TEXAS_PATTERN, REMOTE_PATTERN, TEACHING_PATTERN } from "./jobs-companies.mjs";
 
 const NOTION_VERSION = "2022-06-28";
 const NOTION_API = "https://api.notion.com/v1";
@@ -399,12 +399,59 @@ async function parseGreenhouse(boardUrl) {
     .filter((r) => r.title && r.url);
 }
 
+// SchoolSpring public Job Board API (Texas School for the Deaf).
+// The paged search endpoint returns every open role as JSON
+// (jobId, title, location); each role's detail endpoint carries
+// its infoURL, the description page on the school's own ATS,
+// which is the link the pull keeps. The board hostname is the
+// domainName; a bare slug returns an empty default board. Only
+// teaching / student-services titles are kept (see
+// TEACHING_PATTERN): the school also posts nurses, counsel, and
+// food-service roles that are not teaching jobs. An empty list
+// is legitimate here (a school can have no openings), so it
+// returns [] instead of throwing; a missing jobsList means the
+// API shape broke and throws like the other parsers.
+async function parseSchoolspring(boardUrl) {
+  const u = new URL(boardUrl);
+  const domain = u.searchParams.get("domainName") || "";
+  const apiOrigin = u.origin;
+  const roles = [];
+  let page = 1;
+  for (;;) {
+    u.searchParams.set("page", String(page));
+    const data = await fetchJson(u.toString());
+    const list = data && data.value && data.value.jobsList;
+    if (!Array.isArray(list)) throw new Error("SchoolSpring: jobsList not returned");
+    for (const j of list) {
+      const title = cleanText(decodeEntities(j.title));
+      if (!TEACHING_PATTERN.test(title)) continue;
+      // The board link works, but the description page is the
+      // better destination for a seeker; fall back to the board
+      // link if the detail fetch fails.
+      let link = `https://${domain}/?jobid=${j.jobId}`;
+      try {
+        const detail = await fetchJson(
+          `${apiOrigin}/api/Jobs/${j.jobId}?domainName=${encodeURIComponent(domain)}`
+        );
+        const infoUrl = detail && detail.value && detail.value.jobInfo && detail.value.jobInfo.infoURL;
+        if (infoUrl) link = infoUrl;
+      } catch {
+        // keep the board link
+      }
+      roles.push({ title, location: cleanText(j.location), url: link });
+    }
+    if (list.length < 50 || page >= 5) break;
+    page++;
+  }
+  return roles.filter((r) => r.title && r.url);
+}
+
 // Parser registry. Adding a board type = one function here + the
 // parser name in jobs-companies.mjs. Unknown names fail loudly.
-const PARSERS = { paylocity: parsePaylocity, ukg: parseUkg, taleo: parseTaleo, wordpress: parseWordpress, lever: parseLever, greenhouse: parseGreenhouse };
+const PARSERS = { paylocity: parsePaylocity, ukg: parseUkg, taleo: parseTaleo, wordpress: parseWordpress, lever: parseLever, greenhouse: parseGreenhouse, schoolspring: parseSchoolspring };
 
 // Exported for offline testing (node --input-type=module -e).
-export { parsePaylocity, parseUkg, parseTaleo, parseWordpress, parseLever, parseGreenhouse, classify, normUrl };
+export { parsePaylocity, parseUkg, parseTaleo, parseWordpress, parseLever, parseGreenhouse, parseSchoolspring, classify, normUrl };
 
 // ------------------------------------------------------------------
 // Notion (direct REST, same shapes as sync.mjs / worker.js)
