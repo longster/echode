@@ -30,7 +30,7 @@
 // one company's outage must not block the others or the sync.
 // A Notion failure is fatal (exit 1), like sync.mjs.
 
-import { COMPANIES, CITY_MAP, TEXAS_PATTERN, REMOTE_PATTERN, TEACHING_PATTERN } from "./jobs-companies.mjs";
+import { COMPANIES, CITY_MAP, TEXAS_PATTERN, REMOTE_PATTERN } from "./jobs-companies.mjs";
 
 const NOTION_VERSION = "2022-06-28";
 const NOTION_API = "https://api.notion.com/v1";
@@ -404,10 +404,9 @@ async function parseGreenhouse(boardUrl) {
 // (jobId, title, location); each role's detail endpoint carries
 // its infoURL, the description page on the school's own ATS,
 // which is the link the pull keeps. The board hostname is the
-// domainName; a bare slug returns an empty default board. Only
-// teaching / student-services titles are kept (see
-// TEACHING_PATTERN): the school also posts nurses, counsel, and
-// food-service roles that are not teaching jobs. An empty list
+// domainName; a bare slug returns an empty default board. All of
+// the school's roles are kept: every TSD posting requires sign
+// language proficiency and serves deaf students. An empty list
 // is legitimate here (a school can have no openings), so it
 // returns [] instead of throwing; a missing jobsList means the
 // API shape broke and throws like the other parsers.
@@ -424,7 +423,9 @@ async function parseSchoolspring(boardUrl) {
     if (!Array.isArray(list)) throw new Error("SchoolSpring: jobsList not returned");
     for (const j of list) {
       const title = cleanText(decodeEntities(j.title));
-      if (!TEACHING_PATTERN.test(title)) continue;
+      // Every TSD posting requires sign language proficiency and
+      // serves deaf students, so the pull keeps all of the
+      // school's roles, not just classroom teaching ones.
       // The board link works, but the description page is the
       // better destination for a seeker; fall back to the board
       // link if the detail fetch fails.

@@ -105,8 +105,9 @@ export const COMPANIES = [
       // domainName is the board HOSTNAME (tsd.schoolspring.com),
       // not the "tsd" slug: the slug resolves to an empty
       // default board (0 jobs). The parser fetches each role's
-      // detail for its description-page link, and keeps
-      // teaching / student-services titles only.
+      // detail for its description-page link. Every TSD posting
+      // requires sign language proficiency, so all roles are
+      // kept, not just teaching ones.
       "https://api.schoolspring.com/api/Jobs/GetPagedJobsWithSearch?domainName=tsd.schoolspring.com&keyword=&location=&category=&gradelevel=&jobtype=&organization=&swLat=&swLon=&neLat=&neLon=&page=1&size=50&sortDateAscending=false",
     ],
   },
@@ -143,10 +144,3 @@ export const CITY_MAP = [
 // parser flagged it remote.
 export const TEXAS_PATTERN = /\bTX\b|Texas/i;
 export const REMOTE_PATTERN = /remote|work from home|wfh/i;
-
-// Teaching / education roles (SchoolSpring / TSD parser only).
-// TSD posts non-teaching roles too (nurses, counsel, food
-// service); the pull keeps the classroom and student-services
-// roles that fit the "teaching jobs" ask.
-export const TEACHING_PATTERN =
-  /teacher|instructor|librarian|psychologist|speech|diagnostician|behavior|counselor|principal|curriculum|paraprofessional|\baide\b|tutor|intervention|education|deaf/i;
