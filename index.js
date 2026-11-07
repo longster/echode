@@ -86,15 +86,18 @@
   });
 })();
 
-/* Homepage network stats: computed live from the city data.js files (deduped),
-   never typed by hand. Painted values in HTML are today's verified counts as
-   a graceful fallback; this recomputes on every load. */
+/* Homepage network stats: computed live from the four city data.js files plus
+   houstondeafnetwork.com/data.js (deduped), never typed by hand. Painted values
+   in HTML are today's verified counts as a graceful fallback; this recomputes
+   on every load. Cities stays 4 of 4: HDN is the Houston source, not a fifth city. */
 (function(){
-  var CODES=["atx","dfw","satx","tx"];
+  var CODES=["atx","dfw","satx","tx"],
+      HDN_URL="https://houstondeafnetwork.com/data.js";
   var elL=document.getElementById("statListings"),
       elE=document.getElementById("statEvents"),
+      elJ=document.getElementById("statJobs"),
       elC=document.getElementById("statCities");
-  if(!elL||!elE||!elC) return;
+  if(!elL||!elE||!elJ||!elC) return;
   function parseDataJS(text){
     var m=text.match(/const SITE_DATA = (\{[\s\S]*\})\s*;?\s*$/);
     if(!m) return null;
@@ -107,16 +110,18 @@
       return new Date(e.date+"T12:00:00")>=t;
     });
   }
-  Promise.all(CODES.map(function(c){
-    return fetch(c+"/data.js").then(function(r){
-      if(!r.ok) throw new Error("stats:"+c);
+  function load(url){
+    return fetch(url).then(function(r){
+      if(!r.ok) throw new Error("stats:"+url);
       return r.text();
     }).then(parseDataJS);
-  })).then(function(sets){
-    var seenL={}, seenE={}, nL=0, nE=0, nC=0;
-    sets.forEach(function(d){
+  }
+  Promise.all(CODES.map(function(c){return load(c+"/data.js");}).concat([load(HDN_URL)]))
+  .then(function(sets){
+    var seenL={}, seenE={}, seenJ={}, nL=0, nE=0, nJ=0, nC=0;
+    sets.forEach(function(d, i){
       if(!d) return;
-      nC++;
+      if(i<CODES.length) nC++;
       (d.directory||[]).forEach(function(l){
         var k=String(l.name||"").trim().toLowerCase();
         if(k&&!seenL[k]){seenL[k]=1;nL++;}
@@ -125,10 +130,16 @@
         var k=(String(e.name||"").trim()+"|"+String(e.date||"")).toLowerCase();
         if(!seenE[k]){seenE[k]=1;nE++;}
       });
+      (d.postings||[]).forEach(function(j){
+        var k=String(j.link||j.website||"").trim().toLowerCase()
+          || (String(j.name||"").trim()+"|"+String(j.category||"")).toLowerCase();
+        if(k&&!seenJ[k]){seenJ[k]=1;nJ++;}
+      });
     });
     if(nC===CODES.length){
       elL.textContent=nL;
       elE.textContent=nE;
+      elJ.textContent=nJ;
       elC.textContent=nC+" of "+CODES.length;
     }
   }).catch(function(){/* keep painted fallback values */});
