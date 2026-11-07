@@ -68,6 +68,32 @@ export const COMPANIES = [
       "https://www.masterword.com/careers/",
     ],
   },
+  {
+    key: "lsa",
+    name: "LSA",
+    org: "LSA",
+    parser: "lever",
+    boards: [
+      // Lever public postings API (no auth): one GET returns the
+      // whole board as JSON. The parser keeps only the "American
+      // Sign Language Interpreters" team; the rest of the board
+      // is spoken-language interpreters.
+      "https://api.lever.co/v0/postings/lsaweb?mode=json",
+    ],
+  },
+  {
+    key: "propio",
+    name: "Propio",
+    org: "Propio",
+    parser: "greenhouse",
+    boards: [
+      // Greenhouse public Job Board API (no auth): one GET
+      // returns every job as JSON. The parser keeps only
+      // ASL-titled roles; the rest of the board is
+      // spoken-language interpreting.
+      "https://boards-api.greenhouse.io/v1/boards/propiolanguageservices/jobs",
+    ],
+  },
   // PHASE 2 (not built — parser interface only, add when ready):
   // {
   //   key: "convo",

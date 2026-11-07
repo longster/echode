@@ -349,12 +349,62 @@ async function parseWordpress(boardUrl) {
   return roles.filter((r) => r.title && r.url);
 }
 
+// Lever public postings API (Language Services Associates). One
+// unauthenticated GET returns every posting as JSON: text (title),
+// categories { team, location }, workplaceType, hostedUrl. Only the
+// "American Sign Language Interpreters" team counts; the rest of
+// the board is spoken-language interpreters. A location of "USA"
+// is the national evergreen posting: it reads as Remote.
+async function parseLever(boardUrl) {
+  const postings = await fetchJson(boardUrl);
+  if (!Array.isArray(postings) || postings.length === 0) throw new Error("Lever: no postings returned");
+  return postings
+    .filter((p) => p.categories && p.categories.team === "American Sign Language Interpreters")
+    .map((p) => {
+      const location = cleanText(p.categories.location);
+      const national = /^usa$/i.test(location);
+      return {
+        title: cleanText(String(p.text || "")).replace(/^\*\s*/, ""),
+        location: national ? "Remote" : location,
+        url: p.hostedUrl,
+        remote: national || /remote|hybrid/i.test(String(p.workplaceType || "")),
+      };
+    })
+    .filter((r) => r.title && r.url);
+}
+
+// Greenhouse public Job Board API (Propio Language Services). One
+// unauthenticated GET returns every job as JSON: id, title,
+// location.name, absolute_url. Only ASL-titled roles count; the
+// rest of the board is spoken-language interpreting. A title
+// containing "Remote" is a remote role even when location.name
+// is the company HQ (the API lists the remote ASL role under
+// "Overland Park, KS"), so the location reads as Remote, the
+// same way Taleo's "Home Office" roles do.
+async function parseGreenhouse(boardUrl) {
+  const data = await fetchJson(boardUrl);
+  const jobs = data && data.jobs;
+  if (!Array.isArray(jobs) || jobs.length === 0) throw new Error("Greenhouse: no jobs returned");
+  return jobs
+    .filter((j) => /american sign language|\bASL\b/i.test(String(j.title || "")))
+    .map((j) => {
+      const isRemote = REMOTE_PATTERN.test(String(j.title || ""));
+      return {
+        title: cleanText(j.title),
+        location: isRemote ? "Remote" : cleanText(j.location && j.location.name),
+        url: j.absolute_url,
+        remote: isRemote,
+      };
+    })
+    .filter((r) => r.title && r.url);
+}
+
 // Parser registry. Adding a board type = one function here + the
 // parser name in jobs-companies.mjs. Unknown names fail loudly.
-const PARSERS = { paylocity: parsePaylocity, ukg: parseUkg, taleo: parseTaleo, wordpress: parseWordpress };
+const PARSERS = { paylocity: parsePaylocity, ukg: parseUkg, taleo: parseTaleo, wordpress: parseWordpress, lever: parseLever, greenhouse: parseGreenhouse };
 
 // Exported for offline testing (node --input-type=module -e).
-export { parsePaylocity, parseUkg, parseTaleo, parseWordpress, classify, normUrl };
+export { parsePaylocity, parseUkg, parseTaleo, parseWordpress, parseLever, parseGreenhouse, classify, normUrl };
 
 // ------------------------------------------------------------------
 // Notion (direct REST, same shapes as sync.mjs / worker.js)
@@ -403,6 +453,12 @@ async function queryAllJobs() {
     link: p.properties?.Link?.url || "",
     status: p.properties?.Status?.select?.name || "",
     origin: p.properties?.Origin?.select?.name || "",
+    // Notes carries the dashboard's "[Hold ...]" entries and, since
+    // 2026-11-06, "[Denied YYYY-MM-DD]" stamps: a row the owner
+    // denied by hand must not be relisted just because the role
+    // is still on the board. The dashboard Deny stamps it; the
+    // pull only reads it.
+    notes: (p.properties?.Notes?.rich_text || []).map((t) => t.plain_text).join(""),
   }));
 }
 
@@ -475,7 +531,11 @@ export function reconcile(existingRows, feedRoles, expiry) {
     // touched, even when the same role is also on a board.
     if (existing.origin !== "Auto") continue;
     if (existing.status === "Expired") {
-      // Closed, then reposted: back to review.
+      // Closed, then reposted: back to review. Except a row the
+      // owner denied by hand (Notes carries "[Denied ...]"): the
+      // deny is a decision, not a vacancy, and it sticks even
+      // while the role stays on the board.
+      if (/\[Denied/.test(existing.notes || "")) continue;
       refreshes.push({ pageId: existing.id, title: existing.title, relist: true, expiry });
     } else if (existing.status === "Filled" || existing.status === "Active" || existing.status === "Sync pending") {
       refreshes.push({ pageId: existing.id, title: existing.title, expiry });
