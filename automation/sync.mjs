@@ -7,16 +7,26 @@
 // page publishes only rows that serve it.
 //
 // PUBLISH RULES (mirror the HDN sync's gates, plus the Serves gate):
-//   Directory: Status = "Active" only, and Serves includes the city.
-//   Events: Status = "Upcoming" AND Source does NOT contain
-//     "PENDING REVIEW", and Serves includes the city.
-//   Jobs: Status = "Active" only, and Serves includes the city.
+//   Directory: Status = "Active" or "Sync pending", and Serves
+//     includes the city.
+//   Events: Status = "Upcoming" or "Sync pending" AND Source does
+//     NOT contain "PENDING REVIEW", and Serves includes the city.
+//   Jobs: Status = "Active" or "Sync pending", and Serves includes
+//     the city.
 //   News: Status = "Published" only; each city page gets the
 //     newest Published item whose Serves includes it (or null).
 //     News is best-effort: if the News database cannot be read
 //     (for example the integration has not been connected to it
 //     yet), the sync warns and publishes news: null rather than
 //     failing the whole run.
+// "Sync pending" is the dashboard's approved-but-not-yet-live state
+// (set by Approve since 2026-11-06). This sync publishes such rows
+// exactly like their live status, then flips them to that live
+// status (Directory/Jobs -> "Active", Events -> "Upcoming") so the
+// dashboard's "Waiting to sync" section empties. A flip only runs
+// for a row this run actually included in a city's data, and a
+// failed flip only warns: the next run publishes the row again and
+// retries the flip, so a row can never get stuck unpublished.
 // The approval gate is absolute: each database publishes only rows
 // in its approved state, and if a database has no Status property,
 // the sync FAILS for that database and publishes nothing from it.
@@ -150,6 +160,54 @@ async function queryByStatus(dbId, statusProp, statusValue) {
   return rows;
 }
 
+// Same as queryByStatus, but matches any of several select values
+// (one query with an `or` filter). Used for the publish gate:
+// "Active" + "Sync pending" (Directory, Jobs) and "Upcoming" +
+// "Sync pending" (Events).
+async function queryByStatuses(dbId, statusProp, statusValues) {
+  const rows = [];
+  let cursor = undefined;
+  do {
+    const body = await notionFetch("/databases/" + dbId + "/query", {
+      method: "POST",
+      body: JSON.stringify({
+        filter: { or: statusValues.map((v) => ({ property: statusProp, select: { equals: v } })) },
+        ...(cursor ? { start_cursor: cursor } : {}),
+      }),
+    });
+    rows.push(...(body.results || []));
+    cursor = body.has_more ? body.next_cursor : undefined;
+  } while (cursor);
+  return rows;
+}
+
+const WRITE_PAUSE_MS = 600;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function notionWrite(fn) {
+  try {
+    return await fn();
+  } catch (err) {
+    if (/429|5\d\d/.test(err.message)) {
+      await sleep(5000);
+      return fn();
+    }
+    throw err;
+  }
+}
+
+// Flip a row from "Sync pending" to its live status after this run
+// published it. See the PUBLISH RULES note: best-effort, the next
+// run retries a failed flip.
+async function flipToLive(pageId, liveStatus) {
+  return notionWrite(() =>
+    notionFetch("/pages/" + pageId, {
+      method: "PATCH",
+      body: JSON.stringify({ properties: { Status: { select: { name: liveStatus } } } }),
+    })
+  );
+}
+
 function readTitle(page, schema) {
   const p = page.properties?.[schema.titleProp];
   return p?.title?.map((t) => t.plain_text).join("") || "";
@@ -241,19 +299,21 @@ function readOldData(path) {
 async function main() {
   const today = new Date().toISOString().slice(0, 10);
 
-  // ---- Directory (Status = "Active", gated per city by Serves) ----
+  // ---- Directory (Status = "Active" or "Sync pending", gated per city by Serves) ----
   const dirDb = process.env.DATABASE_ID_DIRECTORY;
   const dirSchema = await getSchema(dirDb);
   if (!("Status" in dirSchema.props)) {
     throw new Error("Directory has no Status property. Refusing to publish.");
   }
-  const dirRows = await queryByStatus(dirDb, MAP.directory.status, "Active");
+  const dirRows = await queryByStatuses(dirDb, MAP.directory.status, ["Active", "Sync pending"]);
   const directoryAll = [];
   for (const page of dirRows) {
     const m = MAP.directory;
     const name = readTitle(page, dirSchema);
     if (!name) continue;
     directoryAll.push({
+      id: page.id,
+      status: readSelect(page, m.status),
       name,
       categoryList: readCategoryList(page, m.category),
       description: readText(page, m.description),
@@ -267,17 +327,19 @@ async function main() {
     });
   }
 
-  // ---- Events (Upcoming, no PENDING REVIEW marker, Serves gate) ----
+  // ---- Events (Upcoming or Sync pending, no PENDING REVIEW marker, Serves gate) ----
   const evDb = process.env.DATABASE_ID_EVENTS;
   const evSchema = await getSchema(evDb);
   if (!("Status" in evSchema.props)) {
     throw new Error("Events has no Status property. Refusing to publish.");
   }
-  const evRows = await queryByStatus(evDb, MAP.events.status, "Upcoming");
+  const evRows = await queryByStatuses(evDb, MAP.events.status, ["Upcoming", "Sync pending"]);
   const eventsAll = evRows
     .map((page) => {
       const m = MAP.events;
       return {
+        id: page.id,
+        status: readSelect(page, m.status),
         name: readTitle(page, evSchema),
         date: readDate(page, m.date),
         location: readText(page, m.location),
@@ -289,17 +351,19 @@ async function main() {
     })
     .filter((e) => e.name && !String(e.source || "").includes("PENDING REVIEW"));
 
-  // ---- Jobs -> postings (Status = "Active", Serves gate) ----
+  // ---- Jobs -> postings (Status = "Active" or "Sync pending", Serves gate) ----
   const jobDb = process.env.DATABASE_ID_JOBS;
   const jobSchema = await getSchema(jobDb);
   if (!("Status" in jobSchema.props)) {
     throw new Error("Jobs has no Status property. Refusing to publish.");
   }
-  const jobRows = await queryByStatus(jobDb, MAP.jobs.status, "Active");
+  const jobRows = await queryByStatuses(jobDb, MAP.jobs.status, ["Active", "Sync pending"]);
   const postingsAll = jobRows
     .map((page) => {
       const m = MAP.jobs;
       return {
+        id: page.id,
+        status: readSelect(page, m.status),
         name: readTitle(page, jobSchema),
         organization: readText(page, m.organization),
         description: readText(page, m.description),
@@ -331,6 +395,11 @@ async function main() {
   }
 
   // ---- Emit one data.js per city ----
+  // Rows this run publishes while in "Sync pending" are collected
+  // here (page id -> live status) and flipped after the loop, even
+  // for a city whose file was unchanged: a row already in a city's
+  // data from a previous run still needs its flip.
+  const pendingFlips = new Map();
   for (const city of CITIES) {
     const dataPath = city.dir + "/data.js";
     const old = readOldData(dataPath);
@@ -365,7 +434,7 @@ async function main() {
 
     const events = eventsAll
       .filter((e) => e.serves.includes(city.code))
-      .map(({ source, serves, ...rest }) => rest)
+      .map(({ source, serves, id, status, ...rest }) => rest)
       .sort((a, b) => { if (!a.date && !b.date) return 0; if (!a.date) return 1; if (!b.date) return -1; return a.date.localeCompare(b.date); });
 
     const postings = postingsAll
@@ -382,6 +451,25 @@ async function main() {
         logo: "",
       }))
       .sort(byName);
+
+    // Record "Sync pending" rows this city publishes, for the flip
+    // after the loop. eventsAll already excludes any row whose
+    // Source still carries PENDING REVIEW.
+    for (const r of directoryAll) {
+      if (r.status === "Sync pending" && r.serves.includes(city.code)) {
+        pendingFlips.set(r.id, { name: r.name, liveStatus: "Active" });
+      }
+    }
+    for (const e of eventsAll) {
+      if (e.status === "Sync pending" && e.serves.includes(city.code)) {
+        pendingFlips.set(e.id, { name: e.name, liveStatus: "Upcoming" });
+      }
+    }
+    for (const j of postingsAll) {
+      if (j.status === "Sync pending" && j.serves.includes(city.code)) {
+        pendingFlips.set(j.id, { name: j.name, liveStatus: "Active" });
+      }
+    }
 
     const newsHit = newsAll.find((n) => n.serves.includes(city.code));
     const next = {
@@ -426,6 +514,17 @@ async function main() {
     console.log("sitemap.xml: wrote " + sitemapPaths.length + " urls.");
   } else {
     console.log("sitemap.xml: no changes.");
+  }
+
+  // ---- Flip published "Sync pending" rows to their live status ----
+  for (const [pageId, { name, liveStatus }] of pendingFlips) {
+    try {
+      await flipToLive(pageId, liveStatus);
+      console.log(`Flipped "${name}" to ${liveStatus} (was Sync pending).`);
+      await sleep(WRITE_PAUSE_MS);
+    } catch (err) {
+      console.warn(`Flip failed for "${name}" (will retry next run): ${err.message}`);
+    }
   }
 }
 

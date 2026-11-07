@@ -477,14 +477,14 @@ export function reconcile(existingRows, feedRoles, expiry) {
     if (existing.status === "Expired") {
       // Closed, then reposted: back to review.
       refreshes.push({ pageId: existing.id, title: existing.title, relist: true, expiry });
-    } else if (existing.status === "Filled" || existing.status === "Active") {
+    } else if (existing.status === "Filled" || existing.status === "Active" || existing.status === "Sync pending") {
       refreshes.push({ pageId: existing.id, title: existing.title, expiry });
     }
   }
   const expires = [];
   for (const r of existingRows) {
     if (r.origin !== "Auto") continue;
-    if (r.status !== "Filled" && r.status !== "Active") continue;
+    if (r.status !== "Filled" && r.status !== "Active" && r.status !== "Sync pending") continue;
     if (r.link && !seenLinks.has(normUrl(r.link))) {
       expires.push({ pageId: r.id, title: r.title });
     }
