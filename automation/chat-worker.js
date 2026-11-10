@@ -4,12 +4,23 @@
 // No framework, no wrangler dependencies. Plain fetch handler.
 //
 // SETUP: deploy as a Cloudflare Worker named echode-ai-chat.
-// Bindings: one AI binding named AI (Workers AI). NO secrets: nothing
-// in this Worker needs a key, a token, or any credential. The deploy
-// helper pattern in
+// Bindings: one AI binding named AI (Workers AI), plus one KV
+// namespace binding named QUESTIONS (namespace
+// echode-ai-chat-questions) for anonymous question logging.
+// NO secrets: nothing in this Worker needs a key, a token, or any
+// credential. The deploy helper pattern in
 // ~/workspace/custom-connectors/custom.cloudflare/bin/deploy_hdn_worker.py
-// adapts directly (new script name, one ai binding, no plain-text vars,
-// no secrets to re-save).
+// adapts directly (new script name, ai + kv_namespace bindings, no
+// plain-text vars, no secrets to re-save).
+//
+// QUESTION LOGGING: every question that reaches the model and gets an
+// answer is logged to KV (including "I don't know" answers, which are
+// the most useful for FAQs). Rate-limited (429) and invalid requests
+// are never logged. Each entry stores ONLY the raw question text, the
+// city scope, and an ISO timestamp — no IP address, no user agent, no
+// names, no answer text. The visitor IP is read for the in-memory
+// rate limits only and is never stored anywhere. Writes go through
+// ctx.waitUntil so logging never delays the answer.
 //
 // COST: Workers AI free tier is 10,000 Neurons/day and the Workers Free
 // plan allows 100,000 requests/day. A short grounded answer costs on
@@ -202,8 +213,27 @@ function jsonResponse(origin, status, body) {
   });
 }
 
+// Log one answered question to KV. Key: q:<ISO timestamp>:<short
+// random>. Value: {question, city, ts} and nothing else. Runs via
+// ctx.waitUntil so it never delays the answer; any KV failure is
+// swallowed so logging can never break a chat answer.
+function logQuestion(env, ctx, question, city) {
+  try {
+    if (!env.QUESTIONS || !ctx || typeof ctx.waitUntil !== "function") return;
+    const ts = new Date().toISOString();
+    const rand = crypto.randomUUID().slice(0, 8);
+    const key = "q:" + ts + ":" + rand;
+    const value = JSON.stringify({ question, city, ts });
+    ctx.waitUntil(
+      env.QUESTIONS.put(key, value).catch(() => {})
+    );
+  } catch {
+    // Logging must never break the answer.
+  }
+}
+
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const origin = request.headers.get("Origin") || "";
     const allowed = ALLOWED_ORIGINS.includes(origin);
     const cors = corsHeaders(allowed ? origin : ALLOWED_ORIGINS[0]);
@@ -279,6 +309,11 @@ export default {
     } catch {
       return jsonResponse(origin, 502, { ok: false, error: "ai_failed" });
     }
+
+    // Log the answered question (including "I don't know" answers)
+    // before returning. Rate-limited and invalid requests return
+    // earlier in this handler, so they are never logged.
+    logQuestion(env, ctx, question, CITY_LABELS[city] ? city : "ALL");
 
     return jsonResponse(origin, 200, {
       ok: true,
