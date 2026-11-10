@@ -364,7 +364,7 @@ select,.gform select{-webkit-appearance:none;appearance:none;padding-right:42px;
 .aichat-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:var(--shl)}
 .aichat-btn svg{width:20px;height:20px}
 .aichat-btn:hover{background:var(--blue-dark)}
-.aichat-panel{position:absolute;right:0;bottom:54px;width:min(360px,calc(100vw - 32px));max-height:min(480px,calc(100dvh - 100px));display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shl);overflow:hidden}
+.aichat-panel{position:absolute;right:0;bottom:54px;width:min(360px,calc(100vw - 32px));max-height:min(480px,calc(100dvh - 100px));display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shl);overflow:hidden;padding:0}
 .aichat-panel[hidden]{display:none}
 .aichat-head{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line)}
 .aichat-head h2{font-size:1rem;font-weight:700;color:var(--char);margin:0}
@@ -374,10 +374,9 @@ select,.gform select{-webkit-appearance:none;appearance:none;padding-right:42px;
 .aichat-msg.user{align-self:flex-end;background:var(--blue-soft);color:var(--ink);border-radius:12px;padding:8px 12px;max-width:85%}
 .aichat-msg.ai{align-self:flex-start}
 .aichat-msg .src{display:block;font-size:.82rem;color:var(--gray);margin-top:6px}
-.aichat-note{margin:0;padding:0 16px 8px;font-size:.82rem;color:var(--gray)}
-.aichat-form{display:flex;gap:.6rem;padding:0 16px 12px}
+.aichat-form{display:flex;gap:.6rem;padding:0 16px 12px;background:transparent;border:0;border-radius:0}
 .aichat-form input{flex:1;height:42px;padding:.75rem 1rem;border:1px solid var(--line);border-radius:12px;font:inherit;font-size:1rem;color:var(--ink);background:var(--bg);min-width:0}
-.aichat-form .btn{flex:none}
+.aichat-form .btn{flex:none;padding:0 16px}
 .aichat-status{margin:0;padding:0 16px 12px}
 :root[data-theme="dark"] .aichat-btn{background:#0a74b8}
 :root[data-theme="dark"] .aichat-form input{background:#0e1821;border-color:#33485a;color:var(--ink)}
